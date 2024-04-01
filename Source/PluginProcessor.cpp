@@ -155,8 +155,11 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
 
+            auto& oscWaveType = *apvts.getRawParameterValue("OSC");
+
             // facem load sa stim ca e un atomic float, nu un float normal. atomic e mult mai heavy
             voice->update(attack.load(), decay.load(), sustain.load(), release.load());
+            voice->getOscillator().setWaveType(oscWaveType);
         }
     }
 

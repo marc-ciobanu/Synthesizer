@@ -16,6 +16,9 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="ZR0tHj" name="OscComponent.cpp" compile="1" resource="0"
+              file="Source/UI/OscComponent.cpp"/>
+        <FILE id="JoYRvk" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
         <FILE id="HWWoF6" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
         <FILE id="ZGBRHx" name="AdsrComponent.cpp" compile="1" resource="0"
               file="Source/UI/AdsrComponent.cpp"/>
@@ -23,6 +26,8 @@
       <GROUP id="{248E5765-ADE1-312B-A7D4-369ACC78E910}" name="Data">
         <FILE id="oIubmC" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
         <FILE id="yz8DXU" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
+        <FILE id="G2lV9r" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
+        <FILE id="JzECAa" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>
