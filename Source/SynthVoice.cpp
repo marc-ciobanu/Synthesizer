@@ -43,13 +43,6 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     osc.prepare(spec);
     gain.prepare(spec);
 
-    //adsrParams.attack = 0.8f;
-    //adsrParams.decay = 0.8f;
-    //adsrParams.sustain = 1.0f;
-    //adsrParams.release = 1.5f;
-
-    //adsr.setParameters(adsrParams);
-
     
     gain.setGainLinear(0.3f);
 
