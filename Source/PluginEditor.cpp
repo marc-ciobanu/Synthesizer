@@ -26,7 +26,6 @@ Synth1AudioProcessorEditor::~Synth1AudioProcessorEditor()
 {
 }
 
-//==============================================================================
 void Synth1AudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colours::black);
