@@ -20,7 +20,6 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::Stri
     oscSelector.addItemList(waveTypes, 1);
 
     oscSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, oscSelectorId, oscSelector);
-
     fmFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmFreqId, fmFreqSlider);
     fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider);
 
@@ -40,11 +39,19 @@ void OscComponent::paint (juce::Graphics& g)
 
 void OscComponent::resized()
 {
+    const auto sliderPosY = 80;
+    const auto sliderWidth = 100;
+    const auto sliderHeight = 90;
+    const auto labelYOffset = 20;
+    const auto labelHeight = 20;
+
     oscSelector.setBounds(0, 0, 90, 20);
-    fmFreqSlider.setBounds(0, 80, 100, 90);
-    fmDepthSlider.setBounds(fmFreqSlider.getWidth(), 80, 100, 90);
-    fmFreqLabel.setBounds(fmFreqSlider.getX(), fmFreqSlider.getY() - 20, fmFreqSlider.getWidth(), 20);
-    fmDepthLabel.setBounds(fmDepthSlider.getX(), fmDepthSlider.getY() - 20, fmDepthSlider.getWidth(), 20);
+
+    fmFreqSlider.setBounds(0, sliderPosY, sliderWidth, sliderHeight);
+    fmDepthSlider.setBounds(fmFreqSlider.getRight(), sliderPosY, sliderWidth, sliderHeight);
+
+    fmFreqLabel.setBounds(fmFreqSlider.getX(), fmFreqSlider.getY() - labelYOffset, fmFreqSlider.getWidth(), labelHeight);
+    fmDepthLabel.setBounds(fmDepthSlider.getX(), fmDepthSlider.getY() - labelYOffset, fmDepthSlider.getWidth(), labelHeight);
 }
 
 void OscComponent::setOscStyle(juce::ComboBox& comboBox) 
