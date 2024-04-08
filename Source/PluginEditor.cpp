@@ -33,9 +33,11 @@ void Synth1AudioProcessorEditor::resized()
     const auto paddingX = 5;
     const auto paddingY = 35;
     const auto paddingY2 = 235;
+    const auto width = 300;
+    const auto height = 200;
 
-    osc.setBounds(paddingX, paddingY, 300, 200);
-    adsr.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
+    osc.setBounds(paddingX, paddingY, width, height);
+    adsr.setBounds(osc.getRight(), paddingY, width, height);
 }
 
 
