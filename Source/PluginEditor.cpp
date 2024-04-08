@@ -13,7 +13,7 @@
 Synth1AudioProcessorEditor::Synth1AudioProcessorEditor (Synth1AudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.apvts, "OSC", "FMFREQ", "FMDEPTH"), adsr(audioProcessor.apvts)
 {
-    setSize (400, 300);
+    setSize (620, 500);
 
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
@@ -30,7 +30,11 @@ void Synth1AudioProcessorEditor::paint (juce::Graphics& g)
 
 void Synth1AudioProcessorEditor::resized()
 {
-    osc.setBounds(10, 10, 180, 200);
+    const auto paddingX = 5;
+    const auto paddingY = 35;
+    const auto paddingY2 = 235;
+
+    osc.setBounds(paddingX, paddingY, 300, 200);
     adsr.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
 }
 

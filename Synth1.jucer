@@ -16,6 +16,10 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="a7Mf85" name="FilterComponent.cpp" compile="1" resource="0"
+              file="Source/UI/FilterComponent.cpp"/>
+        <FILE id="YwIvrR" name="FilterComponent.h" compile="0" resource="0"
+              file="Source/UI/FilterComponent.h"/>
         <FILE id="ZR0tHj" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="JoYRvk" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>

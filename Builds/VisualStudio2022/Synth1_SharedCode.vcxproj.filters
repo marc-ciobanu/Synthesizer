@@ -640,6 +640,9 @@
     <ClCompile Include="..\..\Source\SynthVoice.cpp">
       <Filter>Synth1\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\FilterComponent.cpp">
+      <Filter>Synth1\Source\UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\OscComponent.cpp">
       <Filter>Synth1\Source\UI</Filter>
     </ClCompile>
@@ -3242,6 +3245,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\SynthSound.h">
       <Filter>Synth1\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\FilterComponent.h">
+      <Filter>Synth1\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\OscComponent.h">
       <Filter>Synth1\Source\UI</Filter>

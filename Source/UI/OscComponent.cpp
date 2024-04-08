@@ -14,8 +14,6 @@
 //==============================================================================
 OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::String oscSelectorId, juce::String fmFreqId, juce::String fmDepthId)
 {
-    
-    
     juce::StringArray waveTypes{ "Sine", "Saw", "Square" };
     oscSelector.addItemList(waveTypes, 1);
 
@@ -34,23 +32,31 @@ OscComponent::~OscComponent()
 
 void OscComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::black);
+    auto bounds = getLocalBounds().reduced(5);
+    auto labelSpace = bounds.removeFromTop(25.0f);
+
+    g.fillAll(juce::Colour(0xff135d66));
+    g.setColour(juce::Colours::white);
+    g.setFont(20.0f);
+    g.drawText("Oscillator", labelSpace.withX(5), juce::Justification::left);
+    g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 2.0f);
 }
 
 void OscComponent::resized()
 {
-    const auto sliderPosY = 80;
+    const auto startPosY = 55;
     const auto sliderWidth = 100;
     const auto sliderHeight = 90;
     const auto labelYOffset = 20;
     const auto labelHeight = 20;
 
-    oscSelector.setBounds(0, 0, 90, 20);
+    oscSelector.setBounds(10, startPosY + 5, 90, 30);
+    oscSelectorLabel.setBounds(10, startPosY - labelYOffset, 90, labelHeight);
 
-    fmFreqSlider.setBounds(0, sliderPosY, sliderWidth, sliderHeight);
-    fmDepthSlider.setBounds(fmFreqSlider.getRight(), sliderPosY, sliderWidth, sliderHeight);
-
+    fmFreqSlider.setBounds(oscSelector.getRight(), startPosY, sliderWidth, sliderHeight);
     fmFreqLabel.setBounds(fmFreqSlider.getX(), fmFreqSlider.getY() - labelYOffset, fmFreqSlider.getWidth(), labelHeight);
+    
+    fmDepthSlider.setBounds(fmFreqSlider.getRight(), startPosY, sliderWidth, sliderHeight);
     fmDepthLabel.setBounds(fmDepthSlider.getX(), fmDepthSlider.getY() - labelYOffset, fmDepthSlider.getWidth(), labelHeight);
 }
 

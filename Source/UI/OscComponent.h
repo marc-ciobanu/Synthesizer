@@ -30,16 +30,15 @@ private:
 
     // Butonul in sine
     juce::ComboBox oscSelector;
+    juce::Slider fmFreqSlider;
+    juce::Slider fmDepthSlider;
     
     // Attachment catre variabila din ValueTreeState
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscSelectorAttachment;
-
-    juce::Slider fmFreqSlider;
-    juce::Slider fmDepthSlider;
-
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> fmFreqAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> fmDepthAttachment;
 
+    juce::Label oscSelectorLabel{ "Wave Type", "Wave Type" };
     juce::Label fmFreqLabel{ "FM Freq", "FM Freq" };
     juce::Label fmDepthLabel{ "FM Depth", "FM Depth" };
 
