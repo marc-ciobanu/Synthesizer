@@ -145,6 +145,7 @@
     <ClCompile Include="..\..\Source\UI\OscComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\AdsrComponent.cpp"/>
     <ClCompile Include="..\..\Source\Data\AdsrData.cpp"/>
+    <ClCompile Include="..\..\Source\Data\FilterData.cpp"/>
     <ClCompile Include="..\..\Source\Data\OscData.cpp"/>
     <ClCompile Include="D:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
@@ -2558,6 +2559,7 @@
     <ClInclude Include="..\..\Source\UI\OscComponent.h"/>
     <ClInclude Include="..\..\Source\UI\AdsrComponent.h"/>
     <ClInclude Include="..\..\Source\Data\AdsrData.h"/>
+    <ClInclude Include="..\..\Source\Data\FilterData.h"/>
     <ClInclude Include="..\..\Source\Data\OscData.h"/>
     <ClInclude Include="D:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h"/>
     <ClInclude Include="D:\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.h"/>

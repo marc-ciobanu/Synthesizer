@@ -649,6 +649,9 @@
     <ClCompile Include="..\..\Source\Data\AdsrData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Data\FilterData.cpp">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Data\OscData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
@@ -3247,6 +3250,9 @@
       <Filter>Synth1\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Data\AdsrData.h">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Data\FilterData.h">
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Data\OscData.h">
