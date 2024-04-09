@@ -21,9 +21,9 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::Stri
     fmFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmFreqId, fmFreqSlider);
     fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider);
 
-    setOscStyle(oscSelector);
-    setFmSliderStyle(fmFreqSlider, fmFreqLabel);
-    setFmSliderStyle(fmDepthSlider, fmDepthLabel);
+    setComboBoxStyle(oscSelector, oscSelectorLabel);
+    setSliderStyle(fmFreqSlider, fmFreqLabel);
+    setSliderStyle(fmDepthSlider, fmDepthLabel);
 }
 
 OscComponent::~OscComponent()
@@ -35,7 +35,7 @@ void OscComponent::paint (juce::Graphics& g)
     auto bounds = getLocalBounds().reduced(5);
     auto labelSpace = bounds.removeFromTop(25.0f);
 
-    g.fillAll(juce::Colour(0xff135d66));
+    g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
     g.setFont(20.0f);
     g.drawText("Oscillator", labelSpace.withX(5), juce::Justification::left);
@@ -60,12 +60,13 @@ void OscComponent::resized()
     fmDepthLabel.setBounds(fmDepthSlider.getX(), fmDepthSlider.getY() - labelYOffset, fmDepthSlider.getWidth(), labelHeight);
 }
 
-void OscComponent::setOscStyle(juce::ComboBox& comboBox) 
+void OscComponent::setComboBoxStyle(juce::ComboBox& comboBox, juce::Label& label)
 {
     addAndMakeVisible(comboBox);
+    addAndMakeVisible(label);
 }
 
-void OscComponent::setFmSliderStyle(juce::Slider& slider, juce::Label& label)
+void OscComponent::setSliderStyle(juce::Slider& slider, juce::Label& label)
 {
     addAndMakeVisible(slider);
     addAndMakeVisible(label);

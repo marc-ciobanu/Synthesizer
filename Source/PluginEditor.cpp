@@ -11,12 +11,17 @@
 
 //==============================================================================
 Synth1AudioProcessorEditor::Synth1AudioProcessorEditor (Synth1AudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.apvts, "OSC", "FMFREQ", "FMDEPTH"), adsr(audioProcessor.apvts)
+: AudioProcessorEditor (&p)
+, audioProcessor (p)
+, osc(audioProcessor.apvts, "OSC", "FMFREQ", "FMDEPTH")
+, adsr(audioProcessor.apvts)
+, filter(audioProcessor.apvts)
 {
     setSize (620, 500);
 
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
+    addAndMakeVisible(filter);
 }
 
 Synth1AudioProcessorEditor::~Synth1AudioProcessorEditor()
@@ -38,6 +43,7 @@ void Synth1AudioProcessorEditor::resized()
 
     osc.setBounds(paddingX, paddingY, width, height);
     adsr.setBounds(osc.getRight(), paddingY, width, height);
+    filter.setBounds(paddingX, paddingY2, width, height);
 }
 
 

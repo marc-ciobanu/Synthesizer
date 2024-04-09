@@ -25,8 +25,8 @@ public:
     void resized() override;
 
 private:
-    void setOscStyle(juce::ComboBox& comboBox);
-    void setFmSliderStyle(juce::Slider& slider, juce::Label& label);
+    void setComboBoxStyle(juce::ComboBox& comboBox, juce::Label& label);
+    void setSliderStyle(juce::Slider& slider, juce::Label& label);
 
     // Butonul in sine
     juce::ComboBox oscSelector;
