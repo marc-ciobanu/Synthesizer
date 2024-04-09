@@ -106,7 +106,7 @@ void Synth1AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
         }
     }
 
-    filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+
 
 }
 
@@ -152,33 +152,40 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
         buffer.clear (i, 0, buffer.getNumSamples());
 
     for (int i = 0; i < synth.getNumVoices(); ++i) {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
-            auto& attack = *apvts.getRawParameterValue("ATTACK");
-            auto& decay = *apvts.getRawParameterValue("DECAY");
-            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
-            auto& release = *apvts.getRawParameterValue("RELEASE");
-
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) 
+        {
             auto& oscWaveType = *apvts.getRawParameterValue("OSC");
 
             auto& fmDepth = *apvts.getRawParameterValue("FMDEPTH");
             auto& fmFreq = *apvts.getRawParameterValue("FMFREQ");
 
-            // facem load sa stim ca e un atomic float, nu un float normal. atomic e mult mai heavy
-            
-            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+
+            auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
+            auto& cutoff = *apvts.getRawParameterValue("FILTERCUTOFF");
+            auto& resonance = *apvts.getRawParameterValue("FILTERRES");
+
+            auto& modAttack = *apvts.getRawParameterValue("MODATTACK");
+            auto& modDecay = *apvts.getRawParameterValue("MODDECAY");
+            auto& modSustain = *apvts.getRawParameterValue("MODSUSTAIN");
+            auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");            
+
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
+
+            // aici avem valori Atomic, nu floaturi normale. atomic e mai heavy
+            voice->updateAdsr(attack, decay, sustain, release);
+            
+            voice->updateFilter(filterType, cutoff, resonance);
+
+            voice->updateModAdsr(modAttack, modDecay, modSustain, modRelease);
         }
     }
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
-
-    auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
-    auto& cutoff = *apvts.getRawParameterValue("FILTERCUTOFF");
-    auto& resonance = *apvts.getRawParameterValue("FILTERRES");
-
-    filter.updateParams(filterType, cutoff, resonance);
-    filter.process(buffer);
 }
 
 //==============================================================================
@@ -225,17 +232,17 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     // FM Depth
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FMDEPTH", "FM Depth", juce::NormalisableRange<float>{ 0.0f, 1000.0f, 0.01f, 0.3f}, 0.0f));
 
-    // Attack
+    // Osc ADSR
     params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float>{ 0.1f, 1.0f, 0.01f }, 0.1f));
-
-    // Decay
     params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float>{ 0.1f, 1.0f, 0.01f }, 0.1f));
-
-    // Sustain
     params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float>{ 0.1f, 1.0f, 0.01f }, 1.0f));
-
-    // Release
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float>{ 0.1f, 3.0f, 0.01f }, 0.4f));
+
+    // Filter ADSR
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("MODATTACK", "Mod Attack", juce::NormalisableRange<float>{ 0.1f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("MODDECAY", "Mod Decay", juce::NormalisableRange<float>{ 0.1f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("MODSUSTAIN", "Mod Sustain", juce::NormalisableRange<float>{ 0.1f, 1.0f, 0.01f }, 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("MODRELEASE", "Mod Release", juce::NormalisableRange<float>{ 0.1f, 3.0f, 0.01f }, 0.4f));
 
     // Filter
     params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTERTYPE", "Filter Type", juce::StringArray{ "Low-Pass", "Band-Pass", "High-Pass" }, 0));

@@ -18,10 +18,12 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound) {
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition) {
     osc.setWaveFrequency(midiNoteNumber);
     adsr.noteOn();
+    modAdsr.noteOn();
 }
 
 void SynthVoice::stopNote(float velocity, bool allowTailOff) {
     adsr.noteOff();
+    modAdsr.noteOff();
 }
 
 void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue) {
@@ -42,16 +44,16 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
 
     osc.prepareToPlay(spec);
     gain.prepare(spec);
-
+    filter.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+    modAdsr.setSampleRate(sampleRate);
     
     gain.setGainLinear(0.3f);
 
     isPrepared = true;
 }
 
-
-
-void SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int startSample, int numSamples) {
+void SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int startSample, int numSamples) 
+{
     jassert(isPrepared);
 
     juce::dsp::AudioBlock<float> audioBlock{ outputBuffer };
@@ -61,8 +63,25 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int s
     osc.getNextAudioBlock(audioBlock);
 
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
+
+    filter.process(outputBuffer);
+
+    modAdsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
+    modAdsr.getNextSample();
 }
 
-void SynthVoice::update(const float attack, const float decay, const float sustain, const float release) {
-    adsr.updateADSR(attack, decay, sustain, release);
+void SynthVoice::updateAdsr(const float attack, const float decay, const float sustain, const float release) 
+{
+    adsr.updateParameters(attack, decay, sustain, release);
+}
+
+void SynthVoice::updateFilter(const int filterType, const float cutoff, const float resonance)
+{
+    float modulator = modAdsr.getNextSample();
+    filter.updateParameters(filterType, cutoff, resonance, modulator);
+}
+
+void SynthVoice::updateModAdsr(const float attack, const float decay, const float sustain, const float release)
+{
+    modAdsr.updateParameters(attack, decay, sustain, release);
 }

@@ -9,7 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "Data/FilterData.h"
+
 
 
 //==============================================================================
@@ -58,7 +58,6 @@ public:
     juce::AudioProcessorValueTreeState apvts;
 private:
     juce::Synthesiser synth;
-    FilterData filter;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
 
     //==============================================================================

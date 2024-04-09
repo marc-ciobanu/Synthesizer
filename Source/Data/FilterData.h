@@ -16,7 +16,7 @@ class FilterData {
 public:
     void prepareToPlay(double sampleRate, int samplesPerBlock, int numChannels);
     void process(juce::AudioBuffer<float>& buffer);
-    void updateParams(const int filterType, const float frequency, const float resonance);
+    void updateParameters(const int filterType, const float cutoff, const float resonance, const float modulator=1.0f);
     void reset();
 private:
     juce::dsp::StateVariableTPTFilter<float> filter;
