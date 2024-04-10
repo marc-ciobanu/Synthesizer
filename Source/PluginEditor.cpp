@@ -10,18 +10,20 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-Synth1AudioProcessorEditor::Synth1AudioProcessorEditor (Synth1AudioProcessor& p)
-: AudioProcessorEditor (&p)
-, audioProcessor (p)
-, osc(audioProcessor.apvts, "OSC", "FMFREQ", "FMDEPTH")
-, adsr(audioProcessor.apvts)
-, filter(audioProcessor.apvts)
+Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
+    : AudioProcessorEditor(&p)
+    , audioProcessor(p)
+    , osc(audioProcessor.apvts, "OSC", "FMFREQ", "FMDEPTH")
+    , adsr("Amp Envelope", audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE")
+    , filter(audioProcessor.apvts)
+    , modAdsr("Mod Envelope", audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE")
 {
     setSize (620, 500);
 
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
     addAndMakeVisible(filter);
+    addAndMakeVisible(modAdsr);
 }
 
 Synth1AudioProcessorEditor::~Synth1AudioProcessorEditor()
@@ -44,6 +46,7 @@ void Synth1AudioProcessorEditor::resized()
     osc.setBounds(paddingX, paddingY, width, height);
     adsr.setBounds(osc.getRight(), paddingY, width, height);
     filter.setBounds(paddingX, paddingY2, width, height);
+    modAdsr.setBounds(filter.getRight(), paddingY2, width, height);
 }
 
 

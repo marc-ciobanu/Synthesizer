@@ -30,11 +30,13 @@ public:
 private:
     Synth1AudioProcessor& audioProcessor;
 
-    AdsrComponent adsr;
-
     OscComponent osc;
 
+    AdsrComponent adsr;
+
     FilterComponent filter;
+
+    AdsrComponent modAdsr;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth1AudioProcessorEditor)
 };

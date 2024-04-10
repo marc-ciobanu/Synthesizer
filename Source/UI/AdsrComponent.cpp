@@ -12,16 +12,16 @@
 #include "AdsrComponent.h"
 
 //==============================================================================
-AdsrComponent::AdsrComponent(juce::AudioProcessorValueTreeState& apvts)
+AdsrComponent::AdsrComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId)
 {
-
+    componentName = name;
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
 
-    attackAttachment = std::make_unique<SliderAttachment>(apvts, "ATTACK", attackSlider);
-    decayAttachment = std::make_unique<SliderAttachment>(apvts, "DECAY", decaySlider);
-    sustainAttachment = std::make_unique<SliderAttachment>(apvts, "SUSTAIN", sustainSlider);
-    releaseAttachment = std::make_unique<SliderAttachment>(apvts, "RELEASE", releaseSlider);
+    attackAttachment = std::make_unique<SliderAttachment>(apvts, "attackId", attackSlider);
+    decayAttachment = std::make_unique<SliderAttachment>(apvts, "decayId", decaySlider);
+    sustainAttachment = std::make_unique<SliderAttachment>(apvts, "sustainId", sustainSlider);
+    releaseAttachment = std::make_unique<SliderAttachment>(apvts, "releaseId", releaseSlider);
 
     setSliderParams(attackSlider, attackLabel);
     setSliderParams(decaySlider, decayLabel);
@@ -42,7 +42,7 @@ void AdsrComponent::paint (juce::Graphics& g)
     g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
     g.setFont(20.0f);
-    g.drawText("Amp Envelope", labelSpace.withX(5), juce::Justification::left);
+    g.drawText(componentName, labelSpace.withX(5), juce::Justification::left);
     g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 2.0f);
 }
 
