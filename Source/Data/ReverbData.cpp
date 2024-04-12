@@ -15,12 +15,16 @@ void ReverbData::prepareToPlay(double sampleRate)
     setSampleRate(sampleRate);
 }
 
-void ReverbData::updateParameters(float roomSize, float damping, float wetLevel, float dryLevel)
+void ReverbData::updateParameters(float roomSize, float reverbDamping, float wetLevel, float dryLevel)
 {
     reverbParameters.roomSize = roomSize;
-    reverbParameters.damping = damping;
+    reverbParameters.damping = reverbDamping;
     reverbParameters.wetLevel = wetLevel;
     reverbParameters.dryLevel = dryLevel;
 
     setParameters(reverbParameters);
+}
+
+void ReverbData::process(juce::AudioBuffer<float>& buffer, int numSamples) {
+    processStereo(buffer.getWritePointer(0), buffer.getWritePointer(1), numSamples);
 }
