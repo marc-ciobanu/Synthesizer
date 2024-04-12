@@ -17,13 +17,15 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     , adsr("Amp Envelope", audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE")
     , filter(audioProcessor.apvts)
     , modAdsr("Mod Envelope", audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE")
+    , reverb(audioProcessor.apvts)
 {
-    setSize (620, 500);
+    setSize(620,800);
 
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
     addAndMakeVisible(filter);
     addAndMakeVisible(modAdsr);
+    addAndMakeVisible(reverb);
 }
 
 Synth1AudioProcessorEditor::~Synth1AudioProcessorEditor()
@@ -47,6 +49,7 @@ void Synth1AudioProcessorEditor::resized()
     adsr.setBounds(osc.getRight(), paddingY, width, height);
     filter.setBounds(paddingX, paddingY2, width, height);
     modAdsr.setBounds(filter.getRight(), paddingY2, width, height);
+    reverb.setBounds(paddingX, 435, 490, height);
 }
 
 

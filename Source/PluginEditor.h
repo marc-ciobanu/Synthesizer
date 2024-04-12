@@ -13,6 +13,7 @@
 #include "UI/AdsrComponent.h"
 #include "UI/OscComponent.h"
 #include "UI/FilterComponent.h"
+#include "UI/ReverbComponent.h"
 
 //==============================================================================
 /**
@@ -37,6 +38,8 @@ private:
     FilterComponent filter;
 
     AdsrComponent modAdsr;
+
+    ReverbComponent reverb;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth1AudioProcessorEditor)
 };

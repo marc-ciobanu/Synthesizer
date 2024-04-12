@@ -15,12 +15,13 @@ void ReverbData::prepareToPlay(double sampleRate)
     setSampleRate(sampleRate);
 }
 
-void ReverbData::updateParameters(float roomSize, float reverbDamping, float wetLevel, float dryLevel)
+void ReverbData::updateParameters(float roomSize, float reverbDamping, float wetLevel, float dryLevel, float reverbWidth)
 {
     reverbParameters.roomSize = roomSize;
     reverbParameters.damping = reverbDamping;
     reverbParameters.wetLevel = wetLevel;
     reverbParameters.dryLevel = dryLevel;
+    reverbParameters.width = reverbWidth;
 
     setParameters(reverbParameters);
 }

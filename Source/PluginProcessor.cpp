@@ -140,6 +140,7 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             auto& reverbDamping = *apvts.getRawParameterValue("REVERBDAMPING");
             auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
             auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
+            auto& reverbWidth = *apvts.getRawParameterValue("REVERBWIDTH");
 
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
@@ -151,7 +152,7 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
 
             voice->updateModAdsr(modAttack, modDecay, modSustain, modRelease);
 
-            voice->updateReverb(reverbRoomSize, reverbDamping, reverbWetLevel, reverbDryLevel);
+            voice->updateReverb(reverbRoomSize, reverbDamping, reverbWetLevel, reverbDryLevel, reverbWidth);
         }
     }
 
@@ -196,10 +197,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRES", "Filter Resonance", juce::NormalisableRange<float>{ 1.0f, 10.0f, 0.01f}, 1.0f));
 
     // Reverb
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "Reverb Room Size", juce::NormalisableRange<float>{ 0.0f, 1.0f, 1.0f }, 0.5f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "Reverb Damping", juce::NormalisableRange<float>{ 0.0f, 1.0f, 1.0f }, 0.5f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "Reverb Wet Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 1.0f }, 0.33f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "Reverb Dry Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 1.0f }, 0.7f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "Reverb Room Size", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.5f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "Reverb Damping", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.5f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "Reverb Wet Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.9f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "Reverb Dry Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "Reverb Width", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
 
     return{ params.begin(), params.end() };

@@ -16,7 +16,7 @@ class ReverbData : public juce::Reverb
 {
 public:
     void prepareToPlay(double sampleRate);
-    void updateParameters(float roomSize, float reverbDamping, float wetLevel, float dryLevel);
+    void updateParameters(float roomSize, float reverbDamping, float wetLevel, float dryLevel, float reverbWidth);
     void process(juce::AudioBuffer<float>& buffer, int numSamples);
 private:
     juce::Reverb::Parameters reverbParameters;

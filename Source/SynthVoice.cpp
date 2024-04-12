@@ -90,8 +90,8 @@ void SynthVoice::updateModAdsr(const float attack, const float decay, const floa
     modAdsr.updateParameters(attack, decay, sustain, release);
 }
 
-void SynthVoice::updateReverb(float roomSize, float damping, float wetLevel, float dryLevel)
+void SynthVoice::updateReverb(float roomSize, float damping, float wetLevel, float dryLevel, float reverbWidth)
 {
-    reverb.updateParameters(roomSize, damping, wetLevel, dryLevel);
+    reverb.updateParameters(roomSize, damping, wetLevel, dryLevel, reverbWidth);
 }
 
