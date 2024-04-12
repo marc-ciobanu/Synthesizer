@@ -42,12 +42,14 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     spec.sampleRate = sampleRate;
     spec.numChannels = outputChannels;
 
+    gain.setGainLinear(0.3f);
     osc.prepareToPlay(spec);
     gain.prepare(spec);
     filter.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
     modAdsr.setSampleRate(sampleRate);
+    reverb.setSampleRate(sampleRate);
     
-    gain.setGainLinear(0.3f);
+    
 
     isPrepared = true;
 }
@@ -85,3 +87,9 @@ void SynthVoice::updateModAdsr(const float attack, const float decay, const floa
 {
     modAdsr.updateParameters(attack, decay, sustain, release);
 }
+
+void SynthVoice::updateReverb(float roomSize, float damping, float wetLevel, float dryLevel)
+{
+    reverb.updateParameters(roomSize, damping, wetLevel, dryLevel);
+}
+

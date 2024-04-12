@@ -15,6 +15,7 @@
 #include "Data/OscData.h"
 #include "Data/AdsrData.h"
 #include "Data/FilterData.h"
+#include "Data/ReverbData.h"
 
 class SynthVoice : public juce::SynthesiserVoice {
 public:
@@ -29,6 +30,8 @@ public:
     void updateAdsr(const float attack, const float decay, const float sustain, const float release);
     void updateFilter(const int filterType, const float cutoff, const float resonance);
     void updateModAdsr(const float attack, const float decay, const float sustain, const float release);
+    void updateReverb(float roomSize, float damping, float wetLevel, float dryLevel);
+
 
     OscData& getOscillator() { return osc; }
 private:
@@ -37,6 +40,8 @@ private:
     AdsrData adsr;
     FilterData filter;
     AdsrData modAdsr;
+    ReverbData reverb;
+
 
     juce::dsp::Gain<float> gain;
 

@@ -16,6 +16,10 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="FaQGXS" name="ReverbComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ReverbComponent.cpp"/>
+        <FILE id="hHNYtU" name="ReverbComponent.h" compile="0" resource="0"
+              file="Source/UI/ReverbComponent.h"/>
         <FILE id="a7Mf85" name="FilterComponent.cpp" compile="1" resource="0"
               file="Source/UI/FilterComponent.cpp"/>
         <FILE id="YwIvrR" name="FilterComponent.h" compile="0" resource="0"
@@ -34,6 +38,8 @@
         <FILE id="HNLjKX" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
         <FILE id="G2lV9r" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
         <FILE id="JzECAa" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
+        <FILE id="xjAetd" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/ReverbData.cpp"/>
+        <FILE id="H7NNiZ" name="ReverbData.h" compile="0" resource="0" file="Source/Data/ReverbData.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>

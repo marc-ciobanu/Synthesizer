@@ -640,6 +640,9 @@
     <ClCompile Include="..\..\Source\SynthVoice.cpp">
       <Filter>Synth1\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\ReverbComponent.cpp">
+      <Filter>Synth1\Source\UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\FilterComponent.cpp">
       <Filter>Synth1\Source\UI</Filter>
     </ClCompile>
@@ -656,6 +659,9 @@
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Data\OscData.cpp">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Data\ReverbData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
     <ClCompile Include="D:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
@@ -3246,6 +3252,9 @@
     <ClInclude Include="..\..\Source\SynthSound.h">
       <Filter>Synth1\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\UI\ReverbComponent.h">
+      <Filter>Synth1\Source\UI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\UI\FilterComponent.h">
       <Filter>Synth1\Source\UI</Filter>
     </ClInclude>
@@ -3262,6 +3271,9 @@
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Data\OscData.h">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Data\ReverbData.h">
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
     <ClInclude Include="D:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">

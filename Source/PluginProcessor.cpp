@@ -134,7 +134,12 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             auto& modAttack = *apvts.getRawParameterValue("MODATTACK");
             auto& modDecay = *apvts.getRawParameterValue("MODDECAY");
             auto& modSustain = *apvts.getRawParameterValue("MODSUSTAIN");
-            auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");            
+            auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");       
+
+            auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
+            auto& reverbDamping = *apvts.getRawParameterValue("REVERBDAMPING");
+            auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
+            auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
 
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
@@ -145,6 +150,8 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             voice->updateFilter(filterType, cutoff, resonance);
 
             voice->updateModAdsr(modAttack, modDecay, modSustain, modRelease);
+
+            voice->updateReverb(reverbRoomSize, reverbDamping, reverbWetLevel, reverbDryLevel);
         }
     }
 
@@ -187,6 +194,13 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTERTYPE", "Filter Type", juce::StringArray{ "Low-Pass", "Band-Pass", "High-Pass" }, 0));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFF", "Filter Cutoff", juce::NormalisableRange<float>{ 20.0f, 20000.0f, 0.01f, 0.6f }, 200.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRES", "Filter Resonance", juce::NormalisableRange<float>{ 1.0f, 10.0f, 0.01f}, 1.0f));
+
+    // Reverb
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "Reverb Room Size", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.5f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "Reverb Damping", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.5f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "Reverb Wet Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.33f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "Reverb Dry Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.7f));
+
 
     return{ params.begin(), params.end() };
 }

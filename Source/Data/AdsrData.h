@@ -12,7 +12,8 @@
 
 #include <JuceHeader.h>
 
-class AdsrData : public juce::ADSR {
+class AdsrData : public juce::ADSR 
+{
 public:
     void updateParameters(const float attack, const float decay, const float sustain, const float release);
 
