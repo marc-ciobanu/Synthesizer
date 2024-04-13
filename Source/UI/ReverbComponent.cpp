@@ -49,7 +49,7 @@ void ReverbComponent::resized()
     const auto labelYOffset = 20;
     const auto labelHeight = 20;
 
-    roomSizeSlider.setBounds(10, startPosY + 5, 90, 30);
+    roomSizeSlider.setBounds(10, startPosY, sliderWidth-10, sliderHeight);
     roomSizeLabel.setBounds(10, startPosY - labelYOffset, 90, labelHeight);
 
     dampingSlider.setBounds(roomSizeSlider.getRight(), startPosY, sliderWidth, sliderHeight);

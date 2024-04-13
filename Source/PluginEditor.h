@@ -14,6 +14,7 @@
 #include "UI/OscComponent.h"
 #include "UI/FilterComponent.h"
 #include "UI/ReverbComponent.h"
+#include "UI/ChorusComponent.h"
 
 //==============================================================================
 /**
@@ -40,6 +41,8 @@ private:
     AdsrComponent modAdsr;
 
     ReverbComponent reverb;
+
+    ChorusComponent chorus;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth1AudioProcessorEditor)
 };
