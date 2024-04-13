@@ -48,7 +48,7 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     filter.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
     modAdsr.setSampleRate(sampleRate);
     reverb.setSampleRate(sampleRate);
-    
+    chorus.prepareToPlay(sampleRate, samplesPerBlock);
     
 
     isPrepared = true;
@@ -72,6 +72,8 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int s
     modAdsr.getNextSample();
 
     reverb.process(outputBuffer, numSamples);
+
+    chorus.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 }
 
 void SynthVoice::updateAdsr(const float attack, const float decay, const float sustain, const float release) 
@@ -94,4 +96,11 @@ void SynthVoice::updateReverb(float roomSize, float damping, float wetLevel, flo
 {
     reverb.updateParameters(roomSize, damping, wetLevel, dryLevel, reverbWidth);
 }
+
+void SynthVoice::updateChorus(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix)
+{
+    chorus.updateParameteres(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
+}
+
+
 

@@ -640,6 +640,9 @@
     <ClCompile Include="..\..\Source\SynthVoice.cpp">
       <Filter>Synth1\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\ChorusComponent.cpp">
+      <Filter>Synth1\Source\UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\ReverbComponent.cpp">
       <Filter>Synth1\Source\UI</Filter>
     </ClCompile>
@@ -653,6 +656,9 @@
       <Filter>Synth1\Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Data\AdsrData.cpp">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Data\ChorusData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Data\FilterData.cpp">
@@ -3252,6 +3258,9 @@
     <ClInclude Include="..\..\Source\SynthSound.h">
       <Filter>Synth1\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\UI\ChorusComponent.h">
+      <Filter>Synth1\Source\UI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\UI\ReverbComponent.h">
       <Filter>Synth1\Source\UI</Filter>
     </ClInclude>
@@ -3265,6 +3274,9 @@
       <Filter>Synth1\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Data\AdsrData.h">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Data\ChorusData.h">
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Data\FilterData.h">

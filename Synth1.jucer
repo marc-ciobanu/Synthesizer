@@ -16,6 +16,10 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="MVzKhk" name="ChorusComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ChorusComponent.cpp"/>
+        <FILE id="kPTZHE" name="ChorusComponent.h" compile="0" resource="0"
+              file="Source/UI/ChorusComponent.h"/>
         <FILE id="FaQGXS" name="ReverbComponent.cpp" compile="1" resource="0"
               file="Source/UI/ReverbComponent.cpp"/>
         <FILE id="hHNYtU" name="ReverbComponent.h" compile="0" resource="0"
@@ -34,6 +38,8 @@
       <GROUP id="{248E5765-ADE1-312B-A7D4-369ACC78E910}" name="Data">
         <FILE id="oIubmC" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
         <FILE id="yz8DXU" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
+        <FILE id="yPiZcz" name="ChorusData.cpp" compile="1" resource="0" file="Source/Data/ChorusData.cpp"/>
+        <FILE id="kIgg3q" name="ChorusData.h" compile="0" resource="0" file="Source/Data/ChorusData.h"/>
         <FILE id="fag1iZ" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
         <FILE id="HNLjKX" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
         <FILE id="G2lV9r" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>

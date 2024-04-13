@@ -142,6 +142,12 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
             auto& reverbWidth = *apvts.getRawParameterValue("REVERBWIDTH");
 
+            auto& chorusRate = *apvts.getRawParameterValue("CHORUSRATE");
+            auto& chorusDepth = *apvts.getRawParameterValue("CHORUSDEPTH");
+            auto& chorusCentreDelay = *apvts.getRawParameterValue("CHORUSCENTREDELAY");
+            auto& chorusFeedback = *apvts.getRawParameterValue("CHORUSFEEDBACK");
+            auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
+
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
 
@@ -153,6 +159,8 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             voice->updateModAdsr(modAttack, modDecay, modSustain, modRelease);
 
             voice->updateReverb(reverbRoomSize, reverbDamping, reverbWetLevel, reverbDryLevel, reverbWidth);
+
+            voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
         }
     }
 
@@ -203,6 +211,12 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "Reverb Dry Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "Reverb Width", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
+    // Chorus
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSRATE", "Chorus Rate", juce::NormalisableRange<float>{ 0.0f, 100.0f, 0.1f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSDEPTH", "Chorus Depth", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSCENTREDELAY", "Chorus Centre Delay", juce::NormalisableRange<float>{ 0.0f, 100.0f, 0.1f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSFEEDBACK", "Chorus Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "Chorus Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
     return{ params.begin(), params.end() };
 }
