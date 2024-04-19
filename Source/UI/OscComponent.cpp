@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "OscComponent.h"
+#include "Styles.h"
 
 //==============================================================================
 OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::String oscSelectorId, juce::String fmFreqId, juce::String fmDepthId)
@@ -22,8 +23,8 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::Stri
     fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider);
 
     setComboBoxStyle(oscSelector, oscSelectorLabel);
-    setSliderStyle(fmFreqSlider, fmFreqLabel);
-    setSliderStyle(fmDepthSlider, fmDepthLabel);
+    Styles::setSliderWithLabel(fmFreqSlider, fmFreqLabel, *this);
+    Styles::setSliderWithLabel(fmDepthSlider, fmDepthLabel, *this);
 }
 
 OscComponent::~OscComponent()
@@ -64,17 +65,4 @@ void OscComponent::setComboBoxStyle(juce::ComboBox& comboBox, juce::Label& label
 {
     addAndMakeVisible(comboBox);
     addAndMakeVisible(label);
-}
-
-void OscComponent::setSliderStyle(juce::Slider& slider, juce::Label& label)
-{
-    addAndMakeVisible(slider);
-    addAndMakeVisible(label);
-
-    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
-
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
-    label.setFont(15.0f);
-    label.setJustificationType(juce::Justification::centred);
 }

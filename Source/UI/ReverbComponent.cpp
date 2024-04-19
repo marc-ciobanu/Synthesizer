@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "ReverbComponent.h"
+#include "Styles.h"
 
 //==============================================================================
 ReverbComponent::ReverbComponent(juce::AudioProcessorValueTreeState& apvts)
@@ -20,11 +21,11 @@ ReverbComponent::ReverbComponent(juce::AudioProcessorValueTreeState& apvts)
     dryLevelAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "REVERBDRYLEVEL", dryLevelSlider);
     widthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "REVERBWIDTH", widthSlider);
 
-    setSliderStyle(roomSizeSlider, roomSizeLabel);
-    setSliderStyle(dampingSlider, dampingLabel);
-    setSliderStyle(wetLevelSlider, wetLevelLabel);
-    setSliderStyle(dryLevelSlider, dryLevelLabel);
-    setSliderStyle(widthSlider, widthLabel);
+    Styles::setSliderWithLabel(roomSizeSlider, roomSizeLabel, *this);
+    Styles::setSliderWithLabel(dampingSlider, dampingLabel, *this);
+    Styles::setSliderWithLabel(wetLevelSlider, wetLevelLabel, *this);
+    Styles::setSliderWithLabel(dryLevelSlider, dryLevelLabel, *this);
+    Styles::setSliderWithLabel(widthSlider, widthLabel, *this);
 }
 
 ReverbComponent::~ReverbComponent(){}
@@ -63,17 +64,4 @@ void ReverbComponent::resized()
     
     widthSlider.setBounds(dryLevelSlider.getRight(), startPosY, sliderWidth, sliderHeight);
     widthLabel.setBounds(widthSlider.getX(), widthSlider.getY() - labelYOffset, widthSlider.getWidth(), labelHeight);
-}
-
-void ReverbComponent::setSliderStyle(juce::Slider& slider, juce::Label& label) 
-{
-    addAndMakeVisible(slider);
-    addAndMakeVisible(label);
-
-    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
-
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
-    label.setFont(15.0f);
-    label.setJustificationType(juce::Justification::centred);
 }

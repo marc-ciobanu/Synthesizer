@@ -25,8 +25,6 @@ public:
     void resized() override;
 
 private:
-    void setSliderStyle(juce::Slider& slider, juce::Label& label);
-
     juce::Slider chorusRateSlider;
     juce::Slider chorusDepthSlider;
     juce::Slider chorusCentreDelaySlider;

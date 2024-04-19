@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "FilterComponent.h"
+#include "Styles.h"
 
 //==============================================================================
 FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts)
@@ -22,8 +23,8 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts)
     filterResAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "FILTERRES", filterRes);
 
     setComboBoxStyle(filterSelector, filterSelectorLabel);
-    setSliderStyle(filterCutoff, filterCutoffLabel);
-    setSliderStyle(filterRes, filterResLabel);
+    Styles::setSliderWithLabel(filterCutoff, filterCutoffLabel, *this);
+    Styles::setSliderWithLabel(filterRes, filterResLabel, *this);
 }
 
 FilterComponent::~FilterComponent()
@@ -65,19 +66,6 @@ void FilterComponent::setComboBoxStyle(juce::ComboBox& combobox, juce::Label& la
 {
     addAndMakeVisible(combobox);
     addAndMakeVisible(label);
-
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
-    label.setFont(15.0f);
-    label.setJustificationType(juce::Justification::centred);
-}
-
-void FilterComponent::setSliderStyle(juce::Slider& slider, juce::Label& label)
-{
-    addAndMakeVisible(slider);
-    addAndMakeVisible(label);
-
-    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
 
     label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
     label.setFont(15.0f);

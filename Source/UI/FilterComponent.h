@@ -26,7 +26,6 @@ public:
 
 private:
     void setComboBoxStyle(juce::ComboBox& comboBox, juce::Label& label);
-    void setSliderStyle(juce::Slider& slider, juce::Label& label);
 
     // Butonul in sine
     juce::ComboBox filterSelector;

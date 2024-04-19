@@ -3258,6 +3258,9 @@
     <ClInclude Include="..\..\Source\SynthSound.h">
       <Filter>Synth1\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\UI\Styles.h">
+      <Filter>Synth1\Source\UI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\UI\ChorusComponent.h">
       <Filter>Synth1\Source\UI</Filter>
     </ClInclude>

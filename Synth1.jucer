@@ -16,6 +16,7 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="mVJlsa" name="Styles.h" compile="0" resource="0" file="Source/UI/Styles.h"/>
         <FILE id="MVzKhk" name="ChorusComponent.cpp" compile="1" resource="0"
               file="Source/UI/ChorusComponent.cpp"/>
         <FILE id="kPTZHE" name="ChorusComponent.h" compile="0" resource="0"

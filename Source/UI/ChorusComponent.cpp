@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "ChorusComponent.h"
+#include "Styles.h"
 
 //==============================================================================
 ChorusComponent::ChorusComponent(juce::AudioProcessorValueTreeState& apvts)
@@ -20,11 +21,13 @@ ChorusComponent::ChorusComponent(juce::AudioProcessorValueTreeState& apvts)
     chorusFeedbackAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "CHORUSFEEDBACK", chorusFeedbackSlider);
     chorusMixAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "CHORUSMIX", chorusMixSlider);
 
-    setSliderStyle(chorusRateSlider, chorusRateLabel);
-    setSliderStyle(chorusDepthSlider, chorusDepthLabel);
-    setSliderStyle(chorusCentreDelaySlider, chorusCentreDelayLabel);
-    setSliderStyle(chorusFeedbackSlider, chorusFeedbackLabel);
-    setSliderStyle(chorusMixSlider, chorusMixLabel);
+
+    Styles::setSliderWithLabel(chorusRateSlider, chorusRateLabel, *this);
+    Styles::setSliderWithLabel(chorusDepthSlider, chorusDepthLabel, *this);
+    Styles::setSliderWithLabel(chorusCentreDelaySlider, chorusCentreDelayLabel, *this);
+    Styles::setSliderWithLabel(chorusFeedbackSlider, chorusFeedbackLabel, *this);
+    Styles::setSliderWithLabel(chorusMixSlider, chorusMixLabel, *this);
+    
 }
 
 ChorusComponent::~ChorusComponent()
@@ -66,17 +69,4 @@ void ChorusComponent::resized()
     chorusMixSlider.setBounds(chorusFeedbackSlider.getRight(), startPosY, sliderWidth, sliderHeight);
     chorusMixLabel.setBounds(chorusMixSlider.getX(), chorusMixSlider.getY() - labelYOffset, chorusMixSlider.getWidth(), labelHeight);
 
-}
-
-void ChorusComponent::setSliderStyle(juce::Slider& slider, juce::Label& label)
-{
-    addAndMakeVisible(slider);
-    addAndMakeVisible(label);
-
-    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
-
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
-    label.setFont(15.0f);
-    label.setJustificationType(juce::Justification::centred);
 }

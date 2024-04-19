@@ -2561,6 +2561,7 @@
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
     <ClInclude Include="..\..\Source\SynthVoice.h"/>
     <ClInclude Include="..\..\Source\SynthSound.h"/>
+    <ClInclude Include="..\..\Source\UI\Styles.h"/>
     <ClInclude Include="..\..\Source\UI\ChorusComponent.h"/>
     <ClInclude Include="..\..\Source\UI\ReverbComponent.h"/>
     <ClInclude Include="..\..\Source\UI\FilterComponent.h"/>
