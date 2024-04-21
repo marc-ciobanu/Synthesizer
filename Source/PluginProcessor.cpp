@@ -218,5 +218,28 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSFEEDBACK", "Chorus Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "Chorus Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
+    // Eq
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LOWCUTFREQ", "LowCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 20.f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("HIGHCUTFREQ", "HighCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 20000.f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKFREQ", "Peak Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 750.f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKGAIN", "Peak Gain", juce::NormalisableRange<float>(-24.f, 24.f, 0.5f, 1.f), 0.0f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKQUALITY", "Peak Quality", juce::NormalisableRange<float>(0.1f, 10.f, 0.05f, 1.f), 1.f));
+
+    juce::StringArray stringArray;
+    for (int i = 0; i < 4; ++i)
+    {
+        juce::String str;
+        str << (12 + i * 12);
+        str << " db/Oct";
+        stringArray.add(str);
+    }
+
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("LOWCUTSLOPE", "LowCut Slope", stringArray, 0));
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("HIGHCUTSLOPE", "HighCut Slope", stringArray, 0));
+
     return{ params.begin(), params.end() };
 }
