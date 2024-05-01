@@ -11,6 +11,7 @@
 #include "SynthVoice.h"
 #include "SynthSound.h"
 
+
 //==============================================================================
 Synth1AudioProcessor::Synth1AudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -28,121 +29,93 @@ Synth1AudioProcessor::Synth1AudioProcessor()
     synth.addVoice(new SynthVoice());
 }
 
-Synth1AudioProcessor::~Synth1AudioProcessor(){}
+Synth1AudioProcessor::~Synth1AudioProcessor() {}
 
-const juce::String Synth1AudioProcessor::getName() const{ return JucePlugin_Name; }
+const juce::String Synth1AudioProcessor::getName() const { return JucePlugin_Name; }
 
 bool Synth1AudioProcessor::acceptsMidi() const
 {
-   #if JucePlugin_WantsMidiInput
+#if JucePlugin_WantsMidiInput
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 bool Synth1AudioProcessor::producesMidi() const
 {
-   #if JucePlugin_ProducesMidiOutput
+#if JucePlugin_ProducesMidiOutput
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 bool Synth1AudioProcessor::isMidiEffect() const
 {
-   #if JucePlugin_IsMidiEffect
+#if JucePlugin_IsMidiEffect
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
-double Synth1AudioProcessor::getTailLengthSeconds() const{ return 0.0; }
+double Synth1AudioProcessor::getTailLengthSeconds() const { return 0.0; }
 int Synth1AudioProcessor::getNumPrograms() { return 1; }
 int Synth1AudioProcessor::getCurrentProgram() { return 0; }
-void Synth1AudioProcessor::setCurrentProgram (int index){}
-const juce::String Synth1AudioProcessor::getProgramName (int index){ return {}; }
+void Synth1AudioProcessor::setCurrentProgram(int index) {}
+const juce::String Synth1AudioProcessor::getProgramName(int index) { return {}; }
 void Synth1AudioProcessor::changeProgramName(int index, const juce::String& newName) {}
 
 //==============================================================================
 
-void Synth1AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void Synth1AudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
     synth.setCurrentPlaybackSampleRate(sampleRate);
 
     for (int i = 0; i < synth.getNumVoices(); i++) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
             voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
-
-            juce::dsp::ProcessSpec spec;
-
-            spec.maximumBlockSize = samplesPerBlock;
-
-            spec.numChannels = 1;
-
-            spec.sampleRate = sampleRate;
-
-            leftChain.prepare(spec);
-            rightChain.prepare(spec);
-
-            updateFilters();
         }
     }
-
-    
 }
 
-void Synth1AudioProcessor::releaseResources(){}
+void Synth1AudioProcessor::releaseResources() {}
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool Synth1AudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool Synth1AudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) const
 {
-  #if JucePlugin_IsMidiEffect
-    juce::ignoreUnused (layouts);
+#if JucePlugin_IsMidiEffect
+    juce::ignoreUnused(layouts);
     return true;
-  #else
+#else
     if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
+        && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
         return false;
 
-   #if ! JucePlugin_IsSynth
+#if ! JucePlugin_IsSynth
     if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
         return false;
-   #endif
+#endif
 
     return true;
-  #endif
+#endif
 }
 #endif
 
 //==============================================================================
 
-void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
+    auto totalNumInputChannels = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
-    
+
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-
-    updateFilters();
-
-    juce::dsp::AudioBlock<float> block(buffer);
-
-    auto leftBlock = block.getSingleChannelBlock(0);
-    auto rightBlock = block.getSingleChannelBlock(1);
-
-    juce::dsp::ProcessContextReplacing<float> leftContext(leftBlock);
-    juce::dsp::ProcessContextReplacing<float> rightContext(rightBlock);
-
-    leftChain.process(leftContext);
-    rightChain.process(rightContext);
+        buffer.clear(i, 0, buffer.getNumSamples());
 
     for (int i = 0; i < synth.getNumVoices(); ++i) {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) 
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
             auto& oscWaveType = *apvts.getRawParameterValue("OSC");
 
@@ -161,7 +134,7 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             auto& modAttack = *apvts.getRawParameterValue("MODATTACK");
             auto& modDecay = *apvts.getRawParameterValue("MODDECAY");
             auto& modSustain = *apvts.getRawParameterValue("MODSUSTAIN");
-            auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");       
+            auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");
 
             auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
             auto& reverbDamping = *apvts.getRawParameterValue("REVERBDAMPING");
@@ -175,20 +148,12 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             auto& chorusFeedback = *apvts.getRawParameterValue("CHORUSFEEDBACK");
             auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
 
-            auto& peakFreq = *apvts.getRawParameterValue("PEAKFREQ");
-            auto& peakGain = *apvts.getRawParameterValue("PEAKGAIN");
-            auto& peakQuality = *apvts.getRawParameterValue("PEAKQUALITY");
-            auto& lowCutFreq = *apvts.getRawParameterValue("LOWCUTFREQ");
-            auto& highCutFreq = *apvts.getRawParameterValue("HIGHCUTFREQ");
-            auto& lowCutSlope = *apvts.getRawParameterValue("LOWCUTSLOPE");
-            auto& highCutSlope = *apvts.getRawParameterValue("HIGHCUTSLOPE");
-
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
 
             // aici avem valori Atomic, nu floaturi normale. atomic e mai heavy
             voice->updateAdsr(attack, decay, sustain, release);
-            
+
             voice->updateFilter(filterType, cutoff, resonance);
 
             voice->updateModAdsr(modAttack, modDecay, modSustain, modRelease);
@@ -196,24 +161,17 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             voice->updateReverb(reverbRoomSize, reverbDamping, reverbWetLevel, reverbDryLevel, reverbWidth);
 
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
-
-            //voice->updateEq(getSampleRate(), peakFreq, peakQuality, peakGain, lowCutFreq, highCutFreq, convertStringToSlope(lowCutSlope), convertStringToSlope(highCutSlope));
-        
         }
     }
-
-    
-
-    
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
 
-bool Synth1AudioProcessor::hasEditor() const{ return true; }
-juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor(){ return new Synth1AudioProcessorEditor(*this); }
-void Synth1AudioProcessor::getStateInformation (juce::MemoryBlock& destData){}
-void Synth1AudioProcessor::setStateInformation (const void* data, int sizeInBytes){}
-juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter(){ return new Synth1AudioProcessor(); }
+bool Synth1AudioProcessor::hasEditor() const { return true; }
+juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() { return new Synth1AudioProcessorEditor(*this); }
+void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) {}
+void Synth1AudioProcessor::setStateInformation(const void* data, int sizeInBytes) {}
+juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new Synth1AudioProcessor(); }
 
 //==============================================================================
 
@@ -260,88 +218,5 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSFEEDBACK", "Chorus Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "Chorus Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
-    // Eq
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("LOWCUTFREQ", "LowCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 500.f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("HIGHCUTFREQ", "HighCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 10000.f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKFREQ", "Peak Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 750.f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKGAIN", "Peak Gain", juce::NormalisableRange<float>(-24.f, 24.f, 0.5f, 1.f), 0.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKQUALITY", "Peak Quality", juce::NormalisableRange<float>(0.1f, 10.f, 0.05f, 1.f), 1.f));
-    
-    
-
-    juce::StringArray stringArray;
-    for (int i = 0; i < 4; ++i)
-    {
-        juce::String str;
-        str << (12 + i * 12);
-        str << " db/Oct";
-        stringArray.add(str);
-    }
-
-    params.push_back(std::make_unique<juce::AudioParameterChoice>("LOWCUTSLOPE", "LowCut Slope", stringArray, 0));
-    params.push_back(std::make_unique<juce::AudioParameterChoice>("HIGHCUTSLOPE", "HighCut Slope", stringArray, 0));
-
     return{ params.begin(), params.end() };
-}
-
-
-//////// EQ ///////////
-ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
-{
-    ChainSettings settings;
-
-    settings.lowCutFreq = apvts.getRawParameterValue("LOWCUTFREQ")->load();
-    settings.highCutFreq = apvts.getRawParameterValue("HIGHCUTFREQ")->load();
-    settings.peakFreq = apvts.getRawParameterValue("PEAKFREQ")->load();
-    settings.peakGainInDecibels = apvts.getRawParameterValue("PEAKGAIN")->load();
-    settings.peakQuality = apvts.getRawParameterValue("PEAKQUALITY")->load();
-    settings.lowCutSlope = static_cast<Slope>(apvts.getRawParameterValue("LOWCUTSLOPE")->load());
-    settings.highCutSlope = static_cast<Slope>(apvts.getRawParameterValue("HIGHCUTSLOPE")->load());
-
-
-    return settings;
-}
-
-void Synth1AudioProcessor::updatePeakFilter(const ChainSettings& chainSettings)
-{
-    auto peakCoefficients = juce::dsp::IIR::Coefficients<float>::makePeakFilter(getSampleRate(), chainSettings.peakFreq, chainSettings.peakQuality, juce::Decibels::decibelsToGain(chainSettings.peakGainInDecibels));
-
-
-    updateCoefficients(leftChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
-    updateCoefficients(rightChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
-}
-
-void Synth1AudioProcessor::updateCoefficients(Coefficients& old, const Coefficients& replacements)
-{
-    *old = *replacements;
-}
-
-
-void Synth1AudioProcessor::updateLowCutFilter(const ChainSettings& chainSettings)
-{
-    auto lowCutCoefficients = juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.lowCutFreq, getSampleRate(), 2 * (chainSettings.lowCutSlope + 1));
-    auto& leftLowCut = leftChain.get<ChainPositions::LowCut>();
-    auto& rightLowCut = rightChain.get<ChainPositions::LowCut>();
-
-    updateCutFilter(leftLowCut, lowCutCoefficients, chainSettings.lowCutSlope);
-    updateCutFilter(rightLowCut, lowCutCoefficients, chainSettings.lowCutSlope);
-}
-
-void Synth1AudioProcessor::updateHighCutFilter(const ChainSettings& chainSettings)
-{
-    auto highCutCoefficients = juce::dsp::FilterDesign<float>::designIIRLowpassHighOrderButterworthMethod(chainSettings.highCutFreq, getSampleRate(), 2 * (chainSettings.highCutSlope + 1));
-    auto& leftHighCut = leftChain.get<ChainPositions::HighCut>();
-    auto& rightHighCut = rightChain.get<ChainPositions::HighCut>();
-
-    updateCutFilter(leftHighCut, highCutCoefficients, chainSettings.highCutSlope);
-    updateCutFilter(rightHighCut, highCutCoefficients, chainSettings.highCutSlope);
-}
-
-void Synth1AudioProcessor::updateFilters()
-{
-    auto chainSettings = getChainSettings(apvts);
-
-    updateLowCutFilter(chainSettings);
-    updateHighCutFilter(chainSettings);
-    updatePeakFilter(chainSettings);
 }

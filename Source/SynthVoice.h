@@ -17,7 +17,6 @@
 #include "Data/FilterData.h"
 #include "Data/ReverbData.h"
 #include "Data/ChorusData.h"
-//#include "Data/EqData.h"
 
 class SynthVoice : public juce::SynthesiserVoice {
 public:
@@ -34,7 +33,7 @@ public:
     void updateModAdsr(const float attack, const float decay, const float sustain, const float release);
     void updateReverb(float roomSize, float damping, float wetLevel, float dryLevel, float reverbWidth);
     void updateChorus(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix);
-    //void updateEq(double sampleRate, float peakFreq, float peakQuality, float peakGainInDecibels, float lowCutFreq, float highCutFreq, Slope lowCutSlope, Slope highCutSlope);
+
 
 
     OscData& getOscillator() { return osc; }
@@ -46,7 +45,6 @@ private:
     AdsrData modAdsr;
     ReverbData reverb;
     ChorusData chorus;
-    //EqData eq;
 
 
     juce::dsp::Gain<float> gain;
