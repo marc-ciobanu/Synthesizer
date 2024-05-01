@@ -3303,6 +3303,9 @@
     <ClInclude Include="..\..\Source\Data\ReverbData.h">
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Data\Utility.h">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClInclude>
     <ClInclude Include="D:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>
     </ClInclude>

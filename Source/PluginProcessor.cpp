@@ -10,8 +10,6 @@
 #include "PluginEditor.h"
 #include "SynthVoice.h"
 #include "SynthSound.h"
-#include "Data/EqData.h"
-
 
 //==============================================================================
 Synth1AudioProcessor::Synth1AudioProcessor()
@@ -171,7 +169,6 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
 
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
 
-
             voice->updateEq(getSampleRate(), peakFreq, peakQuality, peakGain, lowCutFreq, highCutFreq, convertStringToSlope(lowCutSlope), convertStringToSlope(highCutSlope));
         }
     }
@@ -231,8 +228,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "Chorus Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
     // Eq
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("LOWCUTFREQ", "LowCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 20.f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("HIGHCUTFREQ", "HighCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 20000.f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LOWCUTFREQ", "LowCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 500.f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("HIGHCUTFREQ", "HighCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 10000.f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKFREQ", "Peak Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 750.f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKGAIN", "Peak Gain", juce::NormalisableRange<float>(-24.f, 24.f, 0.5f, 1.f), 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKQUALITY", "Peak Quality", juce::NormalisableRange<float>(0.1f, 10.f, 0.05f, 1.f), 1.f));
@@ -252,4 +249,3 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
 
     return{ params.begin(), params.end() };
 }
-

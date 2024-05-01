@@ -51,6 +51,7 @@
         <FILE id="JzECAa" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
         <FILE id="xjAetd" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/ReverbData.cpp"/>
         <FILE id="H7NNiZ" name="ReverbData.h" compile="0" resource="0" file="Source/Data/ReverbData.h"/>
+        <FILE id="FUC0Fy" name="Utility.h" compile="0" resource="0" file="Source/Data/Utility.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>

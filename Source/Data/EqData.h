@@ -11,28 +11,8 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Utility.h"
 
-enum Slope
-{
-    Slope_12,
-    Slope_24,
-    Slope_36,
-    Slope_48
-};
-
-Slope convertStringToSlope(const juce::String& slopeString)
-{
-    if (slopeString == "12 db/Oct")
-        return Slope_12;
-    else if (slopeString == "24 db/Oct")
-        return Slope_24;
-    else if (slopeString == "36 db/Oct")
-        return Slope_36;
-    else if (slopeString == "48 db/Oct")
-        return Slope_48;
-    else
-        return Slope_12; // Default to Slope_12 or handle the error as needed
-}
 
 struct ChainSettings
 {
@@ -79,12 +59,5 @@ private:
 
     template<typename ChainType, typename CoefficientType>
     void updateCutFilter(ChainType& chain, const CoefficientType& coefficients, const Slope& slope);
-
-    
-    
-
-
-    
-
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(EqData)
 };

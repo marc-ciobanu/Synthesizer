@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Data/Utility.h"
 
 
 
@@ -62,7 +63,17 @@ private:
     juce::Synthesiser synth;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
 
-    
+    Slope convertStringToSlope(int slopeIndex)
+    {
+        switch (slopeIndex)
+        {
+        case 0: return Slope_12;
+        case 1: return Slope_24;
+        case 2: return Slope_36;
+        case 3: return Slope_48;
+        default: return Slope_12; // Default to Slope_12 or handle the error as needed
+        }
+    }
 
     
 
