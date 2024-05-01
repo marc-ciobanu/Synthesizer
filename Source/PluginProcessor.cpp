@@ -75,8 +75,23 @@ void Synth1AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     for (int i = 0; i < synth.getNumVoices(); i++) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
             voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+
+            juce::dsp::ProcessSpec spec;
+
+            spec.maximumBlockSize = samplesPerBlock;
+
+            spec.numChannels = 1;
+
+            spec.sampleRate = sampleRate;
+
+            leftChain.prepare(spec);
+            rightChain.prepare(spec);
+
+            updateFilters();
         }
     }
+
+    
 }
 
 void Synth1AudioProcessor::releaseResources(){}
@@ -112,6 +127,19 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
+
+    updateFilters();
+
+    juce::dsp::AudioBlock<float> block(buffer);
+
+    auto leftBlock = block.getSingleChannelBlock(0);
+    auto rightBlock = block.getSingleChannelBlock(1);
+
+    juce::dsp::ProcessContextReplacing<float> leftContext(leftBlock);
+    juce::dsp::ProcessContextReplacing<float> rightContext(rightBlock);
+
+    leftChain.process(leftContext);
+    rightChain.process(rightContext);
 
     for (int i = 0; i < synth.getNumVoices(); ++i) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) 
@@ -169,9 +197,14 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
 
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
 
-            voice->updateEq(getSampleRate(), peakFreq, peakQuality, peakGain, lowCutFreq, highCutFreq, convertStringToSlope(lowCutSlope), convertStringToSlope(highCutSlope));
+            //voice->updateEq(getSampleRate(), peakFreq, peakQuality, peakGain, lowCutFreq, highCutFreq, convertStringToSlope(lowCutSlope), convertStringToSlope(highCutSlope));
+        
         }
     }
+
+    
+
+    
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
@@ -234,6 +267,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKGAIN", "Peak Gain", juce::NormalisableRange<float>(-24.f, 24.f, 0.5f, 1.f), 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKQUALITY", "Peak Quality", juce::NormalisableRange<float>(0.1f, 10.f, 0.05f, 1.f), 1.f));
     
+    
 
     juce::StringArray stringArray;
     for (int i = 0; i < 4; ++i)
@@ -248,4 +282,66 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterChoice>("HIGHCUTSLOPE", "HighCut Slope", stringArray, 0));
 
     return{ params.begin(), params.end() };
+}
+
+
+//////// EQ ///////////
+ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
+{
+    ChainSettings settings;
+
+    settings.lowCutFreq = apvts.getRawParameterValue("LOWCUTFREQ")->load();
+    settings.highCutFreq = apvts.getRawParameterValue("HIGHCUTFREQ")->load();
+    settings.peakFreq = apvts.getRawParameterValue("PEAKFREQ")->load();
+    settings.peakGainInDecibels = apvts.getRawParameterValue("PEAKGAIN")->load();
+    settings.peakQuality = apvts.getRawParameterValue("PEAKQUALITY")->load();
+    settings.lowCutSlope = static_cast<Slope>(apvts.getRawParameterValue("LOWCUTSLOPE")->load());
+    settings.highCutSlope = static_cast<Slope>(apvts.getRawParameterValue("HIGHCUTSLOPE")->load());
+
+
+    return settings;
+}
+
+void Synth1AudioProcessor::updatePeakFilter(const ChainSettings& chainSettings)
+{
+    auto peakCoefficients = juce::dsp::IIR::Coefficients<float>::makePeakFilter(getSampleRate(), chainSettings.peakFreq, chainSettings.peakQuality, juce::Decibels::decibelsToGain(chainSettings.peakGainInDecibels));
+
+
+    updateCoefficients(leftChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
+    updateCoefficients(rightChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
+}
+
+void Synth1AudioProcessor::updateCoefficients(Coefficients& old, const Coefficients& replacements)
+{
+    *old = *replacements;
+}
+
+
+void Synth1AudioProcessor::updateLowCutFilter(const ChainSettings& chainSettings)
+{
+    auto lowCutCoefficients = juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.lowCutFreq, getSampleRate(), 2 * (chainSettings.lowCutSlope + 1));
+    auto& leftLowCut = leftChain.get<ChainPositions::LowCut>();
+    auto& rightLowCut = rightChain.get<ChainPositions::LowCut>();
+
+    updateCutFilter(leftLowCut, lowCutCoefficients, chainSettings.lowCutSlope);
+    updateCutFilter(rightLowCut, lowCutCoefficients, chainSettings.lowCutSlope);
+}
+
+void Synth1AudioProcessor::updateHighCutFilter(const ChainSettings& chainSettings)
+{
+    auto highCutCoefficients = juce::dsp::FilterDesign<float>::designIIRLowpassHighOrderButterworthMethod(chainSettings.highCutFreq, getSampleRate(), 2 * (chainSettings.highCutSlope + 1));
+    auto& leftHighCut = leftChain.get<ChainPositions::HighCut>();
+    auto& rightHighCut = rightChain.get<ChainPositions::HighCut>();
+
+    updateCutFilter(leftHighCut, highCutCoefficients, chainSettings.highCutSlope);
+    updateCutFilter(rightHighCut, highCutCoefficients, chainSettings.highCutSlope);
+}
+
+void Synth1AudioProcessor::updateFilters()
+{
+    auto chainSettings = getChainSettings(apvts);
+
+    updateLowCutFilter(chainSettings);
+    updateHighCutFilter(chainSettings);
+    updatePeakFilter(chainSettings);
 }
