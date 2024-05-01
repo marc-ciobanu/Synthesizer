@@ -10,6 +10,7 @@
 #include "PluginEditor.h"
 #include "SynthVoice.h"
 #include "SynthSound.h"
+#include "Data/EqData.h"
 
 
 //==============================================================================
@@ -148,6 +149,14 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             auto& chorusFeedback = *apvts.getRawParameterValue("CHORUSFEEDBACK");
             auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
 
+            auto& peakFreq = *apvts.getRawParameterValue("PEAKFREQ");
+            auto& peakGain = *apvts.getRawParameterValue("PEAKGAIN");
+            auto& peakQuality = *apvts.getRawParameterValue("PEAKQUALITY");
+            auto& lowCutFreq = *apvts.getRawParameterValue("LOWCUTFREQ");
+            auto& highCutFreq = *apvts.getRawParameterValue("HIGHCUTFREQ");
+            auto& lowCutSlope = *apvts.getRawParameterValue("LOWCUTSLOPE");
+            auto& highCutSlope = *apvts.getRawParameterValue("HIGHCUTSLOPE");
+
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
 
@@ -161,6 +170,9 @@ void Synth1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
             voice->updateReverb(reverbRoomSize, reverbDamping, reverbWetLevel, reverbDryLevel, reverbWidth);
 
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
+
+
+            voice->updateEq(getSampleRate(), peakFreq, peakQuality, peakGain, lowCutFreq, highCutFreq, convertStringToSlope(lowCutSlope), convertStringToSlope(highCutSlope));
         }
     }
 
@@ -220,14 +232,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
 
     // Eq
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LOWCUTFREQ", "LowCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 20.f));
-
     params.push_back(std::make_unique<juce::AudioParameterFloat>("HIGHCUTFREQ", "HighCut Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 20000.f));
-
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKFREQ", "Peak Freq", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 0.25f), 750.f));
-
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKGAIN", "Peak Gain", juce::NormalisableRange<float>(-24.f, 24.f, 0.5f, 1.f), 0.0f));
-
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PEAKQUALITY", "Peak Quality", juce::NormalisableRange<float>(0.1f, 10.f, 0.05f, 1.f), 1.f));
+    
 
     juce::StringArray stringArray;
     for (int i = 0; i < 4; ++i)
@@ -243,3 +252,4 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
 
     return{ params.begin(), params.end() };
 }
+

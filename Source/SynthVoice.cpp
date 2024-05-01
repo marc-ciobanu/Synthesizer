@@ -49,7 +49,7 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     modAdsr.setSampleRate(sampleRate);
     reverb.setSampleRate(sampleRate);
     chorus.prepareToPlay(sampleRate, samplesPerBlock);
-    
+    eq.prepareToPlay(sampleRate, samplesPerBlock);
 
     isPrepared = true;
 }
@@ -74,6 +74,8 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int s
     reverb.process(outputBuffer, numSamples);
 
     chorus.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+
+    eq.process(outputBuffer);
 }
 
 void SynthVoice::updateAdsr(const float attack, const float decay, const float sustain, const float release) 
@@ -102,5 +104,10 @@ void SynthVoice::updateChorus(float chorusRate, float chorusDepth, float chorusC
     chorus.updateParameteres(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
 }
 
+void SynthVoice::updateEq(double sampleRate, float peakFreq, float peakQuality, float peakGainInDecibels, float lowCutFreq, float highCutFreq, Slope lowCutSlope, Slope highCutSlope)
+{
+    eq.updatePeakFilter(sampleRate, peakFreq, peakQuality, peakGainInDecibels);
+    eq.updateLowCutFilter(sampleRate, lowCutFreq, lowCutSlope);
+    eq.updateHighCutFilter(sampleRate, highCutFreq, highCutSlope);
 
-
+}
