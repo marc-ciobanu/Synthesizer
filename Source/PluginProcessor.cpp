@@ -72,6 +72,7 @@ void Synth1AudioProcessor::changeProgramName(int index, const juce::String& newN
 void Synth1AudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
     synth.setCurrentPlaybackSampleRate(sampleRate);
+    eq.setSampleRate(static_cast<float>(sampleRate));
 
     for (int i = 0; i < synth.getNumVoices(); i++) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
@@ -148,6 +149,9 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
             auto& chorusFeedback = *apvts.getRawParameterValue("CHORUSFEEDBACK");
             auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
 
+            auto& eqCutoffFreq = *apvts.getRawParameterValue("EQCUTOFFFREQ");
+            auto& eqType = *apvts.getRawParameterValue("EQTYPE");
+
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
 
@@ -161,6 +165,10 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
             voice->updateReverb(reverbRoomSize, reverbDamping, reverbWetLevel, reverbDryLevel, reverbWidth);
 
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
+
+            eq.setCutoffFreq(eqCutoffFreq);
+            eq.setHighpass(eqType);
+            eq.process(buffer, midiMessages);
         }
     }
 
@@ -168,7 +176,13 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
 }
 
 bool Synth1AudioProcessor::hasEditor() const { return true; }
-juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() { return new Synth1AudioProcessorEditor(*this); }
+
+juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() 
+{ 
+    //return new Synth1AudioProcessorEditor(*this);
+    return new juce::GenericAudioProcessorEditor(*this);
+}
+
 void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) {}
 void Synth1AudioProcessor::setStateInformation(const void* data, int sizeInBytes) {}
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new Synth1AudioProcessor(); }
@@ -217,6 +231,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSCENTREDELAY", "Chorus Centre Delay", juce::NormalisableRange<float>{ 0.0f, 100.0f, 0.1f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSFEEDBACK", "Chorus Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "Chorus Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("EQCUTOFFFREQ", "Eq Cutoff Freq", juce::NormalisableRange<float>{ 20.0f, 20000.0f, 0.1f, 0.2f }, 10000.0f));
+    params.push_back(std::make_unique<juce::AudioParameterBool>("EQTYPE", "Eq Type", false));
+
 
     return{ params.begin(), params.end() };
 }

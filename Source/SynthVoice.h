@@ -18,6 +18,7 @@
 #include "Data/ReverbData.h"
 #include "Data/ChorusData.h"
 
+
 class SynthVoice : public juce::SynthesiserVoice {
 public:
     bool canPlaySound(juce::SynthesiserSound* sound) override;

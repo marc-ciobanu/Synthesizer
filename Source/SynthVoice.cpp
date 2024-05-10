@@ -50,7 +50,6 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     reverb.setSampleRate(sampleRate);
     chorus.prepareToPlay(sampleRate, samplesPerBlock);
 
-
     isPrepared = true;
 }
 
@@ -101,5 +100,3 @@ void SynthVoice::updateChorus(float chorusRate, float chorusDepth, float chorusC
 {
     chorus.updateParameteres(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
 }
-
-
