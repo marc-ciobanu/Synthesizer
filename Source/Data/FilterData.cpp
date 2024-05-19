@@ -2,14 +2,13 @@
   ==============================================================================
 
     FilterData.cpp
-    Created: 8 Apr 2024 10:29:47am
-    Author:  admin
+    Created: 1 Apr 2021 12:56:20pm
+    Author:  Joshua Hodge
 
   ==============================================================================
 */
 
 #include "FilterData.h"
-
 
 void FilterData::prepareToPlay(double sampleRate, int samplesPerBlock, int numChannels)
 {
@@ -32,30 +31,28 @@ void FilterData::process(juce::AudioBuffer<float>& buffer)
     juce::dsp::AudioBlock<float> block{ buffer };
     filter.process(juce::dsp::ProcessContextReplacing<float> { block });
 }
-void FilterData::updateParameters(const int filterType, const float cutoff, const float resonance, const float modulator)
+
+void FilterData::updateParameters(const float modulator, const int filterType, const float frequency, const float resonance)
 {
     switch (filterType)
     {
     case 0:
         filter.setType(juce::dsp::StateVariableTPTFilterType::lowpass);
         break;
+
     case 1:
         filter.setType(juce::dsp::StateVariableTPTFilterType::bandpass);
         break;
+
     case 2:
         filter.setType(juce::dsp::StateVariableTPTFilterType::highpass);
         break;
-    default:
-        break;
     }
 
-    float modFrequency = cutoff * modulator;
+    float modulatedFreq = frequency * modulator;
+    modulatedFreq = std::fmax(std::fmin(modulatedFreq, 20000.0f), 20.0f);
 
-    // fmax/fmin alege valoarea mai mica/mare din cele doua
-    modFrequency = std::fmax(modFrequency, 20.0f);
-    modFrequency = std::fmax(modFrequency, 20000.0f);
-
-    filter.setCutoffFrequency(modFrequency);
+    filter.setCutoffFrequency(modulatedFreq);
     filter.setResonance(resonance);
 }
 

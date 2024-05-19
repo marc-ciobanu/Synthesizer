@@ -61,7 +61,6 @@ private:
     juce::Synthesiser synth;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
 
-    EqData eq;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Synth1AudioProcessor)
 };

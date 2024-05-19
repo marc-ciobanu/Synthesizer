@@ -30,15 +30,19 @@ public:
     void renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int startSample, int numSamples) override;
 
     void updateAdsr(const float attack, const float decay, const float sustain, const float release);
-    void updateFilter(const int filterType, const float cutoff, const float resonance);
+    void updateFilter(const int filterType, const float frequency, const float resonance);
     void updateModAdsr(const float attack, const float decay, const float sustain, const float release);
     void updateReverb(float roomSize, float damping, float wetLevel, float dryLevel, float reverbWidth);
     void updateChorus(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix);
 
-
-
     OscData& getOscillator() { return osc; }
+    AdsrData& getAdsr() { return adsr; }
+    AdsrData& getFilterAdsr() { return modAdsr; }
+    FilterData& getFilter() { return filter; }
+
+    
 private:
+    juce::AudioBuffer<float> synthBuffer;
 
     OscData osc;
     AdsrData adsr;
