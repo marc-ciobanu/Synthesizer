@@ -152,8 +152,10 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
             auto& chorusFeedback = *apvts.getRawParameterValue("CHORUSFEEDBACK");
             auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
 
-            auto& eqCutoffFreq = *apvts.getRawParameterValue("EQCUTOFFFREQ");
-            auto& eqType = *apvts.getRawParameterValue("EQTYPE");
+            auto& delayTime = *apvts.getRawParameterValue("DELAYTIME");
+            auto& delayFeedback = *apvts.getRawParameterValue("DELAYFEEDBACK");
+            auto& delayWetLevel = *apvts.getRawParameterValue("DELAYWETLEVEL");
+            auto& delayDryLevel = *apvts.getRawParameterValue("DELAYDRYLEVEL");
 
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
@@ -169,7 +171,8 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
 
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
 
-            
+            voice->updateDelay(delayTime, delayFeedback, delayWetLevel, delayDryLevel);
+
         }
     }
 
@@ -180,8 +183,8 @@ bool Synth1AudioProcessor::hasEditor() const { return true; }
 
 juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() 
 { 
-    return new Synth1AudioProcessorEditor(*this);
-    //return new juce::GenericAudioProcessorEditor(*this);
+    //return new Synth1AudioProcessorEditor(*this);
+    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) {}
@@ -222,7 +225,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     // Reverb
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "Reverb Room Size", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "Reverb Damping", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.5f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "Reverb Wet Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.9f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "Reverb Wet Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "Reverb Dry Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "Reverb Width", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
@@ -232,6 +235,12 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSCENTREDELAY", "Chorus Centre Delay", juce::NormalisableRange<float>{ 0.0f, 100.0f, 0.1f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSFEEDBACK", "Chorus Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "Chorus Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DELAYTIME", "Delay Time", juce::NormalisableRange<float>{ 0.0f, 1.0f }, 0.5f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DELAYFEEDBACK", "Delay Feedback", juce::NormalisableRange<float>{ 0.0f, 1.0f }, 0.5f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DELAYWETLEVEL", "Delay Wet Level", juce::NormalisableRange<float>{ 0.0f, 1.0f }, 0.5f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DELAYDRYLEVEL", "Delay Dry Level", juce::NormalisableRange<float>{ 0.0f, 1.0f }, 0.5f));
+
 
 
     return{ params.begin(), params.end() };

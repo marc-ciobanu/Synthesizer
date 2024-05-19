@@ -16,6 +16,10 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="CmmVJj" name="DelayComponent.cpp" compile="1" resource="0"
+              file="Source/UI/DelayComponent.cpp"/>
+        <FILE id="hBxlOb" name="DelayComponent.h" compile="0" resource="0"
+              file="Source/UI/DelayComponent.h"/>
         <FILE id="pdygB5" name="EqComponent.cpp" compile="1" resource="0" file="Source/UI/EqComponent.cpp"/>
         <FILE id="IcqIcE" name="EqComponent.h" compile="0" resource="0" file="Source/UI/EqComponent.h"/>
         <FILE id="mVJlsa" name="Styles.h" compile="0" resource="0" file="Source/UI/Styles.h"/>
@@ -43,15 +47,14 @@
         <FILE id="yz8DXU" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
         <FILE id="yPiZcz" name="ChorusData.cpp" compile="1" resource="0" file="Source/Data/ChorusData.cpp"/>
         <FILE id="kIgg3q" name="ChorusData.h" compile="0" resource="0" file="Source/Data/ChorusData.h"/>
-        <FILE id="lFJHBe" name="EqData.cpp" compile="1" resource="0" file="Source/Data/EqData.cpp"/>
-        <FILE id="ryIDg2" name="EqData.h" compile="0" resource="0" file="Source/Data/EqData.h"/>
+        <FILE id="SsNQDB" name="DelayData.cpp" compile="1" resource="0" file="Source/Data/DelayData.cpp"/>
+        <FILE id="u5bSDh" name="DelayData.h" compile="0" resource="0" file="Source/Data/DelayData.h"/>
         <FILE id="fag1iZ" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
         <FILE id="HNLjKX" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
         <FILE id="G2lV9r" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
         <FILE id="JzECAa" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
         <FILE id="xjAetd" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/ReverbData.cpp"/>
         <FILE id="H7NNiZ" name="ReverbData.h" compile="0" resource="0" file="Source/Data/ReverbData.h"/>
-        <FILE id="FUC0Fy" name="Utility.h" compile="0" resource="0" file="Source/Data/Utility.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>

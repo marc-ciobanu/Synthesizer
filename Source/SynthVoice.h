@@ -17,6 +17,7 @@
 #include "Data/FilterData.h"
 #include "Data/ReverbData.h"
 #include "Data/ChorusData.h"
+#include "Data/DelayData.h"
 
 
 class SynthVoice : public juce::SynthesiserVoice {
@@ -34,6 +35,7 @@ public:
     void updateModAdsr(const float attack, const float decay, const float sustain, const float release);
     void updateReverb(float roomSize, float damping, float wetLevel, float dryLevel, float reverbWidth);
     void updateChorus(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix);
+    void updateDelay(int samples, float feedback, float wetLevel, float dryLevel);
 
     OscData& getOscillator() { return osc; }
     AdsrData& getAdsr() { return adsr; }
@@ -50,7 +52,7 @@ private:
     AdsrData modAdsr;
     ReverbData reverb;
     ChorusData chorus;
-
+    DelayData delay;
 
     juce::dsp::Gain<float> gain;
 

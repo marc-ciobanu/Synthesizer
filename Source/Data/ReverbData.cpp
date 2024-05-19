@@ -26,6 +26,7 @@ void ReverbData::updateParameters(float roomSize, float reverbDamping, float wet
     setParameters(reverbParameters);
 }
 
-void ReverbData::process(juce::AudioBuffer<float>& buffer, int numSamples) {
+void ReverbData::process(juce::AudioBuffer<float>& buffer, int numSamples) 
+{
     processStereo(buffer.getWritePointer(0), buffer.getWritePointer(1), numSamples);
 }
