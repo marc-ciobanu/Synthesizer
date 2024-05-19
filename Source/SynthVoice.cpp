@@ -1,15 +1,4 @@
-/*
-  ==============================================================================
-
-    SynthVoice.cpp
-    Created: 20 Mar 2024 11:37:14am
-    Author:  admin
-
-  ==============================================================================
-*/
-
 #include "SynthVoice.h"
-
 
 bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound) {
     return dynamic_cast<juce::SynthesiserSound*>(sound) != nullptr;
@@ -31,15 +20,14 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
 }
 
 void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue) {
-
 }
 
 void SynthVoice::pitchWheelMoved(int newPitchWheelValue) {
-
 }
 
 void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels) {
     adsr.setSampleRate(sampleRate);
+    modAdsr.setSampleRate(sampleRate);
 
     juce::dsp::ProcessSpec spec;
     spec.maximumBlockSize = samplesPerBlock;
@@ -50,7 +38,6 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     osc.prepareToPlay(spec);
     gain.prepare(spec);
     filter.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
-    modAdsr.setSampleRate(sampleRate);
     reverb.setSampleRate(sampleRate);
     chorus.prepareToPlay(sampleRate, samplesPerBlock);
 
@@ -63,26 +50,31 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
     if (!isVoiceActive())
         return;
 
+    // Clear the buffer to avoid any residual data
     synthBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
-    modAdsr.applyEnvelopeToBuffer(outputBuffer, 0, numSamples);
     synthBuffer.clear();
 
+    // Process the oscillator output
     juce::dsp::AudioBlock<float> audioBlock{ synthBuffer };
-
     osc.getNextAudioBlock(audioBlock);
 
-    adsr.applyEnvelopeToBuffer(synthBuffer, startSample, numSamples);
+    // Apply envelopes
+    adsr.applyEnvelopeToBuffer(synthBuffer, 0, synthBuffer.getNumSamples());
+    modAdsr.applyEnvelopeToBuffer(synthBuffer, 0, synthBuffer.getNumSamples());
 
+    // Apply filter
     filter.process(synthBuffer);
 
-    reverb.process(synthBuffer, numSamples);
-
+    // Apply reverb and chorus
+    reverb.process(synthBuffer, synthBuffer.getNumSamples());
     chorus.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 
+    // Mix the processed buffer to the output buffer
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel) {
         outputBuffer.addFrom(channel, startSample, synthBuffer, channel, 0, numSamples);
     }
 
+    // Clear the current note if ADSR is inactive
     if (!adsr.isActive()) {
         clearCurrentNote();
     }
