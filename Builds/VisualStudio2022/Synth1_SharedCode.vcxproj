@@ -142,8 +142,7 @@
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
     <ClCompile Include="..\..\Source\SynthVoice.cpp"/>
-    <ClCompile Include="..\..\Source\UI\DelayComponent.cpp"/>
-    <ClCompile Include="..\..\Source\UI\EqComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\Styles.cpp"/>
     <ClCompile Include="..\..\Source\UI\ChorusComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\ReverbComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\FilterComponent.cpp"/>
@@ -2564,8 +2563,6 @@
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
     <ClInclude Include="..\..\Source\SynthVoice.h"/>
     <ClInclude Include="..\..\Source\SynthSound.h"/>
-    <ClInclude Include="..\..\Source\UI\DelayComponent.h"/>
-    <ClInclude Include="..\..\Source\UI\EqComponent.h"/>
     <ClInclude Include="..\..\Source\UI\Styles.h"/>
     <ClInclude Include="..\..\Source\UI\ChorusComponent.h"/>
     <ClInclude Include="..\..\Source\UI\ReverbComponent.h"/>

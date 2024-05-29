@@ -16,13 +16,8 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
-        <FILE id="CmmVJj" name="DelayComponent.cpp" compile="1" resource="0"
-              file="Source/UI/DelayComponent.cpp"/>
-        <FILE id="hBxlOb" name="DelayComponent.h" compile="0" resource="0"
-              file="Source/UI/DelayComponent.h"/>
-        <FILE id="pdygB5" name="EqComponent.cpp" compile="1" resource="0" file="Source/UI/EqComponent.cpp"/>
-        <FILE id="IcqIcE" name="EqComponent.h" compile="0" resource="0" file="Source/UI/EqComponent.h"/>
-        <FILE id="mVJlsa" name="Styles.h" compile="0" resource="0" file="Source/UI/Styles.h"/>
+        <FILE id="B6tWuM" name="Styles.cpp" compile="1" resource="0" file="Source/UI/Styles.cpp"/>
+        <FILE id="K2rKR0" name="Styles.h" compile="0" resource="0" file="Source/UI/Styles.h"/>
         <FILE id="MVzKhk" name="ChorusComponent.cpp" compile="1" resource="0"
               file="Source/UI/ChorusComponent.cpp"/>
         <FILE id="kPTZHE" name="ChorusComponent.h" compile="0" resource="0"

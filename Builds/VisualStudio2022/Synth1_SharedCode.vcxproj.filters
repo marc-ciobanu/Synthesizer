@@ -640,10 +640,7 @@
     <ClCompile Include="..\..\Source\SynthVoice.cpp">
       <Filter>Synth1\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\UI\DelayComponent.cpp">
-      <Filter>Synth1\Source\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\UI\EqComponent.cpp">
+    <ClCompile Include="..\..\Source\UI\Styles.cpp">
       <Filter>Synth1\Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\ChorusComponent.cpp">
@@ -3266,12 +3263,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\SynthSound.h">
       <Filter>Synth1\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\UI\DelayComponent.h">
-      <Filter>Synth1\Source\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\UI\EqComponent.h">
-      <Filter>Synth1\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\Styles.h">
       <Filter>Synth1\Source\UI</Filter>

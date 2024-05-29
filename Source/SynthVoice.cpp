@@ -40,7 +40,6 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     filter.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
     reverb.setSampleRate(sampleRate);
     chorus.prepareToPlay(sampleRate, samplesPerBlock);
-    delay.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
 
     isPrepared = true;
 }
@@ -69,7 +68,6 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
     // Apply reverb and chorus
     reverb.process(synthBuffer, synthBuffer.getNumSamples());
     chorus.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
-    delay.process(outputBuffer);
 
 
     // Mix the processed buffer to the output buffer
@@ -109,7 +107,3 @@ void SynthVoice::updateChorus(float chorusRate, float chorusDepth, float chorusC
     chorus.updateParameteres(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
 }
 
-void SynthVoice::updateDelay(int samples, float feedback, float wetLevel, float dryLevel)
-{
-    delay.updateParameteres(samples, feedback, wetLevel, dryLevel);
-}
