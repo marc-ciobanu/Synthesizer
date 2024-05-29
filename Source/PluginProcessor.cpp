@@ -183,8 +183,24 @@ juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor()
     //return new juce::GenericAudioProcessorEditor(*this);
 }
 
-void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) {}
-void Synth1AudioProcessor::setStateInformation(const void* data, int sizeInBytes) {}
+void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) 
+{
+    std::unique_ptr<juce::XmlElement> xml(apvts.copyState().createXml());
+
+    copyXmlToBinary(*xml, destData);
+}
+
+void Synth1AudioProcessor::setStateInformation(const void* data, int sizeInBytes)
+{
+    std::unique_ptr<juce::XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
+
+    if (xmlState != nullptr) {
+        if (xmlState->hasTagName(apvts.state.getType())) {
+            apvts.replaceState(juce::ValueTree::fromXml(*xmlState));
+        }
+    }
+}
+
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new Synth1AudioProcessor(); }
 
 //==============================================================================
