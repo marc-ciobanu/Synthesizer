@@ -152,7 +152,12 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
             auto& chorusFeedback = *apvts.getRawParameterValue("CHORUSFEEDBACK");
             auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
 
-            
+            auto& phaserRate = *apvts.getRawParameterValue("PHASERRATE");
+            auto& phaserDepth = *apvts.getRawParameterValue("PHASERDEPTH");
+            auto& phaserCentreDelay = *apvts.getRawParameterValue("PHASERCENTREDELAY");
+            auto& phaserFeedback = *apvts.getRawParameterValue("PHASERFEEDBACK");
+            auto& phaserMix = *apvts.getRawParameterValue("PHASERMIX");
+
 
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
@@ -168,6 +173,7 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
 
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
 
+            voice->updatePhaser(phaserRate, phaserDepth, phaserCentreDelay, phaserFeedback, phaserMix);
 
         }
     }
@@ -179,8 +185,8 @@ bool Synth1AudioProcessor::hasEditor() const { return true; }
 
 juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() 
 { 
-    return new Synth1AudioProcessorEditor(*this);
-    //return new juce::GenericAudioProcessorEditor(*this);
+    //return new Synth1AudioProcessorEditor(*this);
+    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) 
@@ -248,8 +254,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSFEEDBACK", "Chorus Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "Chorus Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
-    
-
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERRATE", "Phaser Rate", juce::NormalisableRange<float>{ 0.0f, 99.0f, 0.1f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERDEPTH", "Phaser Depth", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERCENTREDELAY", "Phaser Centre Delay", juce::NormalisableRange<float>{ 0.0f, 100.0f, 0.1f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERFEEDBACK", "Phaser Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERMIX", "Phaser Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
 
     return{ params.begin(), params.end() };

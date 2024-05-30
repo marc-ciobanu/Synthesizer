@@ -48,6 +48,8 @@
         <FILE id="HNLjKX" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
         <FILE id="G2lV9r" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
         <FILE id="JzECAa" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
+        <FILE id="iaRN6R" name="PhaserData.cpp" compile="1" resource="0" file="Source/Data/PhaserData.cpp"/>
+        <FILE id="ZpClWb" name="PhaserData.h" compile="0" resource="0" file="Source/Data/PhaserData.h"/>
         <FILE id="xjAetd" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/ReverbData.cpp"/>
         <FILE id="H7NNiZ" name="ReverbData.h" compile="0" resource="0" file="Source/Data/ReverbData.h"/>
       </GROUP>

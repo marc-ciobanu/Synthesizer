@@ -10,8 +10,6 @@
 
 #include "ChorusData.h"
 
-
-
 void ChorusData::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
     juce::dsp::ProcessSpec specs;

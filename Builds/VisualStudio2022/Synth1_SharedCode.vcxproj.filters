@@ -673,6 +673,9 @@
     <ClCompile Include="..\..\Source\Data\OscData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Data\PhaserData.cpp">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Data\ReverbData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
@@ -3295,6 +3298,9 @@
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Data\OscData.h">
+      <Filter>Synth1\Source\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Data\PhaserData.h">
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Data\ReverbData.h">
