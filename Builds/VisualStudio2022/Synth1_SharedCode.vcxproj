@@ -142,6 +142,9 @@
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
     <ClCompile Include="..\..\Source\SynthVoice.cpp"/>
+    <ClCompile Include="..\..\Source\UI\CompressorComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\LimiterComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\PhaserComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\Styles.cpp"/>
     <ClCompile Include="..\..\Source\UI\ChorusComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\ReverbComponent.cpp"/>
@@ -150,8 +153,10 @@
     <ClCompile Include="..\..\Source\UI\AdsrComponent.cpp"/>
     <ClCompile Include="..\..\Source\Data\AdsrData.cpp"/>
     <ClCompile Include="..\..\Source\Data\ChorusData.cpp"/>
+    <ClCompile Include="..\..\Source\Data\CompressorData.cpp"/>
     <ClCompile Include="..\..\Source\Data\DelayData.cpp"/>
     <ClCompile Include="..\..\Source\Data\FilterData.cpp"/>
+    <ClCompile Include="..\..\Source\Data\LimiterData.cpp"/>
     <ClCompile Include="..\..\Source\Data\OscData.cpp"/>
     <ClCompile Include="..\..\Source\Data\PhaserData.cpp"/>
     <ClCompile Include="..\..\Source\Data\ReverbData.cpp"/>
@@ -2564,6 +2569,9 @@
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
     <ClInclude Include="..\..\Source\SynthVoice.h"/>
     <ClInclude Include="..\..\Source\SynthSound.h"/>
+    <ClInclude Include="..\..\Source\UI\CompressorComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\LimiterComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\PhaserComponent.h"/>
     <ClInclude Include="..\..\Source\UI\Styles.h"/>
     <ClInclude Include="..\..\Source\UI\ChorusComponent.h"/>
     <ClInclude Include="..\..\Source\UI\ReverbComponent.h"/>
@@ -2572,8 +2580,10 @@
     <ClInclude Include="..\..\Source\UI\AdsrComponent.h"/>
     <ClInclude Include="..\..\Source\Data\AdsrData.h"/>
     <ClInclude Include="..\..\Source\Data\ChorusData.h"/>
+    <ClInclude Include="..\..\Source\Data\CompressorData.h"/>
     <ClInclude Include="..\..\Source\Data\DelayData.h"/>
     <ClInclude Include="..\..\Source\Data\FilterData.h"/>
+    <ClInclude Include="..\..\Source\Data\LimiterData.h"/>
     <ClInclude Include="..\..\Source\Data\OscData.h"/>
     <ClInclude Include="..\..\Source\Data\PhaserData.h"/>
     <ClInclude Include="..\..\Source\Data\ReverbData.h"/>

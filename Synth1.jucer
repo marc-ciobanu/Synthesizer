@@ -16,6 +16,18 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="bdMvSX" name="CompressorComponent.cpp" compile="1" resource="0"
+              file="Source/UI/CompressorComponent.cpp"/>
+        <FILE id="fhz22r" name="CompressorComponent.h" compile="0" resource="0"
+              file="Source/UI/CompressorComponent.h"/>
+        <FILE id="FMl8Yn" name="LimiterComponent.cpp" compile="1" resource="0"
+              file="Source/UI/LimiterComponent.cpp"/>
+        <FILE id="z4O783" name="LimiterComponent.h" compile="0" resource="0"
+              file="Source/UI/LimiterComponent.h"/>
+        <FILE id="CU4ja4" name="PhaserComponent.cpp" compile="1" resource="0"
+              file="Source/UI/PhaserComponent.cpp"/>
+        <FILE id="NlD0xu" name="PhaserComponent.h" compile="0" resource="0"
+              file="Source/UI/PhaserComponent.h"/>
         <FILE id="B6tWuM" name="Styles.cpp" compile="1" resource="0" file="Source/UI/Styles.cpp"/>
         <FILE id="K2rKR0" name="Styles.h" compile="0" resource="0" file="Source/UI/Styles.h"/>
         <FILE id="MVzKhk" name="ChorusComponent.cpp" compile="1" resource="0"
@@ -42,10 +54,16 @@
         <FILE id="yz8DXU" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
         <FILE id="yPiZcz" name="ChorusData.cpp" compile="1" resource="0" file="Source/Data/ChorusData.cpp"/>
         <FILE id="kIgg3q" name="ChorusData.h" compile="0" resource="0" file="Source/Data/ChorusData.h"/>
+        <FILE id="W9JjgK" name="CompressorData.cpp" compile="1" resource="0"
+              file="Source/Data/CompressorData.cpp"/>
+        <FILE id="l4V9M2" name="CompressorData.h" compile="0" resource="0"
+              file="Source/Data/CompressorData.h"/>
         <FILE id="SsNQDB" name="DelayData.cpp" compile="1" resource="0" file="Source/Data/DelayData.cpp"/>
         <FILE id="u5bSDh" name="DelayData.h" compile="0" resource="0" file="Source/Data/DelayData.h"/>
         <FILE id="fag1iZ" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
         <FILE id="HNLjKX" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
+        <FILE id="VR4aoi" name="LimiterData.cpp" compile="1" resource="0" file="Source/Data/LimiterData.cpp"/>
+        <FILE id="MTMytk" name="LimiterData.h" compile="0" resource="0" file="Source/Data/LimiterData.h"/>
         <FILE id="G2lV9r" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
         <FILE id="JzECAa" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
         <FILE id="iaRN6R" name="PhaserData.cpp" compile="1" resource="0" file="Source/Data/PhaserData.cpp"/>
