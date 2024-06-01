@@ -25,8 +25,6 @@ public:
     void resized() override;
 
 private:
-    void setSliderParams(juce::Slider& slider, juce::Label& label);
-
     juce::Slider attackSlider;
     juce::Slider decaySlider;
     juce::Slider sustainSlider;

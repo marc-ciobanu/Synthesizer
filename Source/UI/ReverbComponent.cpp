@@ -21,11 +21,11 @@ ReverbComponent::ReverbComponent(juce::AudioProcessorValueTreeState& apvts)
     dryLevelAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "REVERBDRYLEVEL", dryLevelSlider);
     widthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "REVERBWIDTH", widthSlider);
 
-    Styles::setSliderWithLabel(roomSizeSlider, roomSizeLabel, *this);
-    Styles::setSliderWithLabel(dampingSlider, dampingLabel, *this);
-    Styles::setSliderWithLabel(wetLevelSlider, wetLevelLabel, *this);
-    Styles::setSliderWithLabel(dryLevelSlider, dryLevelLabel, *this);
-    Styles::setSliderWithLabel(widthSlider, widthLabel, *this);
+    Styles::setRotarySlider(roomSizeSlider, roomSizeLabel, *this);
+    Styles::setRotarySlider(dampingSlider, dampingLabel, *this);
+    Styles::setRotarySlider(wetLevelSlider, wetLevelLabel, *this);
+    Styles::setRotarySlider(dryLevelSlider, dryLevelLabel, *this);
+    Styles::setRotarySlider(widthSlider, widthLabel, *this);
 }
 
 ReverbComponent::~ReverbComponent(){}

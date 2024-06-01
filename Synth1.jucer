@@ -58,8 +58,6 @@
               file="Source/Data/CompressorData.cpp"/>
         <FILE id="l4V9M2" name="CompressorData.h" compile="0" resource="0"
               file="Source/Data/CompressorData.h"/>
-        <FILE id="SsNQDB" name="DelayData.cpp" compile="1" resource="0" file="Source/Data/DelayData.cpp"/>
-        <FILE id="u5bSDh" name="DelayData.h" compile="0" resource="0" file="Source/Data/DelayData.h"/>
         <FILE id="fag1iZ" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
         <FILE id="HNLjKX" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
         <FILE id="VR4aoi" name="LimiterData.cpp" compile="1" resource="0" file="Source/Data/LimiterData.cpp"/>

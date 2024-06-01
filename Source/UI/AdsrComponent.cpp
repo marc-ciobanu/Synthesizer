@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "AdsrComponent.h"
+#include "Styles.h"
 
 //==============================================================================
 AdsrComponent::AdsrComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId, juce::String sustainId, juce::String releaseId)
@@ -18,15 +19,15 @@ AdsrComponent::AdsrComponent(juce::String name, juce::AudioProcessorValueTreeSta
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
 
-    setSliderParams(attackSlider, attackLabel);
-    setSliderParams(decaySlider, decayLabel);
-    setSliderParams(sustainSlider, sustainLabel);
-    setSliderParams(releaseSlider, releaseLabel);
-
     attackAttachment = std::make_unique<SliderAttachment>(apvts, attackId, attackSlider);
     decayAttachment = std::make_unique<SliderAttachment>(apvts, decayId, decaySlider);
     sustainAttachment = std::make_unique<SliderAttachment>(apvts, sustainId, sustainSlider);
     releaseAttachment = std::make_unique<SliderAttachment>(apvts, releaseId, releaseSlider);
+
+    Styles::setVerticalSlider(attackSlider, attackLabel, *this);
+    Styles::setVerticalSlider(decaySlider, decayLabel, *this);
+    Styles::setVerticalSlider(sustainSlider, sustainLabel, *this);
+    Styles::setVerticalSlider(releaseSlider, releaseLabel, *this);
 }
 
 AdsrComponent::~AdsrComponent()
@@ -70,15 +71,15 @@ void AdsrComponent::resized()
     releaseLabel.setBounds(releaseSlider.getX(), labelStart, sliderWidth, labelHeight);
 }
 
-void AdsrComponent::setSliderParams(juce::Slider& slider, juce::Label& label) 
-{
-    addAndMakeVisible(slider);
-    addAndMakeVisible(label);
-    
-    slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
-    
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
-    label.setFont(15.0f);
-    label.setJustificationType(juce::Justification::centred);
-}
+//void AdsrComponent::setSliderParams(juce::Slider& slider, juce::Label& label) 
+//{
+//    addAndMakeVisible(slider);
+//    addAndMakeVisible(label);
+//    
+//    slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
+//    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+//    
+//    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
+//    label.setFont(15.0f);
+//    label.setJustificationType(juce::Justification::centred);
+//}

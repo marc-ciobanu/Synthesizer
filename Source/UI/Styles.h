@@ -5,10 +5,10 @@
 class Styles
 {
 public:
-    static void setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::Component& component);
+    static void setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Component& component);
+    static void setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::Component& component);
 
 private:
-    // Custom LookAndFeel class for additional slider customization
     class CustomLookAndFeel : public juce::LookAndFeel_V4
     {
     public:
@@ -26,11 +26,11 @@ private:
 
             // Fill
             g.setColour(juce::Colours::transparentBlack);
-            g.fillEllipse(rx, ry, rw, rw);
+            g.fillEllipse((float)rx, (float)ry, (float)rw, (float)rw);
 
             // Outline
             g.setColour(slider.findColour(juce::Slider::rotarySliderOutlineColourId));
-            g.drawEllipse(rx, ry, rw, rw, 2.0f);
+            g.drawEllipse((float)rx, (float)ry, (float)rw, (float)rw, 2.0f);
 
             juce::Path p;
             auto pointerLength = radius * 0.6f;
@@ -41,6 +41,37 @@ private:
             // Pointer
             g.setColour(slider.findColour(juce::Slider::thumbColourId));
             g.fillPath(p);
+        }
+
+        void drawLinearSlider(juce::Graphics& g, int x, int y, int width, int height,
+            float sliderPos, float minSliderPos, float maxSliderPos,
+            const juce::Slider::SliderStyle style, juce::Slider& slider) override
+        {
+            auto trackWidth = 6.0f;
+            auto startX = (float)x + (float)width * 0.5f - trackWidth * 0.5f;
+            auto startY = (float)y;
+            auto endX = startX;
+            auto endY = (float)y + (float)height;
+            auto cornerSize = 3.0f; // Corner radius for rounded edges
+
+            // Fill with rounded rectangle
+            g.setColour(juce::Colours::transparentBlack);
+            g.fillRoundedRectangle((float)startX, (float)startY, trackWidth, (float)height, cornerSize);
+
+            // Outline with rounded rectangle
+            g.setColour(slider.findColour(juce::Slider::rotarySliderOutlineColourId));
+            g.drawRoundedRectangle((float)startX, (float)startY, trackWidth, (float)height, cornerSize, 2.0f);
+
+            // Thumb
+            auto thumbWidth = 15.0f;
+            auto thumbHeight = 10.0f;
+            auto thumbX = startX + trackWidth * 0.5f - thumbWidth * 0.5f;
+            auto thumbY = sliderPos - thumbHeight * 0.5f;
+            auto thumbCorner = 3.0f;
+
+            // Filled thumb
+            g.setColour(slider.findColour(juce::Slider::thumbColourId));
+            g.fillRoundedRectangle((float)thumbX, (float)thumbY, thumbWidth, thumbHeight, thumbCorner);
         }
     };
 

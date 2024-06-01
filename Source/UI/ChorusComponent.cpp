@@ -22,11 +22,11 @@ ChorusComponent::ChorusComponent(juce::AudioProcessorValueTreeState& apvts)
     chorusMixAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "CHORUSMIX", chorusMixSlider);
 
 
-    Styles::setSliderWithLabel(chorusRateSlider, chorusRateLabel, *this);
-    Styles::setSliderWithLabel(chorusDepthSlider, chorusDepthLabel, *this);
-    Styles::setSliderWithLabel(chorusCentreDelaySlider, chorusCentreDelayLabel, *this);
-    Styles::setSliderWithLabel(chorusFeedbackSlider, chorusFeedbackLabel, *this);
-    Styles::setSliderWithLabel(chorusMixSlider, chorusMixLabel, *this);
+    Styles::setRotarySlider(chorusRateSlider, chorusRateLabel, *this);
+    Styles::setRotarySlider(chorusDepthSlider, chorusDepthLabel, *this);
+    Styles::setRotarySlider(chorusCentreDelaySlider, chorusCentreDelayLabel, *this);
+    Styles::setRotarySlider(chorusFeedbackSlider, chorusFeedbackLabel, *this);
+    Styles::setRotarySlider(chorusMixSlider, chorusMixLabel, *this);
     
 }
 
