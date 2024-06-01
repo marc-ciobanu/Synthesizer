@@ -158,6 +158,10 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
             auto& phaserFeedback = *apvts.getRawParameterValue("PHASERFEEDBACK");
             auto& phaserMix = *apvts.getRawParameterValue("PHASERMIX");
 
+            auto& compressorThreshold = *apvts.getRawParameterValue("COMPRESSORTHRESHOLD");
+            auto& compressorRatio = *apvts.getRawParameterValue("COMPRESSORRATIO");
+            auto& compressorAttack = *apvts.getRawParameterValue("COMPRESSORATTACK");
+            auto& compressorRelease = *apvts.getRawParameterValue("COMPRESSORRELEASE");
 
             voice->getOscillator().setWaveType(oscWaveType);
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
@@ -174,6 +178,8 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
 
             voice->updatePhaser(phaserRate, phaserDepth, phaserCentreDelay, phaserFeedback, phaserMix);
+
+            voice->updateCompressor(compressorThreshold, compressorRatio, compressorAttack, compressorRelease);
 
         }
     }
@@ -254,11 +260,20 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSFEEDBACK", "Chorus Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CHORUSMIX", "Chorus Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
+    // Phaser
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERRATE", "Phaser Rate", juce::NormalisableRange<float>{ 0.0f, 99.0f, 0.1f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERDEPTH", "Phaser Depth", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERCENTREDELAY", "Phaser Centre Delay", juce::NormalisableRange<float>{ 0.0f, 100.0f, 0.1f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERFEEDBACK", "Phaser Feedback", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("PHASERMIX", "Phaser Mix", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
+
+    // Compressor
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("COMPRESSORTHRESHOLD", "Compressor Threshold (dB)", juce::NormalisableRange<float>(-60.0f, 12.0f, 0.1f), 0.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("COMPRESSORRATIO", "Compressor Ratio", juce::NormalisableRange<float>(1.0f, 20.0f, 0.1f), 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("COMPRESSORATTACK", "Compressor Attack (ms)", juce::NormalisableRange<float>(0.1f, 1000.0f, 0.1f), 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("COMPRESSORRELEASE", "Compressor Release (ms)", juce::NormalisableRange<float>(0.1f, 5000.0f, 0.1f), 100.0f));
+
+
 
 
     return{ params.begin(), params.end() };

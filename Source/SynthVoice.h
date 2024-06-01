@@ -18,6 +18,7 @@
 #include "Data/ReverbData.h"
 #include "Data/ChorusData.h"
 #include "Data/PhaserData.h"
+#include "Data/CompressorData.h"
 
 
 class SynthVoice : public juce::SynthesiserVoice {
@@ -36,6 +37,7 @@ public:
     void updateReverb(float roomSize, float damping, float wetLevel, float dryLevel, float reverbWidth);
     void updateChorus(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix);
     void updatePhaser(float phaserRate, float phaserDepth, float phaserCentre, float phaserFeedback, float phaserMix);
+    void updateCompressor(float compressorThreshold, float compressorRatio, float compressorAttack, float compressorRelease);
 
     OscData& getOscillator() { return osc; }
     AdsrData& getAdsr() { return adsr; }
@@ -53,6 +55,7 @@ private:
     ReverbData reverb;
     ChorusData chorus;
     PhaserData phaser;
+    CompressorData compressor;
 
     juce::dsp::Gain<float> gain;
 

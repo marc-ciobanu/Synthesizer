@@ -41,6 +41,7 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     reverb.setSampleRate(sampleRate);
     chorus.prepareToPlay(sampleRate, samplesPerBlock);
     phaser.prepareToPlay(sampleRate, samplesPerBlock);
+    compressor.preprareToPlay(sampleRate, samplesPerBlock);
 
     isPrepared = true;
 }
@@ -70,6 +71,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
     reverb.process(synthBuffer, synthBuffer.getNumSamples());
     chorus.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
     phaser.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    compressor.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 
     // Mix the processed buffer to the output buffer
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel) {
@@ -111,4 +113,9 @@ void SynthVoice::updateChorus(float chorusRate, float chorusDepth, float chorusC
 void SynthVoice::updatePhaser(float phaserRate, float phaserDepth, float phaserCentre, float phaserFeedback, float phaserMix)
 {
     phaser.updateParameters(phaserRate, phaserDepth, phaserCentre, phaserFeedback, phaserMix);
+}
+
+void SynthVoice::updateCompressor(float compressorThreshold, float compressorRatio, float compressorAttack, float compressorRelease)
+{
+    compressor.updateParameters(compressorThreshold, compressorRatio, compressorAttack, compressorRelease);
 }
