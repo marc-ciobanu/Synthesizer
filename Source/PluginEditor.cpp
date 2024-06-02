@@ -20,7 +20,7 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     , reverb(audioProcessor.apvts)
     , chorus(audioProcessor.apvts)
 {
-    setSize(1000,700);
+    setSize(1000, 700);
 
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
@@ -28,15 +28,41 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     addAndMakeVisible(modAdsr);
     addAndMakeVisible(reverb);
     addAndMakeVisible(chorus);
+
+    repaint();
 }
 
 Synth1AudioProcessorEditor::~Synth1AudioProcessorEditor()
 {
 }
 
-void Synth1AudioProcessorEditor::paint (juce::Graphics& g)
+void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
 {
+    const auto paddingX = 15;
+    const auto paddingY = 35;
+    const auto width1 = 275;
+    const auto height1 = 650;
+    const auto radius = 10;
+    const auto thickness = 2;
+
+    const auto width2 = 390;
+    const auto height2 = 210;
+    const auto height3 = 425;
     g.fillAll(juce::Colour(0xFF1D2F4A));
+    g.setColour(juce::Colours::white);
+    // parameters: X up-left corner, Y up-left corner, Grosime, Inaltime, Radius of corners, Thickness of outline
+
+    // Oscillator
+    g.drawRoundedRectangle(paddingX, paddingY, width1, height1, radius, thickness);
+
+    // Filter
+    g.drawRoundedRectangle(width1 + 2 * paddingX, paddingY, width1, height1, radius, thickness);
+
+    // Mixer
+    g.drawRoundedRectangle(width1 * 2 + 3 * paddingX, paddingY, width2, height2, radius, thickness);
+
+    // Effects
+    g.drawRoundedRectangle(width1 * 2 + 3 * paddingX, height2 + paddingY + paddingX, width2, height3, radius, thickness);
 }
 
 void Synth1AudioProcessorEditor::resized()
@@ -47,12 +73,10 @@ void Synth1AudioProcessorEditor::resized()
     const auto width = 300;
     const auto height = 200;
 
-    osc.setBounds(paddingX, paddingY, width, height);
-    adsr.setBounds(osc.getRight(), paddingY, width, height);
-    filter.setBounds(paddingX, paddingY2, width, height);
-    modAdsr.setBounds(filter.getRight(), paddingY2, width, height);
-    reverb.setBounds(paddingX, 435, 490, height);
-    chorus.setBounds(reverb.getRight(), 435, 490, height);
+    //osc.setBounds(paddingX, paddingY, width, height);
+    //adsr.setBounds(osc.getRight(), paddingY, width, height);
+    //filter.setBounds(paddingX, paddingY2, width, height);
+    //modAdsr.setBounds(filter.getRight(), paddingY2, width, height);
+    //reverb.setBounds(paddingX, 435, 490, height);
+    //chorus.setBounds(reverb.getRight(), 435, 490, height);
 }
-
-
