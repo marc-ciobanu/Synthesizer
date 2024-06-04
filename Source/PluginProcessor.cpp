@@ -273,7 +273,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("COMPRESSORATTACK", "Compressor Attack (ms)", juce::NormalisableRange<float>(0.1f, 1000.0f, 0.1f), 1.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("COMPRESSORRELEASE", "Compressor Release (ms)", juce::NormalisableRange<float>(0.1f, 5000.0f, 0.1f), 100.0f));
 
-
+    // 
 
 
     return{ params.begin(), params.end() };

@@ -16,6 +16,10 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="QgjvUc" name="LadderComponent.cpp" compile="1" resource="0"
+              file="Source/UI/LadderComponent.cpp"/>
+        <FILE id="CBDmyu" name="LadderComponent.h" compile="0" resource="0"
+              file="Source/UI/LadderComponent.h"/>
         <FILE id="bdMvSX" name="CompressorComponent.cpp" compile="1" resource="0"
               file="Source/UI/CompressorComponent.cpp"/>
         <FILE id="fhz22r" name="CompressorComponent.h" compile="0" resource="0"
@@ -60,6 +64,8 @@
               file="Source/Data/CompressorData.h"/>
         <FILE id="fag1iZ" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
         <FILE id="HNLjKX" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
+        <FILE id="ngV0xe" name="LadderData.cpp" compile="1" resource="0" file="Source/Data/LadderData.cpp"/>
+        <FILE id="MIYyeL" name="LadderData.h" compile="0" resource="0" file="Source/Data/LadderData.h"/>
         <FILE id="VR4aoi" name="LimiterData.cpp" compile="1" resource="0" file="Source/Data/LimiterData.cpp"/>
         <FILE id="MTMytk" name="LimiterData.h" compile="0" resource="0" file="Source/Data/LimiterData.h"/>
         <FILE id="G2lV9r" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>

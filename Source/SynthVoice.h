@@ -19,6 +19,7 @@
 #include "Data/ChorusData.h"
 #include "Data/PhaserData.h"
 #include "Data/CompressorData.h"
+#include "Data/LadderData.h"
 
 
 class SynthVoice : public juce::SynthesiserVoice {
@@ -38,6 +39,7 @@ public:
     void updateChorus(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix);
     void updatePhaser(float phaserRate, float phaserDepth, float phaserCentre, float phaserFeedback, float phaserMix);
     void updateCompressor(float compressorThreshold, float compressorRatio, float compressorAttack, float compressorRelease);
+    void updateLadder(bool enable, juce::dsp::LadderFilterMode mode, float ladderCutoff, float ladderResonance, float ladderDrive);
 
     OscData& getOscillator() { return osc; }
     AdsrData& getAdsr() { return adsr; }
@@ -56,6 +58,7 @@ private:
     ChorusData chorus;
     PhaserData phaser;
     CompressorData compressor;
+    LadderData ladder;
 
     juce::dsp::Gain<float> gain;
 
