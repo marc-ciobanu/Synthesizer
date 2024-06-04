@@ -228,7 +228,7 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new Synth1Audi
 juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::createParams() {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
-    // Main oscillator type
+    // Main oscillator type  
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray{ "Sine", "Saw", "Square" }, 0));
 
     // FM Frequency
