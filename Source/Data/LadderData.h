@@ -16,7 +16,7 @@ class LadderData : public juce::dsp::LadderFilter<float>
 {
 public:
     void prepareToPlay(double sampleRate, int samplesPerBlock);
-    void updateParameters(bool enable, juce::dsp::LadderFilterMode mode, float ladderCutoff, float ladderResonance, float ladderDrive);
+    void updateParameters(bool ladderEnable, int ladderMode, float ladderCutoff, float ladderResonance, float ladderDrive);
 private:
 
 };

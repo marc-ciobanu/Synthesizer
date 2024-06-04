@@ -122,7 +122,7 @@ void SynthVoice::updateCompressor(float compressorThreshold, float compressorRat
     compressor.updateParameters(compressorThreshold, compressorRatio, compressorAttack, compressorRelease);
 }
 
-void SynthVoice::updateLadder(bool enable, juce::dsp::LadderFilterMode mode, float ladderCutoff, float ladderResonance, float ladderDrive)
+void SynthVoice::updateLadder(bool ladderEnable, int ladderMode, float ladderCutoff, float ladderResonance, float ladderDrive)
 {
-    ladder.updateParameters(enable, mode, ladderCutoff, ladderResonance, ladderDrive);
+    ladder.updateParameters(ladderEnable, ladderMode, ladderCutoff, ladderResonance, ladderDrive);
 }

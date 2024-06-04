@@ -39,7 +39,7 @@ public:
     void updateChorus(float chorusRate, float chorusDepth, float chorusCentreDelay, float chorusFeedback, float chorusMix);
     void updatePhaser(float phaserRate, float phaserDepth, float phaserCentre, float phaserFeedback, float phaserMix);
     void updateCompressor(float compressorThreshold, float compressorRatio, float compressorAttack, float compressorRelease);
-    void updateLadder(bool enable, juce::dsp::LadderFilterMode mode, float ladderCutoff, float ladderResonance, float ladderDrive);
+    void updateLadder(bool ladderEnable, int ladderMode, float ladderCutoff, float ladderResonance, float ladderDrive);
 
     OscData& getOscillator() { return osc; }
     AdsrData& getAdsr() { return adsr; }

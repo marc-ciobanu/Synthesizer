@@ -163,10 +163,17 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
             auto& compressorAttack = *apvts.getRawParameterValue("COMPRESSORATTACK");
             auto& compressorRelease = *apvts.getRawParameterValue("COMPRESSORRELEASE");
 
+            // LADDER FILTER
+            auto& ladderEnable = *apvts.getRawParameterValue("LADDERENABLE"); 
+            auto& ladderMode = *apvts.getRawParameterValue("LADDERMODE");
+            auto& ladderCutoff = *apvts.getRawParameterValue("LADDERCUTOFF");
+            auto& ladderResonance = *apvts.getRawParameterValue("LADDERRESONANCE");
+            auto& ladderDrive = *apvts.getRawParameterValue("LADDERDRIVE");
+
             voice->getOscillator().setWaveType(oscWaveType);
+
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
 
-            // aici avem valori Atomic, nu floaturi normale. atomic e mai heavy
             voice->updateAdsr(attack, decay, sustain, release);
 
             voice->updateFilter(filterType, cutoff, resonance);
@@ -181,6 +188,7 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
 
             voice->updateCompressor(compressorThreshold, compressorRatio, compressorAttack, compressorRelease);
 
+            voice->updateLadder(ladderEnable, ladderMode, ladderCutoff, ladderResonance, ladderDrive);
         }
     }
 
@@ -191,8 +199,8 @@ bool Synth1AudioProcessor::hasEditor() const { return true; }
 
 juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() 
 { 
-    return new Synth1AudioProcessorEditor(*this);
-    //return new juce::GenericAudioProcessorEditor(*this);
+    //return new Synth1AudioProcessorEditor(*this);
+    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) 
@@ -273,7 +281,15 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("COMPRESSORATTACK", "Compressor Attack (ms)", juce::NormalisableRange<float>(0.1f, 1000.0f, 0.1f), 1.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("COMPRESSORRELEASE", "Compressor Release (ms)", juce::NormalisableRange<float>(0.1f, 5000.0f, 0.1f), 100.0f));
 
-    // 
+    // Ladder
+    // bool enable, juce::dsp::LadderFilterMode mode, float ladderCutoff, float ladderResonance, float ladderDrive
+    params.push_back(std::make_unique<juce::AudioParameterBool>("LADDERENABLE", "Ladder Enable", 0));
+    juce::StringArray ladderModes{ "LPF12", "HPF12", "BPF12", "LPF24", "HPF24", "BPF24" };
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("LADDERMODE", "Ladder Mode", ladderModes, 0));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERCUTOFF", "Ladder Cutoff", juce::NormalisableRange<float>{ 20.0f, 20000.0f, 0.01f, 0.6f }, 200.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERRESONANCE", "Ladder Resonance", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERDRIVE", "Ladder Drive", juce::NormalisableRange<float>{ 1.0f, 800.0f, 0.1f }, 10.0f));
+
 
 
     return{ params.begin(), params.end() };

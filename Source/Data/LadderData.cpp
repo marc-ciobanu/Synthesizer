@@ -19,11 +19,38 @@ void LadderData::prepareToPlay(double sampleRate, int samplesPerBlock)
     prepare(specs);
 }
 
-void LadderData::updateParameters(bool enable, juce::dsp::LadderFilterMode mode, float ladderCutoff, float ladderResonance, float ladderDrive)
+void LadderData::updateParameters(bool ladderEnable, int ladderMode, float ladderCutoff, float ladderResonance, float ladderDrive)
 {
-    setEnabled(enable);
-    setMode(mode);
+    setEnabled(ladderEnable);
     setCutoffFrequencyHz(ladderCutoff);
     setResonance(ladderResonance);
     setDrive(ladderDrive);
+
+    switch (ladderMode)
+    {
+    case 0:
+        setMode(juce::dsp::LadderFilterMode::LPF12);
+        break;
+
+    case 1:
+        setMode(juce::dsp::LadderFilterMode::HPF12);
+        break;
+
+    case 2:
+        setMode(juce::dsp::LadderFilterMode::BPF12);
+        break;
+
+    case 3:
+        setMode(juce::dsp::LadderFilterMode::LPF24);
+        break;
+
+    case 4:
+        setMode(juce::dsp::LadderFilterMode::HPF24);
+        break;
+
+    case 5:
+        setMode(juce::dsp::LadderFilterMode::BPF24);
+        break;
+    }
+
 }
