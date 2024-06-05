@@ -38,6 +38,10 @@ Synth1AudioProcessorEditor::~Synth1AudioProcessorEditor()
 
 void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
 {
+    g.fillAll(juce::Colour(0xFF192E25));
+    // parameters: X up-left corner, Y up-left corner, Grosime, Inaltime, Radius of corners, Thickness of outline
+
+    /////// RECTANGLES VARIABLES ////////
     const auto paddingX = 15;
     const auto paddingY = 80;
     const auto width1 = 275;
@@ -48,11 +52,27 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     const auto width2 = 390;
     const auto height2 = 210;
     const auto height3 = 380;
-    g.fillAll(juce::Colour(0xFF192E25));
-    g.setColour(juce::Colours::white);
-    // parameters: X up-left corner, Y up-left corner, Grosime, Inaltime, Radius of corners, Thickness of outline
 
-    // Oscillator
+    //////// TEXT VARIABLES /////// 
+    const auto xOscLabel = 15;
+    const auto yOscLabel = 110;
+    const auto oscLabelWidth = 275;
+    const auto oscLabelHeight = 20;
+
+    ///////// DRAWING TEXT ////////////
+
+    g.setColour(juce::Colour(0xFFDAD3BE));
+    g.setFont(juce::Font("Cascadia Code", 22.0f, juce::Font::underlined));
+
+    g.drawText("OSCILLATOR", xOscLabel, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
+    g.drawText("FM MODULATION", xOscLabel, height1 - 85, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
+
+
+    ///////// DRAWING RECTANGLES ///////////////
+
+    g.setColour(juce::Colours::white);
+
+    // Oscillator    
     g.drawRoundedRectangle(paddingX, paddingY, width1, height1, radius, thickness);
 
     // Filter
@@ -67,16 +87,21 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
 
 void Synth1AudioProcessorEditor::resized()
 {
-    const auto paddingX = 15;
-    const auto paddingY = 80;
-    const auto width1 = 275;
-    const auto height1 = 605;
-    const auto radius = 10;
-    const auto thickness = 2;
+    // Oscillator + FM Modulation
+    const auto xOsc = 15;
+    const auto yOsc = 80;
+    const auto widthOsc = 275;
+    const auto heightOsc = 605;
+    osc.setBounds(xOsc, yOsc, widthOsc, heightOsc);
 
-    const auto width2 = 390;
-    const auto height2 = 210;
-    const auto height3 = 380;
+    // ADSR 1
+    const auto xAdsr1 = 30;
+    const auto yAdsr1 = 265;
+    const auto widthAdsr = 245;
+    const auto heightAdsr = 200;
+    adsr.setBounds(xAdsr1, yAdsr1, widthAdsr, widthAdsr);
+    
+
 
     /*const auto paddingX = 5;
     const auto paddingY = 35;
@@ -84,8 +109,8 @@ void Synth1AudioProcessorEditor::resized()
     const auto width = 300;
     const auto height = 200;*/
 
-    osc.setBounds(paddingX, paddingY, width1, height1);
-    //adsr.setBounds(osc.getRight(), paddingY, width, height);
+    
+    
     //filter.setBounds(paddingX, paddingY2, width, height);
     //modAdsr.setBounds(filter.getRight(), paddingY2, width, height);
     //reverb.setBounds(paddingX, 435, 490, height);

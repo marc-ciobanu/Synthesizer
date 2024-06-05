@@ -49,7 +49,7 @@ private:
             float sliderPos, float minSliderPos, float maxSliderPos,
             const juce::Slider::SliderStyle style, juce::Slider& slider) override
         {
-            auto trackWidth = 6.0f;
+            auto trackWidth = 5.0f;
             auto startX = (float)x + (float)width * 0.5f - trackWidth * 0.5f;
             auto startY = (float)y;
             auto endX = startX;

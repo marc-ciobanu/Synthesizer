@@ -26,7 +26,7 @@ Synth1AudioProcessor::Synth1AudioProcessor()
 #endif
 {
     synth.addSound(new SynthSound());
-    const int numVoices = 8; // Number of voices you want for polyphony
+    const int numVoices = 6; // Number of voices you want for polyphony
     for (int i = 0; i < numVoices; ++i)
         synth.addVoice(new SynthVoice());
 }
@@ -118,82 +118,73 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear(i, 0, buffer.getNumSamples());
 
+    // Cache parameters outside the loop
+    auto oscWaveType = apvts.getRawParameterValue("OSC")->load();
+    auto fmDepth = apvts.getRawParameterValue("FMDEPTH")->load();
+    auto fmFreq = apvts.getRawParameterValue("FMFREQ")->load();
+
+    auto attack = apvts.getRawParameterValue("ATTACK")->load();
+    auto decay = apvts.getRawParameterValue("DECAY")->load();
+    auto sustain = apvts.getRawParameterValue("SUSTAIN")->load();
+    auto release = apvts.getRawParameterValue("RELEASE")->load();
+
+    auto filterType = apvts.getRawParameterValue("FILTERTYPE")->load();
+    auto cutoff = apvts.getRawParameterValue("FILTERCUTOFF")->load();
+    auto resonance = apvts.getRawParameterValue("FILTERRES")->load();
+
+    auto modAttack = apvts.getRawParameterValue("MODATTACK")->load();
+    auto modDecay = apvts.getRawParameterValue("MODDECAY")->load();
+    auto modSustain = apvts.getRawParameterValue("MODSUSTAIN")->load();
+    auto modRelease = apvts.getRawParameterValue("MODRELEASE")->load();
+
+    auto reverbRoomSize = apvts.getRawParameterValue("REVERBROOMSIZE")->load();
+    auto reverbDamping = apvts.getRawParameterValue("REVERBDAMPING")->load();
+    auto reverbWetLevel = apvts.getRawParameterValue("REVERBWETLEVEL")->load();
+    auto reverbDryLevel = apvts.getRawParameterValue("REVERBDRYLEVEL")->load();
+    auto reverbWidth = apvts.getRawParameterValue("REVERBWIDTH")->load();
+
+    auto chorusRate = apvts.getRawParameterValue("CHORUSRATE")->load();
+    auto chorusDepth = apvts.getRawParameterValue("CHORUSDEPTH")->load();
+    auto chorusCentreDelay = apvts.getRawParameterValue("CHORUSCENTREDELAY")->load();
+    auto chorusFeedback = apvts.getRawParameterValue("CHORUSFEEDBACK")->load();
+    auto chorusMix = apvts.getRawParameterValue("CHORUSMIX")->load();
+
+    auto phaserRate = apvts.getRawParameterValue("PHASERRATE")->load();
+    auto phaserDepth = apvts.getRawParameterValue("PHASERDEPTH")->load();
+    auto phaserCentreDelay = apvts.getRawParameterValue("PHASERCENTREDELAY")->load();
+    auto phaserFeedback = apvts.getRawParameterValue("PHASERFEEDBACK")->load();
+    auto phaserMix = apvts.getRawParameterValue("PHASERMIX")->load();
+
+    auto compressorThreshold = apvts.getRawParameterValue("COMPRESSORTHRESHOLD")->load();
+    auto compressorRatio = apvts.getRawParameterValue("COMPRESSORRATIO")->load();
+    auto compressorAttack = apvts.getRawParameterValue("COMPRESSORATTACK")->load();
+    auto compressorRelease = apvts.getRawParameterValue("COMPRESSORRELEASE")->load();
+
+    auto ladderEnable = apvts.getRawParameterValue("LADDERENABLE")->load();
+    auto ladderMode = apvts.getRawParameterValue("LADDERMODE")->load();
+    auto ladderCutoff = apvts.getRawParameterValue("LADDERCUTOFF")->load();
+    auto ladderResonance = apvts.getRawParameterValue("LADDERRESONANCE")->load();
+    auto ladderDrive = apvts.getRawParameterValue("LADDERDRIVE")->load();
+
     for (int i = 0; i < synth.getNumVoices(); ++i) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
-            auto& oscWaveType = *apvts.getRawParameterValue("OSC");
-
-            auto& fmDepth = *apvts.getRawParameterValue("FMDEPTH");
-            auto& fmFreq = *apvts.getRawParameterValue("FMFREQ");
-
-            auto& attack = *apvts.getRawParameterValue("ATTACK");
-            auto& decay = *apvts.getRawParameterValue("DECAY");
-            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
-            auto& release = *apvts.getRawParameterValue("RELEASE");
-
-            auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
-            auto& cutoff = *apvts.getRawParameterValue("FILTERCUTOFF");
-            auto& resonance = *apvts.getRawParameterValue("FILTERRES");
-
-            auto& modAttack = *apvts.getRawParameterValue("MODATTACK");
-            auto& modDecay = *apvts.getRawParameterValue("MODDECAY");
-            auto& modSustain = *apvts.getRawParameterValue("MODSUSTAIN");
-            auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");
-
-            auto& reverbRoomSize = *apvts.getRawParameterValue("REVERBROOMSIZE");
-            auto& reverbDamping = *apvts.getRawParameterValue("REVERBDAMPING");
-            auto& reverbWetLevel = *apvts.getRawParameterValue("REVERBWETLEVEL");
-            auto& reverbDryLevel = *apvts.getRawParameterValue("REVERBDRYLEVEL");
-            auto& reverbWidth = *apvts.getRawParameterValue("REVERBWIDTH");
-
-            auto& chorusRate = *apvts.getRawParameterValue("CHORUSRATE");
-            auto& chorusDepth = *apvts.getRawParameterValue("CHORUSDEPTH");
-            auto& chorusCentreDelay = *apvts.getRawParameterValue("CHORUSCENTREDELAY");
-            auto& chorusFeedback = *apvts.getRawParameterValue("CHORUSFEEDBACK");
-            auto& chorusMix = *apvts.getRawParameterValue("CHORUSMIX");
-
-            auto& phaserRate = *apvts.getRawParameterValue("PHASERRATE");
-            auto& phaserDepth = *apvts.getRawParameterValue("PHASERDEPTH");
-            auto& phaserCentreDelay = *apvts.getRawParameterValue("PHASERCENTREDELAY");
-            auto& phaserFeedback = *apvts.getRawParameterValue("PHASERFEEDBACK");
-            auto& phaserMix = *apvts.getRawParameterValue("PHASERMIX");
-
-            auto& compressorThreshold = *apvts.getRawParameterValue("COMPRESSORTHRESHOLD");
-            auto& compressorRatio = *apvts.getRawParameterValue("COMPRESSORRATIO");
-            auto& compressorAttack = *apvts.getRawParameterValue("COMPRESSORATTACK");
-            auto& compressorRelease = *apvts.getRawParameterValue("COMPRESSORRELEASE");
-
-            // LADDER FILTER
-            auto& ladderEnable = *apvts.getRawParameterValue("LADDERENABLE"); 
-            auto& ladderMode = *apvts.getRawParameterValue("LADDERMODE");
-            auto& ladderCutoff = *apvts.getRawParameterValue("LADDERCUTOFF");
-            auto& ladderResonance = *apvts.getRawParameterValue("LADDERRESONANCE");
-            auto& ladderDrive = *apvts.getRawParameterValue("LADDERDRIVE");
-
             voice->getOscillator().setWaveType(oscWaveType);
-
             voice->getOscillator().setFmParams(fmDepth, fmFreq);
-
             voice->updateAdsr(attack, decay, sustain, release);
-
             voice->updateFilter(filterType, cutoff, resonance);
-
-            voice->updateModAdsr(modAttack.load(), modDecay.load(), modSustain.load(), modRelease.load());
-
+            voice->updateModAdsr(modAttack, modDecay, modSustain, modRelease);
             voice->updateReverb(reverbRoomSize, reverbDamping, reverbWetLevel, reverbDryLevel, reverbWidth);
-
             voice->updateChorus(chorusRate, chorusDepth, chorusCentreDelay, chorusFeedback, chorusMix);
-
             voice->updatePhaser(phaserRate, phaserDepth, phaserCentreDelay, phaserFeedback, phaserMix);
-
             voice->updateCompressor(compressorThreshold, compressorRatio, compressorAttack, compressorRelease);
-
             voice->updateLadder(ladderEnable, ladderMode, ladderCutoff, ladderResonance, ladderDrive);
         }
     }
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
+
 
 bool Synth1AudioProcessor::hasEditor() const { return true; }
 
@@ -258,7 +249,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBROOMSIZE", "Reverb Room Size", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDAMPING", "Reverb Damping", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.5f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWETLEVEL", "Reverb Wet Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "Reverb Dry Level", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBDRYLEVEL", "Reverb Dry Level", juce::NormalisableRange<float>{ 0.1f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("REVERBWIDTH", "Reverb Width", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
 
     // Chorus
