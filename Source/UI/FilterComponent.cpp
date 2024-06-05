@@ -43,7 +43,29 @@ void FilterComponent::paint (juce::Graphics& g)
 
 void FilterComponent::resized()
 {
-    const auto startPosY = 55;
+    const auto xFilter = 35;
+    const auto yFilter = 65;
+    const auto filterWidth = 205;
+    const auto filterHeight = 45;
+
+    const auto xSlide = 35;
+    const auto ySlide = 150;
+    const auto sliderWidth = 102.5;
+    const auto sliderHeight = 102.5;
+
+    const auto labelYOffset = 20;
+    const auto labelHeight = 20;
+
+    filterSelector.setBounds(xFilter, yFilter, filterWidth, filterHeight);
+
+    filterCutoff.setBounds(xSlide, ySlide, sliderWidth, sliderHeight);
+    filterCutoffLabel.setBounds(filterCutoff.getX(), filterCutoff.getY() - labelYOffset, filterCutoff.getWidth(), labelHeight);
+
+    filterRes.setBounds(xSlide + sliderWidth, ySlide, sliderWidth, sliderHeight);
+    filterResLabel.setBounds(filterRes.getX(), filterRes.getY() - labelYOffset, filterRes.getWidth(), labelHeight);
+    
+
+    /*const auto startPosY = 55;
     const auto sliderWidth = 100;
     const auto sliderHeight = 90;
     const auto labelYOffset = 20;
@@ -56,7 +78,7 @@ void FilterComponent::resized()
     filterCutoffLabel.setBounds(filterCutoff.getX(), filterCutoff.getY() - labelYOffset, filterCutoff.getWidth(), labelHeight);
 
     filterRes.setBounds(filterCutoff.getRight(), startPosY, sliderWidth, sliderHeight);
-    filterResLabel.setBounds(filterRes.getX(), filterRes.getY() - labelYOffset, filterRes.getWidth(), labelHeight);
+    filterResLabel.setBounds(filterRes.getX(), filterRes.getY() - labelYOffset, filterRes.getWidth(), labelHeight);*/
 
 }
 

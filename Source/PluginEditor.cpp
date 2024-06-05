@@ -66,6 +66,7 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
 
     g.drawText("OSCILLATOR", xOscLabel, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
     g.drawText("FM MODULATION", xOscLabel, height1 - 85, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
+    g.drawText("FILTER", width1 + 2 * paddingX, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
 
 
     ///////// DRAWING RECTANGLES ///////////////
@@ -94,14 +95,22 @@ void Synth1AudioProcessorEditor::resized()
     const auto heightOsc = 605;
     osc.setBounds(xOsc, yOsc, widthOsc, heightOsc);
 
-    // ADSR 1
+    // ADSR
     const auto xAdsr1 = 30;
     const auto yAdsr1 = 265;
     const auto widthAdsr = 245;
-    const auto heightAdsr = 200;
+    const auto heightAdsr = 220;
     adsr.setBounds(xAdsr1, yAdsr1, widthAdsr, widthAdsr);
     
+    // Filter
+    const auto xFilter = 305;
+    const auto yFilter = 80;
+    filter.setBounds(xFilter, yFilter, widthOsc, heightOsc);
 
+    // 255 Filter ADSR
+    const auto xModAdsr = 320;
+    const auto yModAdsr = 315;
+    modAdsr.setBounds(xModAdsr, yModAdsr, widthAdsr, heightAdsr);
 
     /*const auto paddingX = 5;
     const auto paddingY = 35;
