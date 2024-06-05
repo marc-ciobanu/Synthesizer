@@ -22,7 +22,7 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::Stri
     fmFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmFreqId, fmFreqSlider);
     fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider);
 
-    setComboBoxStyle(oscSelector, oscSelectorLabel);
+    Styles::setComboBox(oscSelector, *this);
     Styles::setRotarySlider(fmFreqSlider, fmFreqLabel, *this);
     Styles::setRotarySlider(fmDepthSlider, fmDepthLabel, *this);
 }
@@ -65,10 +65,4 @@ void OscComponent::resized()
     
     fmDepthSlider.setBounds(xSlide + sliderWidth, ySlide, sliderWidth, sliderHeight);
     fmDepthLabel.setBounds(fmDepthSlider.getX(), fmDepthSlider.getY() - labelYOffset, fmDepthSlider.getWidth(), labelHeight);
-}
-
-void OscComponent::setComboBoxStyle(juce::ComboBox& comboBox, juce::Label& label)
-{
-    addAndMakeVisible(comboBox);
-    addAndMakeVisible(label);
 }

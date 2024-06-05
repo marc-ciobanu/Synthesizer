@@ -22,7 +22,7 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts)
     filterCutoffAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "FILTERCUTOFF", filterCutoff);
     filterResAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "FILTERRES", filterRes);
 
-    setComboBoxStyle(filterSelector, filterSelectorLabel);
+    Styles::setComboBox(filterSelector, *this);
     Styles::setRotarySlider(filterCutoff, filterCutoffLabel, *this);
     Styles::setRotarySlider(filterRes, filterResLabel, *this);
 }
@@ -82,12 +82,12 @@ void FilterComponent::resized()
 
 }
 
-void FilterComponent::setComboBoxStyle(juce::ComboBox& combobox, juce::Label& label)
-{
-    addAndMakeVisible(combobox);
-    addAndMakeVisible(label);
-
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
-    label.setFont(15.0f);
-    label.setJustificationType(juce::Justification::centred);
-}
+//void FilterComponent::setComboBoxStyle(juce::ComboBox& combobox, juce::Label& label)
+//{
+//    addAndMakeVisible(combobox);
+//    addAndMakeVisible(label);
+//
+//    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
+//    label.setFont(15.0f);
+//    label.setJustificationType(juce::Justification::centred);
+//}

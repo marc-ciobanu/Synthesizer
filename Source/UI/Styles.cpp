@@ -1,3 +1,5 @@
+// Styles.cpp
+
 #include "Styles.h"
 
 // Define the static member
@@ -53,4 +55,15 @@ void Styles::setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::C
     label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
     label.setFont(juce::Font("Cascadia Code", 15.0f, juce::Font::plain));
     label.setJustificationType(juce::Justification::centred);
+}
+
+void Styles::setComboBox(juce::ComboBox& combobox, juce::Component& component)
+{
+    component.addAndMakeVisible(combobox);
+    combobox.setLookAndFeel(&customLookAndFeel);
+    combobox.setColour(juce::ComboBox::backgroundColourId, juce::Colours::transparentBlack);
+    combobox.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xFFDAD3BE));
+    combobox.setColour(juce::ComboBox::textColourId, juce::Colours::white);
+    combobox.setColour(juce::ComboBox::arrowColourId, juce::Colour(0xFFDAD3BE));
+    combobox.setColour(juce::ComboBox::buttonColourId, juce::Colour(0xFFDAD3BE));
 }

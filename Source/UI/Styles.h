@@ -1,3 +1,5 @@
+// Styles.h
+
 #pragma once
 
 #include <JuceHeader.h>
@@ -7,6 +9,7 @@ class Styles
 public:
     static void setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Component& component);
     static void setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::Component& component);
+    static void setComboBox(juce::ComboBox& combobox, juce::Component& component);
     static void paintComponent(juce::Graphics& g);
 
 private:
@@ -74,6 +77,25 @@ private:
             // Filled thumb
             g.setColour(slider.findColour(juce::Slider::thumbColourId));
             g.fillRoundedRectangle((float)thumbX, (float)thumbY, thumbWidth, thumbHeight, thumbCorner);
+        }
+
+        void drawComboBox(juce::Graphics& g, int width, int height, bool isButtonDown,
+            int buttonX, int buttonY, int buttonW, int buttonH, juce::ComboBox& box)
+        {
+            g.setColour(box.findColour(juce::ComboBox::backgroundColourId));
+            g.fillRoundedRectangle(0.0f, 0.0f, (float)width, (float)height, 5.0f);
+
+            g.setColour(box.findColour(juce::ComboBox::outlineColourId));
+            g.drawRoundedRectangle(0.0f, 0.0f, (float)width, (float)height, 5.0f, 2.0f);
+
+            juce::Rectangle<int> arrowZone(width - 30, 0, 20, height);
+            juce::Path path;
+            path.startNewSubPath((float)arrowZone.getX() + 3.0f, (float)arrowZone.getCentreY() - 2.0f);
+            path.lineTo((float)arrowZone.getCentreX(), (float)arrowZone.getCentreY() + 3.0f);
+            path.lineTo((float)arrowZone.getRight() - 3.0f, (float)arrowZone.getCentreY() - 2.0f);
+
+            g.setColour(box.findColour(juce::ComboBox::arrowColourId));
+            g.strokePath(path, juce::PathStrokeType(2.0f));
         }
     };
 
