@@ -36,28 +36,34 @@ void OscComponent::paint (juce::Graphics& g)
     auto bounds = getLocalBounds().reduced(5);
     auto labelSpace = bounds.removeFromTop(25.0f);
 
-    g.fillAll(juce::Colour(0xFF1D2F4A));
-    g.setColour(juce::Colours::white);
-    g.setFont(juce::Font("Cascadia Code", 20.0f, juce::Font::plain));
+    Styles::paintComponent(g);
+    
     /*g.drawText("Oscillator", labelSpace.withX(5), juce::Justification::left);
     g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 2.0f);*/
 }
 
 void OscComponent::resized()
 {
-    const auto startPosY = 55;
-    const auto sliderWidth = 100;
-    const auto sliderHeight = 90;
+    const auto xOsc = 35;
+    const auto yOsc = 65;
+    const auto oscWidth = 205;
+    const auto oscHeight = 45;
+
+    const auto xSlide = 35;
+    const auto ySlide = 495;
+    const auto sliderWidth = 102.5;
+    const auto sliderHeight = 102.5;
+
     const auto labelYOffset = 20;
     const auto labelHeight = 20;
 
-    oscSelector.setBounds(10, startPosY + 5, 90, 30);
-    oscSelectorLabel.setBounds(10, startPosY - labelYOffset, 90, labelHeight);
+    oscSelector.setBounds(xOsc, yOsc, oscWidth, oscHeight);
+    //oscSelectorLabel.setBounds(10, startPosY - labelYOffset, 90, labelHeight);
 
-    fmFreqSlider.setBounds(oscSelector.getRight(), startPosY, sliderWidth, sliderHeight);
+    fmFreqSlider.setBounds(xSlide, ySlide, sliderWidth, sliderHeight);
     fmFreqLabel.setBounds(fmFreqSlider.getX(), fmFreqSlider.getY() - labelYOffset, fmFreqSlider.getWidth(), labelHeight);
     
-    fmDepthSlider.setBounds(fmFreqSlider.getRight(), startPosY, sliderWidth, sliderHeight);
+    fmDepthSlider.setBounds(xSlide + sliderWidth, ySlide, sliderWidth, sliderHeight);
     fmDepthLabel.setBounds(fmDepthSlider.getX(), fmDepthSlider.getY() - labelYOffset, fmDepthSlider.getWidth(), labelHeight);
 }
 

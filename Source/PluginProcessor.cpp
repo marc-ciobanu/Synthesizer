@@ -199,8 +199,8 @@ bool Synth1AudioProcessor::hasEditor() const { return true; }
 
 juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() 
 { 
-    //return new Synth1AudioProcessorEditor(*this);
-    return new juce::GenericAudioProcessorEditor(*this);
+    return new Synth1AudioProcessorEditor(*this);
+    //return new juce::GenericAudioProcessorEditor(*this);
 }
 
 void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) 
@@ -288,7 +288,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterChoice>("LADDERMODE", "Ladder Mode", ladderModes, 0));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERCUTOFF", "Ladder Cutoff", juce::NormalisableRange<float>{ 20.0f, 20000.0f, 0.01f, 0.6f }, 200.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERRESONANCE", "Ladder Resonance", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERDRIVE", "Ladder Drive", juce::NormalisableRange<float>{ 1.0f, 800.0f, 0.1f }, 10.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERDRIVE", "Ladder Drive", juce::NormalisableRange<float>{ 1.0f, 10.0f, 0.1f }, 10.0f));
 
 
 

@@ -1,7 +1,15 @@
 #include "Styles.h"
 
 // Define the static member
+
 Styles::CustomLookAndFeel Styles::customLookAndFeel;
+
+void Styles::paintComponent(juce::Graphics& g)
+{
+    g.fillAll(juce::Colours::transparentBlack);
+    g.setColour(juce::Colour(0xFFDAD3BE));
+    g.setFont(juce::Font("Cascadia Code", 20.0f, juce::Font::plain));
+}
 
 void Styles::setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Component& component)
 {
@@ -13,8 +21,8 @@ void Styles::setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Com
 
     // Set minimalist color scheme
     slider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::transparentBlack);
-    slider.setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xFFD0EFBD));
-    slider.setColour(juce::Slider::thumbColourId, juce::Colour(0xFFD0EFBD));
+    slider.setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xFFDAD3BE));
+    slider.setColour(juce::Slider::thumbColourId, juce::Colour(0xFFDAD3BE));
     slider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
     slider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::white);
 
@@ -35,8 +43,8 @@ void Styles::setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::C
 
     // Set minimalist color scheme
     slider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::transparentBlack);
-    slider.setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xFFD0EFBD));
-    slider.setColour(juce::Slider::thumbColourId, juce::Colour(0xFFD0EFBD));
+    slider.setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xFFDAD3BE));
+    slider.setColour(juce::Slider::thumbColourId, juce::Colour(0xFFDAD3BE));
     slider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
     slider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::white);
 

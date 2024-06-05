@@ -39,16 +39,16 @@ Synth1AudioProcessorEditor::~Synth1AudioProcessorEditor()
 void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
 {
     const auto paddingX = 15;
-    const auto paddingY = 35;
+    const auto paddingY = 80;
     const auto width1 = 275;
-    const auto height1 = 650;
+    const auto height1 = 605;
     const auto radius = 10;
     const auto thickness = 2;
 
     const auto width2 = 390;
     const auto height2 = 210;
-    const auto height3 = 425;
-    g.fillAll(juce::Colour(0xFF1D2F4A));
+    const auto height3 = 380;
+    g.fillAll(juce::Colour(0xFF192E25));
     g.setColour(juce::Colours::white);
     // parameters: X up-left corner, Y up-left corner, Grosime, Inaltime, Radius of corners, Thickness of outline
 
@@ -67,13 +67,24 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
 
 void Synth1AudioProcessorEditor::resized()
 {
-    const auto paddingX = 5;
+    const auto paddingX = 15;
+    const auto paddingY = 80;
+    const auto width1 = 275;
+    const auto height1 = 605;
+    const auto radius = 10;
+    const auto thickness = 2;
+
+    const auto width2 = 390;
+    const auto height2 = 210;
+    const auto height3 = 380;
+
+    /*const auto paddingX = 5;
     const auto paddingY = 35;
     const auto paddingY2 = 235;
     const auto width = 300;
-    const auto height = 200;
+    const auto height = 200;*/
 
-    //osc.setBounds(paddingX, paddingY, width, height);
+    osc.setBounds(paddingX, paddingY, width1, height1);
     //adsr.setBounds(osc.getRight(), paddingY, width, height);
     //filter.setBounds(paddingX, paddingY2, width, height);
     //modAdsr.setBounds(filter.getRight(), paddingY2, width, height);

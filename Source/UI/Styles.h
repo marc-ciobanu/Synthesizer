@@ -7,8 +7,10 @@ class Styles
 public:
     static void setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Component& component);
     static void setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::Component& component);
+    static void paintComponent(juce::Graphics& g);
 
 private:
+    juce::Colour sliderColour = juce::Colour(0xFFDAD3BE);
     class CustomLookAndFeel : public juce::LookAndFeel_V4
     {
     public:

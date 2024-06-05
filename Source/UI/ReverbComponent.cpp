@@ -35,9 +35,7 @@ void ReverbComponent::paint (juce::Graphics& g)
     auto bounds = getLocalBounds().reduced(5);
     auto labelSpace = bounds.removeFromTop(25.0f);
 
-    g.fillAll(juce::Colour(0xFF1D2F4A));
-    g.setColour(juce::Colours::white);
-    g.setFont(20.0f);
+    Styles::paintComponent(g);
     /*g.drawText("Reverb", labelSpace.withX(5), juce::Justification::left);
     g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 2.0f);*/
 }
