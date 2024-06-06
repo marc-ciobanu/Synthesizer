@@ -15,6 +15,7 @@
 #include "UI/FilterComponent.h"
 #include "UI/ReverbComponent.h"
 #include "UI/ChorusComponent.h"
+#include "UI/LadderComponent.h"
 
 //==============================================================================
 /**
@@ -43,6 +44,8 @@ private:
     ReverbComponent reverb;
 
     ChorusComponent chorus;
+
+    LadderComponent ladder;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth1AudioProcessorEditor)
 };

@@ -46,12 +46,12 @@ void FilterComponent::resized()
     const auto xFilter = 35;
     const auto yFilter = 65;
     const auto filterWidth = 205;
-    const auto filterHeight = 45;
+    const auto filterHeight = 30;
 
     const auto xSlide = 35;
-    const auto ySlide = 150;
+    const auto ySlide = 130;
     const auto sliderWidth = 102.5;
-    const auto sliderHeight = 102.5;
+    const auto sliderHeight = 90;
 
     const auto labelYOffset = 20;
     const auto labelHeight = 20;

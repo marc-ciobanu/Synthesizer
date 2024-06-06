@@ -19,6 +19,7 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     , modAdsr("Mod Envelope", audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE")
     , reverb(audioProcessor.apvts)
     , chorus(audioProcessor.apvts)
+    , ladder(audioProcessor.apvts)
 {
     setSize(1000, 700);
 
@@ -28,6 +29,7 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     addAndMakeVisible(modAdsr);
     addAndMakeVisible(reverb);
     addAndMakeVisible(chorus);
+    addAndMakeVisible(ladder);
 
     repaint();
 }
@@ -62,11 +64,12 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     ///////// DRAWING TEXT ////////////
 
     g.setColour(juce::Colour(0xFFDAD3BE));
-    g.setFont(juce::Font("Cascadia Code", 22.0f, juce::Font::underlined));
+    g.setFont(juce::Font("Cascadia Code", 22.0f, juce::Font::plain));
 
     g.drawText("OSCILLATOR", xOscLabel, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
     g.drawText("FM MODULATION", xOscLabel, height1 - 85, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
     g.drawText("FILTER", width1 + 2 * paddingX, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
+    g.drawText("LADDER FILTER", width1 + 2 * paddingX, yOscLabel + 390, oscLabelWidth, oscLabelHeight - 10, juce::Justification::centred);
 
 
     ///////// DRAWING RECTANGLES ///////////////
@@ -99,7 +102,7 @@ void Synth1AudioProcessorEditor::resized()
     const auto xAdsr1 = 30;
     const auto yAdsr1 = 265;
     const auto widthAdsr = 245;
-    const auto heightAdsr = 220;
+    const auto heightAdsr = 210;
     adsr.setBounds(xAdsr1, yAdsr1, widthAdsr, widthAdsr);
     
     // Filter
@@ -107,10 +110,15 @@ void Synth1AudioProcessorEditor::resized()
     const auto yFilter = 80;
     filter.setBounds(xFilter, yFilter, widthOsc, heightOsc);
 
-    // 255 Filter ADSR
+    // Filter ADSR
     const auto xModAdsr = 320;
-    const auto yModAdsr = 315;
+    const auto yModAdsr = 275;
     modAdsr.setBounds(xModAdsr, yModAdsr, widthAdsr, heightAdsr);
+
+    // Ladder
+    const auto yLadder = 440;
+    const auto heightLadder = 300;
+    ladder.setBounds(xFilter, yLadder, widthOsc, heightLadder);
 
     /*const auto paddingX = 5;
     const auto paddingY = 35;

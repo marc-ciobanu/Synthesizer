@@ -10,13 +10,23 @@
 
 #include <JuceHeader.h>
 #include "LadderComponent.h"
+#include "Styles.h"
 
 //==============================================================================
-LadderComponent::LadderComponent()
+LadderComponent::LadderComponent(juce::AudioProcessorValueTreeState& apvts)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
+    juce::StringArray ladderModes{ "LPF12", "HPF12", "BPF12", "LPF24", "HPF24", "BPF24" };
+    ladderMode.addItemList(ladderModes, 1);
 
+    ladderModeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "LADDERMODE", ladderMode);
+    ladderCutoffAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "LADDERCUTOFF", ladderCutoff);
+    ladderResonanceAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "LADDERRESONANCE", ladderResonance);
+    ladderDriveAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "LADDERDRIVE", ladderDrive);
+
+    Styles::setComboBox(ladderMode, *this);
+    Styles::setRotarySlider(ladderCutoff, ladderCutoffLabel, *this);
+    Styles::setRotarySlider(ladderResonance, ladderResonanceLabel, *this);
+    Styles::setRotarySlider(ladderDrive, ladderDriveLabel, *this);
 }
 
 LadderComponent::~LadderComponent()
@@ -25,27 +35,36 @@ LadderComponent::~LadderComponent()
 
 void LadderComponent::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
+    auto bounds = getLocalBounds().reduced(5);
+    auto labelSpace = bounds.removeFromTop(25.0f);
 
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (juce::Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("LadderComponent", getLocalBounds(),
-                juce::Justification::centred, true);   // draw some placeholder text
+    Styles::paintComponent(g);
 }
 
 void LadderComponent::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
+    const auto xFilter = 35;
+    const auto yFilter = 85;
+    const auto filterWidth = 205;
+    const auto filterHeight = 30;
+
+    const auto xSlide = 35;
+    const auto ySlide = 150;
+    const auto sliderWidth = filterWidth / 3;
+    const auto sliderHeight = 80;
+
+    const auto labelYOffset = 20;
+    const auto labelHeight = 20;
+
+    ladderMode.setBounds(xFilter, yFilter, filterWidth, filterHeight);
+
+    ladderCutoff.setBounds(xSlide, ySlide, sliderWidth, sliderHeight);
+    ladderCutoffLabel.setBounds(ladderCutoff.getX(), ladderCutoff.getY() - labelYOffset, ladderCutoff.getWidth(), labelHeight);
+
+    ladderResonance.setBounds(xSlide + sliderWidth, ySlide, sliderWidth, sliderHeight);
+    ladderResonanceLabel.setBounds(ladderResonance.getX(), ladderResonance.getY() - labelYOffset, ladderResonance.getWidth(), labelHeight);
+
+    ladderDrive.setBounds(xSlide + 2 * sliderWidth, ySlide, sliderWidth, sliderHeight);
+    ladderDriveLabel.setBounds(ladderDrive.getX(), ladderDrive.getY() - labelYOffset, ladderDrive.getWidth(), labelHeight);
 
 }

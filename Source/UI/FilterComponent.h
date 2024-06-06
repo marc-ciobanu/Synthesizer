@@ -25,8 +25,6 @@ public:
     void resized() override;
 
 private:
-    void setComboBoxStyle(juce::ComboBox& comboBox, juce::Label& label);
-
     // Butonul in sine
     juce::ComboBox filterSelector;
     juce::Slider filterCutoff;
