@@ -37,10 +37,10 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> dryLevelAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> widthAttachment;
 
-    juce::Label roomSizeLabel {"Reverb Room Size", "Room Size"};
+    juce::Label roomSizeLabel {"Reverb Room Size", "Size"};
     juce::Label dampingLabel{"Reverb Damping", "Damping"};
-    juce::Label wetLevelLabel {"Reverb Wet Level", "Wet Level"};
-    juce::Label dryLevelLabel {"Reverb Dry Level", "Dry Level"};
+    juce::Label wetLevelLabel {"Reverb Wet Level", "Wet"};
+    juce::Label dryLevelLabel {"Reverb Dry Level", "Dry"};
     juce::Label widthLabel {"Reverb Width", "Width"};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ReverbComponent)

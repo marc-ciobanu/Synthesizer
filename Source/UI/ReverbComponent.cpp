@@ -43,13 +43,13 @@ void ReverbComponent::paint (juce::Graphics& g)
 void ReverbComponent::resized()
 {
     const auto startPosY = 55;
-    const auto sliderWidth = 100;
-    const auto sliderHeight = 90;
-    const auto labelYOffset = 20;
-    const auto labelHeight = 20;
+    const auto sliderWidth = 80;
+    const auto sliderHeight = 80;
+    const auto labelYOffset = 15;
+    const auto labelHeight = 15;
 
-    roomSizeSlider.setBounds(10, startPosY, sliderWidth-10, sliderHeight);
-    roomSizeLabel.setBounds(10, startPosY - labelYOffset, 90, labelHeight);
+    roomSizeSlider.setBounds(10, startPosY, sliderWidth, sliderHeight);
+    roomSizeLabel.setBounds(0, startPosY - labelYOffset, 90, labelHeight);
 
     dampingSlider.setBounds(roomSizeSlider.getRight(), startPosY, sliderWidth, sliderHeight);
     dampingLabel.setBounds(dampingSlider.getX(), dampingSlider.getY() - labelYOffset, dampingSlider.getWidth(), labelHeight);

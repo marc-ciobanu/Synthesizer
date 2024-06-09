@@ -39,7 +39,7 @@ private:
 
     juce::Label chorusRateLabel{ "Chorus Rate", "Rate" };
     juce::Label chorusDepthLabel{ "Chorus Depth", "Depth" };
-    juce::Label chorusCentreDelayLabel{ "Chorus Centre Delay", "Centre Delay" };
+    juce::Label chorusCentreDelayLabel{ "Chorus Centre Delay", "Centre" };
     juce::Label chorusFeedbackLabel{ "Chorus Feedback", "Feedback" };
     juce::Label chorusMixLabel{ "Chorus Mix", "Mix" };
 

@@ -47,13 +47,15 @@ void ChorusComponent::paint (juce::Graphics& g)
 void ChorusComponent::resized()
 {
     const auto startPosY = 55;
-    const auto sliderWidth = 100;
-    const auto sliderHeight = 90;
-    const auto labelYOffset = 20;
-    const auto labelHeight = 20;
+    const auto sliderWidth = 80;
+    const auto sliderHeight = 80;
+    const auto labelYOffset = 15;
+    const auto labelHeight = 15;
 
-    chorusRateSlider.setBounds(10, startPosY + 5, sliderWidth, sliderHeight);
-    chorusRateLabel.setBounds(10, startPosY - labelYOffset, 90, labelHeight);
+    // Make the vertical position consistent with ReverbComponent
+    chorusRateSlider.setBounds(10, startPosY, sliderWidth, sliderHeight);
+    // Make the label X position consistent with other labels
+    chorusRateLabel.setBounds(0, startPosY - labelYOffset, 90, labelHeight);
 
     chorusDepthSlider.setBounds(chorusRateSlider.getRight(), startPosY, sliderWidth, sliderHeight);
     chorusDepthLabel.setBounds(chorusDepthSlider.getX(), chorusDepthSlider.getY() - labelYOffset, chorusDepthSlider.getWidth(), labelHeight);
@@ -66,5 +68,4 @@ void ChorusComponent::resized()
 
     chorusMixSlider.setBounds(chorusFeedbackSlider.getRight(), startPosY, sliderWidth, sliderHeight);
     chorusMixLabel.setBounds(chorusMixSlider.getX(), chorusMixSlider.getY() - labelYOffset, chorusMixSlider.getWidth(), labelHeight);
-
 }
