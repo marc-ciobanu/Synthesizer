@@ -15,6 +15,7 @@
 #include "UI/FilterComponent.h"
 #include "UI/ReverbComponent.h"
 #include "UI/ChorusComponent.h"
+#include "UI/PhaserComponent.h"
 #include "UI/LadderComponent.h"
 
 //==============================================================================
@@ -41,11 +42,13 @@ private:
 
     AdsrComponent modAdsr;
 
+    LadderComponent ladder;
+
     ReverbComponent reverb;
 
     ChorusComponent chorus;
 
-    LadderComponent ladder;
+    PhaserComponent phaser;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth1AudioProcessorEditor)
 };

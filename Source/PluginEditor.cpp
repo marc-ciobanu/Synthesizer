@@ -19,6 +19,7 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     , modAdsr("Mod Envelope", audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE")
     , reverb(audioProcessor.apvts)
     , chorus(audioProcessor.apvts)
+    , phaser(audioProcessor.apvts)
     , ladder(audioProcessor.apvts)
 {
     setSize(1000, 700);
@@ -26,10 +27,14 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
     addAndMakeVisible(filter);
+    
     addAndMakeVisible(modAdsr);
+    addAndMakeVisible(ladder);
+
     addAndMakeVisible(reverb);
     addAndMakeVisible(chorus);
-    addAndMakeVisible(ladder);
+    addAndMakeVisible(phaser);
+    
 
     repaint();
 }
@@ -72,12 +77,13 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     g.drawText("FILTER", width1 + 2 * paddingX, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
     g.drawText("LADDER FILTER", width1 + 2 * paddingX, yOscLabel + 390, oscLabelWidth, oscLabelHeight - 10, juce::Justification::centred);
 
-    g.setFont(juce::Font("Cascadia Code", 26.0f, juce::Font::plain));
-    g.drawText("EFFECTS", width1 * 2 + 3 * paddingX, height2 + paddingY, width2, oscLabelHeight, juce::Justification::centred);
+    g.setFont(juce::Font("Cascadia Code", 24.0f, juce::Font::plain));
+    g.drawText("EFFECTS", width1 * 2 + 3 * paddingX, height2 + paddingY - 15, width2, oscLabelHeight, juce::Justification::centred);
 
     g.setFont(juce::Font("Cascadia Code", 20.0f, juce::Font::plain));
-    g.drawText("REVERB", width1 * 2 + 3 * paddingX, height2 + paddingY + 30, width2, oscLabelHeight, juce::Justification::centred);
-    g.drawText("CHORUS", width1 * 2 + 3 * paddingX, height2 + paddingY + 160, width2, oscLabelHeight, juce::Justification::centred);
+    g.drawText("REVERB", width1 * 2 + 3 * paddingX, height2 + paddingY + 10, width2, oscLabelHeight, juce::Justification::centred);
+    g.drawText("CHORUS", width1 * 2 + 3 * paddingX, height2 + paddingY + 140, width2, oscLabelHeight, juce::Justification::centred);
+    g.drawText("PHASER", width1 * 2 + 3 * paddingX, height2 + paddingY + 160 + 110, width2, oscLabelHeight, juce::Justification::centred);
 
 
     ///////// DRAWING RECTANGLES ///////////////
@@ -130,7 +136,7 @@ void Synth1AudioProcessorEditor::resized()
 
     // EFFECTS
     const auto xEffects = 582.5;
-    const auto yEffects = 305;
+    const auto yEffects = 285;
     const auto widthEffects = 500;
     const auto heightEffects = 150;
 
@@ -139,6 +145,9 @@ void Synth1AudioProcessorEditor::resized()
 
     // Chorus
     chorus.setBounds(xEffects, yEffects + 130, widthEffects, heightEffects);
+
+    // Phaser
+    phaser.setBounds(xEffects, yEffects + 130 * 2, widthEffects, heightEffects);
 
     /*const auto paddingX = 5;
     const auto paddingY = 35;
