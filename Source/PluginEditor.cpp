@@ -77,13 +77,13 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     g.setColour(juce::Colour(0xFFDAD3BE));
     g.setFont(juce::Font("Cascadia Code", 22.0f, juce::Font::plain));
 
-    g.drawText("OSCILLATOR", xOscLabel, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
-    g.drawText("FM MODULATION", xOscLabel, height1 - 85, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
-    g.drawText("FILTER", width1 + 2 * paddingX, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
-    g.drawText("LADDER FILTER", width1 + 2 * paddingX, yOscLabel + 390, oscLabelWidth, oscLabelHeight - 10, juce::Justification::centred);
+    g.drawText("O S C I L L A T O R", xOscLabel, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
+    g.drawText("F M   M O D", xOscLabel, height1 - 85, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
+    g.drawText("F I L T E R", width1 + 2 * paddingX, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
+    g.drawText("L A D D E R", width1 + 2 * paddingX, yOscLabel + 390, oscLabelWidth, oscLabelHeight - 10, juce::Justification::centred);
 
-    g.setFont(juce::Font("Cascadia Code", 24.0f, juce::Font::plain));
-    g.drawText("EFFECTS", width1 * 2 + 3 * paddingX, height2 + paddingY - 15, width2, oscLabelHeight, juce::Justification::centred);
+    g.setFont(juce::Font("Cascadia Code", 26.0f, juce::Font::plain));
+    g.drawText("E F F E C T S", width1 * 2 + 3 * paddingX, height2 + paddingY - 15, width2, oscLabelHeight, juce::Justification::centred);
 
     g.setFont(juce::Font("Cascadia Code", 20.0f, juce::Font::plain));
 
@@ -91,9 +91,9 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     const auto yEffectsLabel = 270;
     const auto effectsOffset = 140;
 
-    g.drawText("REVERB", xEffectsLabel, yEffectsLabel, width2, oscLabelHeight, juce::Justification::centred);
-    g.drawText("CHORUS", xEffectsLabel, yEffectsLabel + effectsOffset, width2, oscLabelHeight, juce::Justification::centred);
-    g.drawText("PHASER", xEffectsLabel, yEffectsLabel + 2 * effectsOffset, width2, oscLabelHeight, juce::Justification::centred);
+    g.drawText("R E V E R B", xEffectsLabel, yEffectsLabel, width2, oscLabelHeight, juce::Justification::centred);
+    g.drawText("C H O R U S", xEffectsLabel, yEffectsLabel + effectsOffset, width2, oscLabelHeight, juce::Justification::centred);
+    g.drawText("P H A S E R", xEffectsLabel, yEffectsLabel + 2 * effectsOffset, width2, oscLabelHeight, juce::Justification::centred);
 
 
     ///////// DRAWING RECTANGLES ///////////////
