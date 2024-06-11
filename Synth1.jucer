@@ -16,6 +16,10 @@
       <FILE id="AiBxms" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="bjttLS" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <GROUP id="{029A8F29-B010-5C5F-55A4-98B1EFE3C063}" name="UI">
+        <FILE id="ajyl98" name="PannerComponent.cpp" compile="1" resource="0"
+              file="Source/UI/PannerComponent.cpp"/>
+        <FILE id="pdtvE2" name="PannerComponent.h" compile="0" resource="0"
+              file="Source/UI/PannerComponent.h"/>
         <FILE id="QgjvUc" name="LadderComponent.cpp" compile="1" resource="0"
               file="Source/UI/LadderComponent.cpp"/>
         <FILE id="CBDmyu" name="LadderComponent.h" compile="0" resource="0"
@@ -24,10 +28,6 @@
               file="Source/UI/CompressorComponent.cpp"/>
         <FILE id="fhz22r" name="CompressorComponent.h" compile="0" resource="0"
               file="Source/UI/CompressorComponent.h"/>
-        <FILE id="FMl8Yn" name="LimiterComponent.cpp" compile="1" resource="0"
-              file="Source/UI/LimiterComponent.cpp"/>
-        <FILE id="z4O783" name="LimiterComponent.h" compile="0" resource="0"
-              file="Source/UI/LimiterComponent.h"/>
         <FILE id="CU4ja4" name="PhaserComponent.cpp" compile="1" resource="0"
               file="Source/UI/PhaserComponent.cpp"/>
         <FILE id="NlD0xu" name="PhaserComponent.h" compile="0" resource="0"
@@ -64,12 +64,12 @@
               file="Source/Data/CompressorData.h"/>
         <FILE id="fag1iZ" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
         <FILE id="HNLjKX" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
-        <FILE id="ngV0xe" name="LadderData.cpp" compile="1" resource="0" file="Source/Data/LadderData.cpp"/>
-        <FILE id="MIYyeL" name="LadderData.h" compile="0" resource="0" file="Source/Data/LadderData.h"/>
-        <FILE id="VR4aoi" name="LimiterData.cpp" compile="1" resource="0" file="Source/Data/LimiterData.cpp"/>
-        <FILE id="MTMytk" name="LimiterData.h" compile="0" resource="0" file="Source/Data/LimiterData.h"/>
+        <FILE id="psL87j" name="LadderData.cpp" compile="1" resource="0" file="Source/Data/LadderData.cpp"/>
+        <FILE id="R5yDje" name="LadderData.h" compile="0" resource="0" file="Source/Data/LadderData.h"/>
         <FILE id="G2lV9r" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
         <FILE id="JzECAa" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
+        <FILE id="Mu3dEa" name="PannerData.cpp" compile="1" resource="0" file="Source/Data/PannerData.cpp"/>
+        <FILE id="TIw7vp" name="PannerData.h" compile="0" resource="0" file="Source/Data/PannerData.h"/>
         <FILE id="iaRN6R" name="PhaserData.cpp" compile="1" resource="0" file="Source/Data/PhaserData.cpp"/>
         <FILE id="ZpClWb" name="PhaserData.h" compile="0" resource="0" file="Source/Data/PhaserData.h"/>
         <FILE id="xjAetd" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/ReverbData.cpp"/>

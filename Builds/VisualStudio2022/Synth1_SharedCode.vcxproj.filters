@@ -640,13 +640,13 @@
     <ClCompile Include="..\..\Source\SynthVoice.cpp">
       <Filter>Synth1\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\PannerComponent.cpp">
+      <Filter>Synth1\Source\UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\LadderComponent.cpp">
       <Filter>Synth1\Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\CompressorComponent.cpp">
-      <Filter>Synth1\Source\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\UI\LimiterComponent.cpp">
       <Filter>Synth1\Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\PhaserComponent.cpp">
@@ -685,10 +685,10 @@
     <ClCompile Include="..\..\Source\Data\LadderData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Data\LimiterData.cpp">
+    <ClCompile Include="..\..\Source\Data\OscData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Data\OscData.cpp">
+    <ClCompile Include="..\..\Source\Data\PannerData.cpp">
       <Filter>Synth1\Source\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Data\PhaserData.cpp">
@@ -3285,13 +3285,13 @@
     <ClInclude Include="..\..\Source\SynthSound.h">
       <Filter>Synth1\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\UI\PannerComponent.h">
+      <Filter>Synth1\Source\UI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\UI\LadderComponent.h">
       <Filter>Synth1\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\CompressorComponent.h">
-      <Filter>Synth1\Source\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\UI\LimiterComponent.h">
       <Filter>Synth1\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\PhaserComponent.h">
@@ -3330,10 +3330,10 @@
     <ClInclude Include="..\..\Source\Data\LadderData.h">
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Data\LimiterData.h">
+    <ClInclude Include="..\..\Source\Data\OscData.h">
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Data\OscData.h">
+    <ClInclude Include="..\..\Source\Data\PannerData.h">
       <Filter>Synth1\Source\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Data\PhaserData.h">

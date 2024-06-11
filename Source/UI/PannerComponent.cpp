@@ -1,29 +1,29 @@
 /*
   ==============================================================================
 
-    LimiterComponent.cpp
-    Created: 31 May 2024 2:45:45pm
+    PannerComponent.cpp
+    Created: 11 Jun 2024 8:35:45pm
     Author:  admin
 
   ==============================================================================
 */
 
 #include <JuceHeader.h>
-#include "LimiterComponent.h"
+#include "PannerComponent.h"
 
 //==============================================================================
-LimiterComponent::LimiterComponent()
+PannerComponent::PannerComponent()
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
 }
 
-LimiterComponent::~LimiterComponent()
+PannerComponent::~PannerComponent()
 {
 }
 
-void LimiterComponent::paint (juce::Graphics& g)
+void PannerComponent::paint (juce::Graphics& g)
 {
     /* This demo code just fills the component's background and
        draws some placeholder text to get you started.
@@ -39,11 +39,11 @@ void LimiterComponent::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (14.0f);
-    g.drawText ("LimiterComponent", getLocalBounds(),
+    g.drawText ("PannerComponent", getLocalBounds(),
                 juce::Justification::centred, true);   // draw some placeholder text
 }
 
-void LimiterComponent::resized()
+void PannerComponent::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..

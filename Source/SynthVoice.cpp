@@ -43,6 +43,7 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     phaser.prepareToPlay(sampleRate, samplesPerBlock);
     compressor.preprareToPlay(sampleRate, samplesPerBlock);
     ladder.prepareToPlay(sampleRate, samplesPerBlock);
+    panner.prepareToPlay(sampleRate, samplesPerBlock);
 
     isPrepared = true;
 }
@@ -74,6 +75,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
     phaser.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
     compressor.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
     ladder.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    panner.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 
     // Mix the processed buffer to the output buffer
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel) {
@@ -125,4 +127,9 @@ void SynthVoice::updateCompressor(float compressorThreshold, float compressorRat
 void SynthVoice::updateLadder(bool ladderEnable, int ladderMode, float ladderCutoff, float ladderResonance, float ladderDrive)
 {
     ladder.updateParameters(ladderEnable, ladderMode, ladderCutoff, ladderResonance, ladderDrive);
+}
+
+void SynthVoice::updatePanner(int rule, float pan)
+{
+    panner.updateParameters(rule, pan);
 }

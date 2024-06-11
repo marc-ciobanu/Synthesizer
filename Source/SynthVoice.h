@@ -20,6 +20,7 @@
 #include "Data/PhaserData.h"
 #include "Data/CompressorData.h"
 #include "Data/LadderData.h"
+#include "Data/PannerData.h"
 
 
 class SynthVoice : public juce::SynthesiserVoice {
@@ -40,6 +41,7 @@ public:
     void updatePhaser(float phaserRate, float phaserDepth, float phaserCentre, float phaserFeedback, float phaserMix);
     void updateCompressor(float compressorThreshold, float compressorRatio, float compressorAttack, float compressorRelease);
     void updateLadder(bool ladderEnable, int ladderMode, float ladderCutoff, float ladderResonance, float ladderDrive);
+    void updatePanner(int rule, float pan);
 
     OscData& getOscillator() { return osc; }
     AdsrData& getAdsr() { return adsr; }
@@ -59,6 +61,7 @@ private:
     PhaserData phaser;
     CompressorData compressor;
     LadderData ladder;
+    PannerData panner;
 
     juce::dsp::Gain<float> gain;
 

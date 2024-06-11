@@ -142,9 +142,9 @@
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
     <ClCompile Include="..\..\Source\SynthVoice.cpp"/>
+    <ClCompile Include="..\..\Source\UI\PannerComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\LadderComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\CompressorComponent.cpp"/>
-    <ClCompile Include="..\..\Source\UI\LimiterComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\PhaserComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\Styles.cpp"/>
     <ClCompile Include="..\..\Source\UI\ChorusComponent.cpp"/>
@@ -157,8 +157,8 @@
     <ClCompile Include="..\..\Source\Data\CompressorData.cpp"/>
     <ClCompile Include="..\..\Source\Data\FilterData.cpp"/>
     <ClCompile Include="..\..\Source\Data\LadderData.cpp"/>
-    <ClCompile Include="..\..\Source\Data\LimiterData.cpp"/>
     <ClCompile Include="..\..\Source\Data\OscData.cpp"/>
+    <ClCompile Include="..\..\Source\Data\PannerData.cpp"/>
     <ClCompile Include="..\..\Source\Data\PhaserData.cpp"/>
     <ClCompile Include="..\..\Source\Data\ReverbData.cpp"/>
     <ClCompile Include="D:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.cpp">
@@ -2570,9 +2570,9 @@
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
     <ClInclude Include="..\..\Source\SynthVoice.h"/>
     <ClInclude Include="..\..\Source\SynthSound.h"/>
+    <ClInclude Include="..\..\Source\UI\PannerComponent.h"/>
     <ClInclude Include="..\..\Source\UI\LadderComponent.h"/>
     <ClInclude Include="..\..\Source\UI\CompressorComponent.h"/>
-    <ClInclude Include="..\..\Source\UI\LimiterComponent.h"/>
     <ClInclude Include="..\..\Source\UI\PhaserComponent.h"/>
     <ClInclude Include="..\..\Source\UI\Styles.h"/>
     <ClInclude Include="..\..\Source\UI\ChorusComponent.h"/>
@@ -2585,8 +2585,8 @@
     <ClInclude Include="..\..\Source\Data\CompressorData.h"/>
     <ClInclude Include="..\..\Source\Data\FilterData.h"/>
     <ClInclude Include="..\..\Source\Data\LadderData.h"/>
-    <ClInclude Include="..\..\Source\Data\LimiterData.h"/>
     <ClInclude Include="..\..\Source\Data\OscData.h"/>
+    <ClInclude Include="..\..\Source\Data\PannerData.h"/>
     <ClInclude Include="..\..\Source\Data\PhaserData.h"/>
     <ClInclude Include="..\..\Source\Data\ReverbData.h"/>
     <ClInclude Include="D:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h"/>

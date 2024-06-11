@@ -168,6 +168,9 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
     auto ladderResonance = apvts.getRawParameterValue("LADDERRESONANCE")->load();
     auto ladderDrive = apvts.getRawParameterValue("LADDERDRIVE")->load();
 
+    auto pannerRule = apvts.getRawParameterValue("PANNERRULE")->load();
+    auto pannerPan = apvts.getRawParameterValue("PANNERPAN")->load();
+
     for (int i = 0; i < synth.getNumVoices(); ++i) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
@@ -181,6 +184,7 @@ void Synth1AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::
             voice->updatePhaser(phaserRate, phaserDepth, phaserCentreDelay, phaserFeedback, phaserMix);
             voice->updateCompressor(compressorThreshold, compressorRatio, compressorAttack, compressorRelease);
             voice->updateLadder(ladderEnable, ladderMode, ladderCutoff, ladderResonance, ladderDrive);
+            voice->updatePanner(pannerRule, pannerPan);
         }
     }
 
@@ -192,8 +196,8 @@ bool Synth1AudioProcessor::hasEditor() const { return true; }
 
 juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() 
 { 
-    return new Synth1AudioProcessorEditor(*this);
-    //return new juce::GenericAudioProcessorEditor(*this);
+    //return new Synth1AudioProcessorEditor(*this);
+    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) 
@@ -283,7 +287,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth1AudioProcessor::create
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERRESONANCE", "Ladder Resonance", juce::NormalisableRange<float>{ 0.0f, 1.0f, 0.01f }, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LADDERDRIVE", "Ladder Drive", juce::NormalisableRange<float>{ 1.0f, 10.0f, 0.1f }, 10.0f));
 
-
+    // Panner
+    juce::StringArray pannerRules{ "linear", "balanced", "sin3dB", "sin4p5dB", "sin6dB", "squareRoot3dB", "squareRoot4p5dB"};
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("PANNERRULE", "Panner Rule", pannerRules, 0));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("PANNERPAN", "Panner Pan", juce::NormalisableRange<float>{ -1.0f, 1.0f, 0.01f }, 0.0f));
 
     return{ params.begin(), params.end() };
 }

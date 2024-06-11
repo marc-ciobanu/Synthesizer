@@ -167,15 +167,4 @@ void Synth1AudioProcessorEditor::resized()
 
     // COMPRESSOR
     compressor.setBounds(xEffects + 25, yFilter, widthEffects, heightEffects);
-
-    /*const auto paddingX = 5;
-    const auto paddingY = 35;
-    const auto paddingY2 = 235;
-    const auto width = 300;
-    const auto height = 200;*/
-    
-    //filter.setBounds(paddingX, paddingY2, width, height);
-    //modAdsr.setBounds(filter.getRight(), paddingY2, width, height);
-    //reverb.setBounds(paddingX, 435, 490, height);
-    //chorus.setBounds(reverb.getRight(), 435, 490, height);
 }

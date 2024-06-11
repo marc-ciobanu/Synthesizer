@@ -1,8 +1,8 @@
 /*
   ==============================================================================
 
-    LimiterData.h
-    Created: 31 May 2024 2:44:45pm
+    PannerData.h
+    Created: 11 Jun 2024 8:35:05pm
     Author:  admin
 
   ==============================================================================
@@ -12,12 +12,13 @@
 
 #include <JuceHeader.h>
 
-class LimiterData : public juce::dsp::Limiter<float>
+
+class PannerData: public juce::dsp::Panner<float>
 {
 public:
     void prepareToPlay(double sampleRate, int samplesPerBlock);
-    void updateParameters(float limiterThreshold, float limiterRelease);
-    juce::dsp::Limiter<float> limiter;
+    void updateParameters(int rule, float pan);
 private:
+
 
 };

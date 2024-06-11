@@ -1,8 +1,8 @@
 /*
   ==============================================================================
 
-    LimiterComponent.h
-    Created: 31 May 2024 2:45:45pm
+    PannerComponent.h
+    Created: 11 Jun 2024 8:35:45pm
     Author:  admin
 
   ==============================================================================
@@ -15,15 +15,15 @@
 //==============================================================================
 /*
 */
-class LimiterComponent  : public juce::Component
+class PannerComponent  : public juce::Component
 {
 public:
-    LimiterComponent();
-    ~LimiterComponent() override;
+    PannerComponent();
+    ~PannerComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
 
 private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LimiterComponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PannerComponent)
 };
