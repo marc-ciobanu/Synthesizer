@@ -21,6 +21,7 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     , chorus(audioProcessor.apvts)
     , phaser(audioProcessor.apvts)
     , ladder(audioProcessor.apvts)
+    , compressor(audioProcessor.apvts)
 {
     setSize(1000, 700);
 
@@ -35,6 +36,7 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     addAndMakeVisible(chorus);
     addAndMakeVisible(phaser);
     
+    addAndMakeVisible(compressor);
 
     repaint();
 }
@@ -81,6 +83,7 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     g.drawText("F M   M O D", xOscLabel, height1 - 85, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
     g.drawText("F I L T E R", width1 + 2 * paddingX, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
     g.drawText("L A D D E R", width1 + 2 * paddingX, yOscLabel + 390, oscLabelWidth, oscLabelHeight - 10, juce::Justification::centred);
+    g.drawText("C O M P R E S S O R", 595, yOscLabel - 15, width2, oscLabelHeight, juce::Justification::centred);
 
     g.setFont(juce::Font("Cascadia Code", 26.0f, juce::Font::plain));
     g.drawText("E F F E C T S", width1 * 2 + 3 * paddingX, height2 + paddingY - 15, width2, oscLabelHeight, juce::Justification::centred);
@@ -94,6 +97,8 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     g.drawText("R E V E R B", xEffectsLabel, yEffectsLabel, width2, oscLabelHeight, juce::Justification::centred);
     g.drawText("C H O R U S", xEffectsLabel, yEffectsLabel + effectsOffset, width2, oscLabelHeight, juce::Justification::centred);
     g.drawText("P H A S E R", xEffectsLabel, yEffectsLabel + 2 * effectsOffset, width2, oscLabelHeight, juce::Justification::centred);
+
+    
 
 
     ///////// DRAWING RECTANGLES ///////////////
@@ -150,8 +155,6 @@ void Synth1AudioProcessorEditor::resized()
     const auto widthEffects = 500;
     const auto heightEffects = 150;
 
-
-
     // Reverb
     reverb.setBounds(xEffects, yEffects, widthEffects, heightEffects);
 
@@ -160,6 +163,10 @@ void Synth1AudioProcessorEditor::resized()
 
     // Phaser
     phaser.setBounds(xEffects, yEffects + 140 * 2, widthEffects, heightEffects);
+
+
+    // COMPRESSOR
+    compressor.setBounds(xEffects + 25, yFilter, widthEffects, heightEffects);
 
     /*const auto paddingX = 5;
     const auto paddingY = 35;

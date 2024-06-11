@@ -43,16 +43,17 @@ void CompressorComponent::resized()
     const auto sliderHeight = 80;
     const auto labelYOffset = 15;
     const auto labelHeight = 15;
+    const auto sliderOffset = 10;
 
     compressorThresholdSlider.setBounds(10, startPosY, sliderWidth, sliderHeight);
     compressorThresholdLabel.setBounds(0, startPosY - labelYOffset, 90, labelHeight);
 
-    compressorRatioSlider.setBounds(compressorThresholdSlider.getRight(), startPosY, sliderWidth, sliderHeight);
+    compressorRatioSlider.setBounds(compressorThresholdSlider.getRight() + sliderOffset, startPosY, sliderWidth, sliderHeight);
     compressorRatioLabel.setBounds(compressorRatioSlider.getX(), compressorRatioSlider.getY() - labelYOffset, compressorRatioSlider.getWidth(), labelHeight);
 
-    compressorAttackSlider.setBounds(compressorRatioSlider.getRight(), startPosY, sliderWidth, sliderHeight);
+    compressorAttackSlider.setBounds(compressorRatioSlider.getRight() + sliderOffset, startPosY, sliderWidth, sliderHeight);
     compressorAttackLabel.setBounds(compressorAttackSlider.getX(), compressorAttackSlider.getY() - labelYOffset, compressorAttackSlider.getWidth(), labelHeight);
 
-    compressorReleaseSlider.setBounds(compressorAttackSlider.getRight(), startPosY, sliderWidth, sliderHeight);
+    compressorReleaseSlider.setBounds(compressorAttackSlider.getRight() + sliderOffset, startPosY, sliderWidth, sliderHeight);
     compressorReleaseLabel.setBounds(compressorReleaseSlider.getX(), compressorReleaseSlider.getY() - labelYOffset, compressorReleaseSlider.getWidth(), labelHeight);
 }

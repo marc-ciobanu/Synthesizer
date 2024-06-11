@@ -17,6 +17,7 @@
 #include "UI/ChorusComponent.h"
 #include "UI/PhaserComponent.h"
 #include "UI/LadderComponent.h"
+#include "UI/CompressorComponent.h"
 
 //==============================================================================
 /**
@@ -49,6 +50,8 @@ private:
     ChorusComponent chorus;
 
     PhaserComponent phaser;
+
+    CompressorComponent compressor;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth1AudioProcessorEditor)
 };
