@@ -12,6 +12,8 @@
 #include "SynthSound.h"
 
 
+
+
 //==============================================================================
 Synth1AudioProcessor::Synth1AudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations

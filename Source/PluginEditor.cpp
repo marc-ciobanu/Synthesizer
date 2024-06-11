@@ -58,8 +58,8 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     const auto thickness = 2;
 
     const auto width2 = 390;
-    const auto height2 = 210;
-    const auto height3 = 380;
+    const auto height2 = 170;
+    const auto height3 = 420;
 
     //////// TEXT VARIABLES /////// 
     const auto xOscLabel = 15;
@@ -68,6 +68,11 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     const auto oscLabelHeight = 20;
 
     ///////// DRAWING TEXT ////////////
+    g.setColour(juce::Colour(0xFFDAD3BE));
+    g.setFont(juce::Font("Dubai", 120.0f, juce::Font::plain));
+    g.drawText("S  Y  R  E  N", 17.5, -20, 400, 170, juce::Justification::topLeft);
+
+
 
     g.setColour(juce::Colour(0xFFDAD3BE));
     g.setFont(juce::Font("Cascadia Code", 22.0f, juce::Font::plain));
@@ -81,9 +86,14 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     g.drawText("EFFECTS", width1 * 2 + 3 * paddingX, height2 + paddingY - 15, width2, oscLabelHeight, juce::Justification::centred);
 
     g.setFont(juce::Font("Cascadia Code", 20.0f, juce::Font::plain));
-    g.drawText("REVERB", width1 * 2 + 3 * paddingX, height2 + paddingY + 10, width2, oscLabelHeight, juce::Justification::centred);
-    g.drawText("CHORUS", width1 * 2 + 3 * paddingX, height2 + paddingY + 140, width2, oscLabelHeight, juce::Justification::centred);
-    g.drawText("PHASER", width1 * 2 + 3 * paddingX, height2 + paddingY + 160 + 110, width2, oscLabelHeight, juce::Justification::centred);
+
+    const auto xEffectsLabel = 595;
+    const auto yEffectsLabel = 270;
+    const auto effectsOffset = 140;
+
+    g.drawText("REVERB", xEffectsLabel, yEffectsLabel, width2, oscLabelHeight, juce::Justification::centred);
+    g.drawText("CHORUS", xEffectsLabel, yEffectsLabel + effectsOffset, width2, oscLabelHeight, juce::Justification::centred);
+    g.drawText("PHASER", xEffectsLabel, yEffectsLabel + 2 * effectsOffset, width2, oscLabelHeight, juce::Justification::centred);
 
 
     ///////// DRAWING RECTANGLES ///////////////
@@ -136,18 +146,20 @@ void Synth1AudioProcessorEditor::resized()
 
     // EFFECTS
     const auto xEffects = 582.5;
-    const auto yEffects = 285;
+    const auto yEffects = 260;
     const auto widthEffects = 500;
     const auto heightEffects = 150;
+
+
 
     // Reverb
     reverb.setBounds(xEffects, yEffects, widthEffects, heightEffects);
 
     // Chorus
-    chorus.setBounds(xEffects, yEffects + 130, widthEffects, heightEffects);
+    chorus.setBounds(xEffects, yEffects + 140, widthEffects, heightEffects);
 
     // Phaser
-    phaser.setBounds(xEffects, yEffects + 130 * 2, widthEffects, heightEffects);
+    phaser.setBounds(xEffects, yEffects + 140 * 2, widthEffects, heightEffects);
 
     /*const auto paddingX = 5;
     const auto paddingY = 35;
