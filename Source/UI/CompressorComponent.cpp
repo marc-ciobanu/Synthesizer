@@ -20,10 +20,10 @@ CompressorComponent::CompressorComponent(juce::AudioProcessorValueTreeState& apv
     compressorAttackAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "COMPRESSORATTACK", compressorAttackSlider);
     compressorReleaseAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "COMPRESSORRELEASE", compressorReleaseSlider);
 
-    Styles::setRotarySlider(compressorThresholdSlider, compressorThresholdLabel, *this, juce::Colour(0xFFDAD3BE));
-    Styles::setRotarySlider(compressorRatioSlider, compressorRatioLabel, *this, juce::Colour(0xFFDAD3BE));
-    Styles::setRotarySlider(compressorAttackSlider, compressorAttackLabel, *this, juce::Colour(0xFFDAD3BE));
-    Styles::setRotarySlider(compressorReleaseSlider, compressorReleaseLabel, *this, juce::Colour(0xFFDAD3BE));
+    Styles::setRotarySlider(compressorThresholdSlider, compressorThresholdLabel, *this, juce::Colour(0xFFc095e4));
+    Styles::setRotarySlider(compressorRatioSlider, compressorRatioLabel, *this, juce::Colour(0xFFc095e4));
+    Styles::setRotarySlider(compressorAttackSlider, compressorAttackLabel, *this, juce::Colour(0xFFc095e4));
+    Styles::setRotarySlider(compressorReleaseSlider, compressorReleaseLabel, *this, juce::Colour(0xFFc095e4));
 }
 
 CompressorComponent::~CompressorComponent() {}

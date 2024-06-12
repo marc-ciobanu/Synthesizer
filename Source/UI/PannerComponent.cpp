@@ -21,8 +21,8 @@ PannerComponent::PannerComponent(juce::AudioProcessorValueTreeState& apvts)
     ruleAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "PANNERRULE", rule);
     panAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "PANNERPAN", pan);
 
-    Styles::setComboBox(rule, *this, juce::Colour(0xFF2c4875));
-    Styles::setRotarySlider(pan, panLabel, *this, juce::Colour(0xFFDAD3BE));
+    Styles::setComboBox(rule, *this, juce::Colour(0xFF809bce));
+    Styles::setRotarySlider(pan, panLabel, *this, juce::Colour(0xFF809bce));
 
     addAndMakeVisible(ruleLabel);
 }
@@ -56,7 +56,7 @@ void PannerComponent::resized()
 
     rule.setBounds(xFilter, yFilter, filterWidth, filterHeight);
 
-    ruleLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
+    ruleLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colour(0xFF809bce));
     ruleLabel.setFont(juce::Font("Cascadia Code", 20.0f, juce::Font::plain));
     ruleLabel.setJustificationType(juce::Justification::left);
     ruleLabel.setBounds(rule.getX() - 5, rule.getY() - labelYOffset - 5, rule.getWidth(), labelHeight);
