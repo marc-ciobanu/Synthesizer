@@ -22,6 +22,7 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     , phaser(audioProcessor.apvts)
     , ladder(audioProcessor.apvts)
     , compressor(audioProcessor.apvts)
+    , panner(audioProcessor.apvts)
 {
     setSize(1000, 700);
 
@@ -37,6 +38,8 @@ Synth1AudioProcessorEditor::Synth1AudioProcessorEditor(Synth1AudioProcessor& p)
     addAndMakeVisible(phaser);
     
     addAndMakeVisible(compressor);
+
+    addAndMakeVisible(panner);
 
     repaint();
 }
@@ -126,6 +129,10 @@ void Synth1AudioProcessorEditor::resized()
     const auto widthOsc = 275;
     const auto heightOsc = 605;
     osc.setBounds(xOsc, yOsc, widthOsc, heightOsc);
+
+    // Panner
+    panner.setBounds(xOsc, yOsc + 115, widthOsc, heightOsc - 450);
+    
 
     // ADSR
     const auto xAdsr1 = 30;

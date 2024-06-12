@@ -196,8 +196,8 @@ bool Synth1AudioProcessor::hasEditor() const { return true; }
 
 juce::AudioProcessorEditor* Synth1AudioProcessor::createEditor() 
 { 
-    //return new Synth1AudioProcessorEditor(*this);
-    return new juce::GenericAudioProcessorEditor(*this);
+    return new Synth1AudioProcessorEditor(*this);
+    //return new juce::GenericAudioProcessorEditor(*this);
 }
 
 void Synth1AudioProcessor::getStateInformation(juce::MemoryBlock& destData) 

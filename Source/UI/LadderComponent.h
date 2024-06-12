@@ -25,7 +25,6 @@ public:
     void resized() override;
 
 private:
-    // cutoff, resonance, drive
     juce::ComboBox ladderMode;
     juce::Slider ladderCutoff;
     juce::Slider ladderResonance;

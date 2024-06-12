@@ -47,7 +47,7 @@ void OscComponent::resized()
     const auto xOsc = 35;
     const auto yOsc = 65;
     const auto oscWidth = 205;
-    const auto oscHeight = 45;
+    const auto oscHeight = 30;
 
     const auto xSlide = 35;
     const auto ySlide = 495;

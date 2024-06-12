@@ -18,6 +18,7 @@
 #include "UI/PhaserComponent.h"
 #include "UI/LadderComponent.h"
 #include "UI/CompressorComponent.h"
+#include "UI/PannerComponent.h"
 
 //==============================================================================
 /**
@@ -52,6 +53,8 @@ private:
     PhaserComponent phaser;
 
     CompressorComponent compressor;
+
+    PannerComponent panner;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth1AudioProcessorEditor)
 };
