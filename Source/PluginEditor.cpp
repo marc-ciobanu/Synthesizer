@@ -50,7 +50,7 @@ Synth1AudioProcessorEditor::~Synth1AudioProcessorEditor()
 
 void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
 {
-    g.fillAll(juce::Colour(0xFF192E25));
+    g.fillAll(juce::Colour(0xFF00202e));
     // parameters: X up-left corner, Y up-left corner, Grosime, Inaltime, Radius of corners, Thickness of outline
 
     // height2 + paddingY + paddingX + 70
@@ -60,7 +60,7 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     const auto width1 = 275;
     const auto height1 = 605;
     const auto radius = 10;
-    const auto thickness = 2;
+    const auto thickness = 1;
 
     const auto width2 = 390;
     const auto height2 = 170;
@@ -73,13 +73,13 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
     const auto oscLabelHeight = 20;
 
     ///////// DRAWING TEXT ////////////
-    g.setColour(juce::Colour(0xFFDAD3BE));
-    g.setFont(juce::Font("Dubai", 120.0f, juce::Font::plain));
-    g.drawText("S  Y  R  E  N", 17.5, -20, 400, 170, juce::Justification::topLeft);
+    g.setColour(juce::Colour(0xFFffa600));
+    g.setFont(juce::Font("Dubai", 110.0f, juce::Font::plain));
+    g.drawText("S     Y     R     E     N", 0, -10, 1000, 170, juce::Justification::centredTop);
 
 
 
-    g.setColour(juce::Colour(0xFFDAD3BE));
+    g.setColour(juce::Colour(0xFFffa600));
     g.setFont(juce::Font("Cascadia Code", 22.0f, juce::Font::plain));
 
     g.drawText("O S C I L L A T O R", xOscLabel, yOscLabel, oscLabelWidth, oscLabelHeight, juce::Justification::centred);
@@ -106,7 +106,7 @@ void Synth1AudioProcessorEditor::paint(juce::Graphics& g)
 
     ///////// DRAWING RECTANGLES ///////////////
 
-    g.setColour(juce::Colours::white);
+    g.setColour(juce::Colour(0xFFffd380));
 
     // Oscillator    
     g.drawRoundedRectangle(paddingX, paddingY, width1, height1, radius, thickness);

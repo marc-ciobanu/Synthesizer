@@ -13,7 +13,7 @@ void Styles::paintComponent(juce::Graphics& g)
     g.setFont(juce::Font("Cascadia Code", 20.0f, juce::Font::plain));
 }
 
-void Styles::setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Component& component)
+void Styles::setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Component& component, juce::Colour color)
 {
     component.addAndMakeVisible(slider);
     component.addAndMakeVisible(label);
@@ -23,19 +23,19 @@ void Styles::setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Com
 
     // Set minimalist color scheme
     slider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::transparentBlack);
-    slider.setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xFFDAD3BE));
-    slider.setColour(juce::Slider::thumbColourId, juce::Colour(0xFFDAD3BE));
+    slider.setColour(juce::Slider::rotarySliderOutlineColourId, color);
+    slider.setColour(juce::Slider::thumbColourId, color);
     slider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
-    slider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::white);
+    slider.setColour(juce::Slider::textBoxTextColourId, color);
 
     slider.setLookAndFeel(&customLookAndFeel);
 
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
+    label.setColour(juce::Label::ColourIds::textColourId, color);
     label.setFont(juce::Font("Cascadia Code", 15.0f, juce::Font::plain));
     label.setJustificationType(juce::Justification::centred);
 }
 
-void Styles::setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::Component& component)
+void Styles::setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::Component& component, juce::Colour color)
 {
     component.addAndMakeVisible(slider);
     component.addAndMakeVisible(label);
@@ -45,25 +45,25 @@ void Styles::setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::C
 
     // Set minimalist color scheme
     slider.setColour(juce::Slider::rotarySliderFillColourId, juce::Colours::transparentBlack);
-    slider.setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xFFDAD3BE));
-    slider.setColour(juce::Slider::thumbColourId, juce::Colour(0xFFDAD3BE));
+    slider.setColour(juce::Slider::rotarySliderOutlineColourId, color);
+    slider.setColour(juce::Slider::thumbColourId, color);
     slider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
-    slider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::white);
+    slider.setColour(juce::Slider::textBoxTextColourId, color);
 
     slider.setLookAndFeel(&customLookAndFeel);
 
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
+    label.setColour(juce::Label::ColourIds::textColourId, color);
     label.setFont(juce::Font("Cascadia Code", 15.0f, juce::Font::plain));
     label.setJustificationType(juce::Justification::centred);
 }
 
-void Styles::setComboBox(juce::ComboBox& combobox, juce::Component& component)
+void Styles::setComboBox(juce::ComboBox& combobox, juce::Component& component, juce::Colour color)
 {
     component.addAndMakeVisible(combobox);
     combobox.setLookAndFeel(&customLookAndFeel);
     combobox.setColour(juce::ComboBox::backgroundColourId, juce::Colours::transparentBlack);
-    combobox.setColour(juce::ComboBox::outlineColourId, juce::Colour(0xFFDAD3BE));
-    combobox.setColour(juce::ComboBox::textColourId, juce::Colours::white);
-    combobox.setColour(juce::ComboBox::arrowColourId, juce::Colour(0xFFDAD3BE));
-    combobox.setColour(juce::ComboBox::buttonColourId, juce::Colour(0xFFDAD3BE));
+    combobox.setColour(juce::ComboBox::outlineColourId, color);
+    combobox.setColour(juce::ComboBox::textColourId, color);
+    combobox.setColour(juce::ComboBox::arrowColourId, color);
+    combobox.setColour(juce::ComboBox::buttonColourId, color);
 }

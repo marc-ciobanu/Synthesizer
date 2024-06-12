@@ -21,11 +21,11 @@ PhaserComponent::PhaserComponent(juce::AudioProcessorValueTreeState& apvts)
     phaserFeedbackAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "PHASERFEEDBACK", phaserFeedbackSlider);
     phaserMixAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "PHASERMIX", phaserMixSlider);
 
-    Styles::setRotarySlider(phaserRateSlider, phaserRateLabel, *this);
-    Styles::setRotarySlider(phaserDepthSlider, phaserDepthLabel, *this);
-    Styles::setRotarySlider(phaserCentreDelaySlider, phaserCentreDelayLabel, *this);
-    Styles::setRotarySlider(phaserFeedbackSlider, phaserFeedbackLabel, *this);
-    Styles::setRotarySlider(phaserMixSlider, phaserMixLabel, *this);
+    Styles::setRotarySlider(phaserRateSlider, phaserRateLabel, *this, juce::Colour(0xFFbc5090));
+    Styles::setRotarySlider(phaserDepthSlider, phaserDepthLabel, *this, juce::Colour(0xFFbc5090));
+    Styles::setRotarySlider(phaserCentreDelaySlider, phaserCentreDelayLabel, *this, juce::Colour(0xFFbc5090));
+    Styles::setRotarySlider(phaserFeedbackSlider, phaserFeedbackLabel, *this, juce::Colour(0xFFbc5090));
+    Styles::setRotarySlider(phaserMixSlider, phaserMixLabel, *this, juce::Colour(0xFFbc5090));
 }
 
 PhaserComponent::~PhaserComponent() {}

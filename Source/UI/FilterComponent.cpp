@@ -22,9 +22,9 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts)
     filterCutoffAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "FILTERCUTOFF", filterCutoff);
     filterResAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "FILTERRES", filterRes);
 
-    Styles::setComboBox(filterSelector, *this);
-    Styles::setRotarySlider(filterCutoff, filterCutoffLabel, *this);
-    Styles::setRotarySlider(filterRes, filterResLabel, *this);
+    Styles::setComboBox(filterSelector, *this, juce::Colour(0xFF2c4875));
+    Styles::setRotarySlider(filterCutoff, filterCutoffLabel, *this, juce::Colour(0xFFDAD3BE));
+    Styles::setRotarySlider(filterRes, filterResLabel, *this, juce::Colour(0xFFDAD3BE));
 }
 
 FilterComponent::~FilterComponent()

@@ -24,10 +24,10 @@ AdsrComponent::AdsrComponent(juce::String name, juce::AudioProcessorValueTreeSta
     sustainAttachment = std::make_unique<SliderAttachment>(apvts, sustainId, sustainSlider);
     releaseAttachment = std::make_unique<SliderAttachment>(apvts, releaseId, releaseSlider);
 
-    Styles::setVerticalSlider(attackSlider, attackLabel, *this);
-    Styles::setVerticalSlider(decaySlider, decayLabel, *this);
-    Styles::setVerticalSlider(sustainSlider, sustainLabel, *this);
-    Styles::setVerticalSlider(releaseSlider, releaseLabel, *this);
+    Styles::setVerticalSlider(attackSlider, attackLabel, *this, juce::Colour(0xFF2c4875));
+    Styles::setVerticalSlider(decaySlider, decayLabel, *this, juce::Colour(0xFF2c4875));
+    Styles::setVerticalSlider(sustainSlider, sustainLabel, *this, juce::Colour(0xFF2c4875));
+    Styles::setVerticalSlider(releaseSlider, releaseLabel, *this, juce::Colour(0xFF2c4875));
 }
 
 AdsrComponent::~AdsrComponent()

@@ -21,8 +21,8 @@ PannerComponent::PannerComponent(juce::AudioProcessorValueTreeState& apvts)
     ruleAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "PANNERRULE", rule);
     panAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "PANNERPAN", pan);
 
-    Styles::setComboBox(rule, *this);
-    Styles::setRotarySlider(pan, panLabel, *this);
+    Styles::setComboBox(rule, *this, juce::Colour(0xFF2c4875));
+    Styles::setRotarySlider(pan, panLabel, *this, juce::Colour(0xFFDAD3BE));
 
     addAndMakeVisible(ruleLabel);
 }

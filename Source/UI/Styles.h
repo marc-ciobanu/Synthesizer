@@ -7,9 +7,9 @@
 class Styles
 {
 public:
-    static void setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Component& component);
-    static void setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::Component& component);
-    static void setComboBox(juce::ComboBox& combobox, juce::Component& component);
+    static void setRotarySlider(juce::Slider& slider, juce::Label& label, juce::Component& component, juce::Colour color);
+    static void setVerticalSlider(juce::Slider& slider, juce::Label& label, juce::Component& component, juce::Colour color);
+    static void setComboBox(juce::ComboBox& combobox, juce::Component& component, juce::Colour color);
     static void paintComponent(juce::Graphics& g);
 
 private:

@@ -23,10 +23,10 @@ LadderComponent::LadderComponent(juce::AudioProcessorValueTreeState& apvts)
     ladderResonanceAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "LADDERRESONANCE", ladderResonance);
     ladderDriveAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "LADDERDRIVE", ladderDrive);
 
-    Styles::setComboBox(ladderMode, *this);
-    Styles::setRotarySlider(ladderCutoff, ladderCutoffLabel, *this);
-    Styles::setRotarySlider(ladderResonance, ladderResonanceLabel, *this);
-    Styles::setRotarySlider(ladderDrive, ladderDriveLabel, *this);
+    Styles::setComboBox(ladderMode, *this, juce::Colour(0xFF003f5c));
+    Styles::setRotarySlider(ladderCutoff, ladderCutoffLabel, *this, juce::Colour(0xFF003f5c));
+    Styles::setRotarySlider(ladderResonance, ladderResonanceLabel, *this, juce::Colour(0xFF003f5c));
+    Styles::setRotarySlider(ladderDrive, ladderDriveLabel, *this, juce::Colour(0xFF003f5c));
 }
 
 LadderComponent::~LadderComponent()

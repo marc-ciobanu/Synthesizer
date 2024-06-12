@@ -22,9 +22,9 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::Stri
     fmFreqAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmFreqId, fmFreqSlider);
     fmDepthAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, fmDepthId, fmDepthSlider);
 
-    Styles::setComboBox(oscSelector, *this);
-    Styles::setRotarySlider(fmFreqSlider, fmFreqLabel, *this);
-    Styles::setRotarySlider(fmDepthSlider, fmDepthLabel, *this);
+    Styles::setComboBox(oscSelector, *this, juce::Colour(0xFF2c4875));
+    Styles::setRotarySlider(fmFreqSlider, fmFreqLabel, *this, juce::Colour(0xFF003f5c));
+    Styles::setRotarySlider(fmDepthSlider, fmDepthLabel, *this, juce::Colour(0xFF003f5c));
 }
 
 OscComponent::~OscComponent()

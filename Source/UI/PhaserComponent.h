@@ -39,7 +39,7 @@ private:
 
     juce::Label phaserRateLabel{ "Phaser Rate", "Rate" };
     juce::Label phaserDepthLabel{ "Phaser Depth", "Depth" };
-    juce::Label phaserCentreDelayLabel{ "Phaser Centre Delay", "Centre Delay" };
+    juce::Label phaserCentreDelayLabel{ "Phaser Centre Delay", "Centre" };
     juce::Label phaserFeedbackLabel{ "Phaser Feedback", "Feedback" };
     juce::Label phaserMixLabel{ "Phaser Mix", "Mix" };
 
