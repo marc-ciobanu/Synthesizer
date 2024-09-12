@@ -1,1 +1,1 @@
-"# JUCE-Synth-Syren" 
+"# JUCE-Synthhesizer" 
